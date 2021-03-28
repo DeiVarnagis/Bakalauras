@@ -1,0 +1,291 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+input:focus {
+  outline-width: 0;
+}
+
+button:focus {
+  outline-width: 0;
+}
+
+.formLogin {
+  vertical-align: middle;
+  width: 450px;
+  min-height: 325px;
+  height: auto;
+  margin: auto;
+  background: #FFFFFF;
+  border-radius: 15px;
+  -webkit-box-shadow: 1px 1px 1px 3px #0054A6;
+          box-shadow: 1px 1px 1px 3px #0054A6;
+  padding: 1%;
+  background-color: #ffffff;
+  z-index: 0;
+}
+
+.formLogin img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  height: 120px;
+  width: 120px;
+  border-radius: 50%;
+  border-width: 5px;
+  margin: 2px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  border: 1px solid #C4C4C4;
+}
+
+.formLogin .autoSelect_backdrop {
+  width: 440px;
+  min-height: 440px;
+  top: 245px;
+  position: fixed;
+  background: white;
+  z-index: 0;
+}
+
+.formLogin .autoSelect_backdrop_leaveWork {
+  width: 440px;
+  height: 270px;
+  top: 290px;
+  position: fixed;
+  background: white;
+  z-index: 0;
+}
+
+.formLogin .con {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 5px;
+  margin: 0 auto;
+  z-index: 0;
+}
+
+.formLogin a {
+  color: #0054A6;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 2%;
+  z-index: 10;
+}
+
+.formLogin a:hover {
+  color: red;
+}
+
+.formLogin p {
+  position: relative;
+  margin: 5px 0px 5px 0px;
+  color: red;
+  font-size: small;
+  float: left;
+  z-index: 1;
+}
+
+.formLogin span {
+  width: 330px;
+}
+
+.headerLogin {
+  z-index: 10;
+  margin: 4%;
+  text-align: center;
+}
+
+.headerLogin h2 {
+  font-size: 33px;
+}
+
+.headerLogin h3 {
+  color: lightgreen;
+}
+
+.headerLogin p {
+  letter-spacing: 0.05em;
+}
+
+.inputLogin {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 330px;
+  height: 50px;
+  margin: auto;
+  margin-top: 6%;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid black;
+  z-index: 20;
+}
+
+.inputLoginNoBottom {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 330px;
+  height: 50px;
+  margin: auto;
+  margin-top: 4%;
+  padding: 15px;
+  font-size: 16px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: 1px solid black;
+  border-bottom: none;
+  z-index: 10;
+}
+
+.inputLogin:focus {
+  outline-width: 0;
+}
+
+.buttonLogin {
+  opacity: 0.85;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 280px;
+  height: 50px;
+  font-size: 15px;
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 5px;
+  z-index: 5;
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  background-color: #0054A6;
+  color: white;
+  margin: 5% auto;
+  letter-spacing: 0.05em;
+}
+
+.buttonLogin:disabled {
+  background-color: gray;
+}
+
+.buttonLogin:hover {
+  opacity: 1;
+}
+
+/* Submits */
+.custom-select {
+  display: none;
+}
+
+.select-css {
+  font-size: 16px;
+  line-height: 1.5;
+  padding: .6em 1.4em .5em .8em;
+  width: 330px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 10px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #fff;
+  margin: auto;
+  margin-top: 4%;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat, repeat;
+  background-position: right .7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+}
+
+.select-css::-ms-expand {
+  display: none;
+}
+
+.select-css:focus {
+  outline-width: 0;
+}
+
+.textOnInput {
+  position: relative;
+}
+
+.textOnInput label {
+  position: absolute;
+  top: -10px;
+  left: 23px;
+  padding: 2px;
+  z-index: 1;
+  font-family: Oswald;
+}
+
+.textOnInput label:after {
+  content: " ";
+  background-color: #fff;
+  width: 100%;
+  height: 13px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.textOnInput .top {
+  top: 3px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  position: absolute;
+  margin-bottom: .5rem;
+}
+
+.autoSelect ul {
+  text-align: left;
+  cursor: pointer;
+  overflow-y: hidden;
+  list-style-type: none;
+  width: 330px;
+  max-height: 142px;
+  border: 1px solid black;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  position: absolute;
+  background: lightgrey;
+  z-index: 10;
+}
+
+.autoSelect ul li {
+  font-size: 16px;
+  padding: 5px;
+}
+
+.autoSelect ul li:hover {
+  background: gray;
+}
+/*# sourceMappingURL=login.css.map */

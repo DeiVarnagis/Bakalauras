@@ -1,0 +1,182 @@
+.nameStyle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 60px;
+  font-style: Oswald;
+  font-weight: bold;
+}
+
+.about {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 20px;
+  opacity: 0.8;
+  font-style: Oswald;
+}
+
+.aboutDiv {
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.nameDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: flex;
+  margin: 20px;
+}
+
+.genaralStyle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 30px;
+  font-style: Oswald;
+}
+
+.generalInfo {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.genaralTabelDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.generalTable {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 20px;
+  list-style: none;
+  width: 600px;
+  height: 350px;
+}
+
+.generalTable li {
+  list-style: none;
+}
+
+.generalTable_label_li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  float: left;
+  font-size: 20px;
+  font-weight: bold;
+  margin-right: 4rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.generalTable_info_li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  float: left;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  font-size: 20px;
+  margin-bottom: 2rem;
+  opacity: 0.7;
+  width: 100%;
+}
+
+.buttonsDiv {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.buttonsDiv_editButton {
+  opacity: 0.85;
+  width: 200px;
+  height: 50px;
+  font-size: 15px;
+  padding: 0 20px;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+  background-color: #0054A6;
+  color: white;
+  margin-right: 10px;
+}
+
+.buttonsDiv_editButton:hover {
+  opacity: 1;
+  background-color: #0054A6;
+}
+
+.img-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  border: 1px solid #C4C4C4;
+  height: 450px;
+  width: 400px;
+  margin-bottom: 10px;
+}
+
+.img-div img {
+  height: 450px;
+  width: 400px;
+}
+/*# sourceMappingURL=profile.css.map */

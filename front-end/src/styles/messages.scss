@@ -1,0 +1,40 @@
+@import './_variables';
+
+.deleteButton{
+    margin-left: 5px;
+    padding: 3px;
+    font-size: 40px; 
+    color: red; 
+    &:hover{
+        color:green
+    }
+}
+
+.confirmButton{
+    margin-left: 5px;
+    padding: 3px;
+    font-size: 35px; 
+    color: #88807B; 
+    &:hover{
+        color:$primaryColor
+    }
+}
+
+.iconButton{
+
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none; 
+}
+
+
+.disabledButton{
+
+    margin-left: 5px;
+    padding: 3px;
+    font-size: 35px; 
+    color: lightgray; 
+}

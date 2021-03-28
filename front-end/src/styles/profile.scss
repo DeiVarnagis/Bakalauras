@@ -1,0 +1,134 @@
+@import './_variables';
+
+.nameStyle{
+    display: flex;
+    justify-content: center;
+    font-size: 60px;
+    font-style: Oswald;
+    font-weight: bold;
+}
+
+.about{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 20px;
+    opacity: 0.8;
+    font-style: Oswald;
+}
+
+.aboutDiv{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.nameDiv{
+    display: flex;
+    justify-content: center;
+    display: flex;
+    margin: 20px;
+}
+
+.genaralStyle{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    font-style: Oswald;
+}
+
+.generalInfo{
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+ 
+}
+
+.genaralTabelDiv{
+  
+    display: flex;
+    justify-content: center;
+}
+
+.generalTable{
+    display: flex;
+    justify-content: flex-start;
+    padding: 20px;
+    list-style: none;
+    width: 600px;
+    height: 350px;
+
+    li{
+        list-style: none;
+    }
+
+    &_label_li{
+        display: flex;
+        justify-content: flex-start;
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 4rem;
+        margin-bottom: 2rem;
+        width: 100%;
+    }
+
+    &_info_li{
+        display: flex;
+        float: left;
+        justify-content: flex-start;
+        font-size: 20px;
+        margin-bottom: 2rem;
+        opacity: 0.7;
+        width: 100%;
+    }
+   
+}
+
+.buttonsDiv{
+    display: flex;
+    justify-content: flex-end;
+
+    &_editButton{
+        opacity: 0.85;
+        width: 200px;
+        height: 50px;
+        font-size: 15px;
+        padding: 0 20px;
+        background: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s linear;
+        background-color:$primaryColor;
+        color: $btnText;
+        margin-right: 10px;
+    }
+
+    &_editButton:hover{
+        opacity: 1;
+       background-color: $primaryColor;
+    }
+}
+
+
+
+.img-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border: 1px solid $borderColor;
+    height: 450px;
+    width: 400px;
+    margin-bottom: 10px;
+
+    img{
+      
+        height: 450px;
+        width: 400px;
+    }
+}

@@ -1,0 +1,38 @@
+.deleteButton {
+  margin-left: 5px;
+  padding: 3px;
+  font-size: 40px;
+  color: red;
+}
+
+.deleteButton:hover {
+  color: green;
+}
+
+.confirmButton {
+  margin-left: 5px;
+  padding: 3px;
+  font-size: 35px;
+  color: #88807B;
+}
+
+.confirmButton:hover {
+  color: #0054A6;
+}
+
+.iconButton {
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.disabledButton {
+  margin-left: 5px;
+  padding: 3px;
+  font-size: 35px;
+  color: lightgray;
+}
+/*# sourceMappingURL=messages.css.map */

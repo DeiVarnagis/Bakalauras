@@ -1,0 +1,421 @@
+#scroller::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px gray;
+          box-shadow: inset 0 0 6px gray;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+#scroller::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+
+#scroller::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: gray;
+}
+
+.buttonDiv {
+  height: 70px;
+  width: 70px;
+}
+
+.tableDiv {
+  height: 600px;
+  width: 100%;
+  overflow: auto;
+  border-bottom: 1px solid #0054A6;
+}
+
+.tableDiv thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  color: white;
+  background: #0054A6;
+  top: 0;
+}
+
+.addDevice {
+  cursor: pointer;
+  font-weight: 200;
+  font-size: 40px;
+  display: block;
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  border: 1px solid #C4C4C4;
+}
+
+.addDevice:hover {
+  background: #0054A6;
+  color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.tabs_ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  border-bottom: 1px solid #dbdbdb;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.tabs_li {
+  color: #000000;
+  display: inline;
+  font-size: 20px;
+  padding: 5px;
+  list-style: none;
+  margin: 10px;
+}
+
+.tabs_li:hover {
+  color: white;
+  border-radius: 15px;
+  background-color: #0054A6;
+}
+
+.tabs_li_selected {
+  margin: 10px;
+  color: white;
+  border-radius: 15px;
+  background-color: #0054A6;
+  display: inline;
+  font-size: 20px;
+  padding: 5px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.tabs_a {
+  color: black;
+  text-decoration: none;
+}
+
+.tabs_a_active {
+  color: white;
+  text-decoration: none;
+}
+
+.tabs_a:hover {
+  color: white;
+}
+
+.inner-div {
+  height: 85vh;
+  width: 85vw;
+  display: block;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 25px;
+  border-radius: 15px;
+  margin-left: 11vw;
+  text-align: center;
+  min-height: 800px;
+  min-width: 1600px;
+  background-color: white;
+}
+
+.inner-div a {
+  text-decoration: none;
+}
+
+.inner-div h4 {
+  padding-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 16px;
+}
+
+.inner-div_attributes {
+  padding-top: 10px;
+  text-align: left;
+  border-top: 1px solid #C4C4C4;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 55px;
+}
+
+.inner-div_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.inner-div_column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 700px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.inner-div_column_layout_left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.inner-div_column_layout_left_row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 100%;
+}
+
+.inner-div_column_layout_left_column {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.inner-div_column_layout_left_column_left {
+  padding: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.inner-div_column_layout_left_baseColumn {
+  height: 280px;
+}
+
+.inner-div_column_layout_left_baseColumn_table {
+  padding: 1rem;
+  overflow: auto;
+  height: 800px;
+}
+
+.inner-div_column_layout_right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  overflow-y: auto;
+  width: 40%;
+  padding: 2rem 13rem 16rem 11rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 15px;
+  -webkit-box-shadow: 1px 1px 1px 3px #0054A6;
+          box-shadow: 1px 1px 1px 3px #0054A6;
+  height: 90%;
+  z-index: 1;
+}
+
+.inner-div_column_layout_right_row {
+  display: inline;
+}
+
+.inner-div_column_layout_right_connector_L_R_UP {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: #C0392B;
+  width: 200px;
+  bottom: 10px;
+  height: 10px;
+  z-index: -1;
+  -webkit-transform: rotate(145deg);
+          transform: rotate(145deg);
+}
+
+.inner-div_column_layout_right_connector_R_L_UP {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: #C0392B;
+  width: 190px;
+  height: 10px;
+  left: 25px;
+  bottom: 20px;
+  z-index: -1;
+  -webkit-transform: rotate(37deg);
+          transform: rotate(37deg);
+}
+
+.inner-div_column_layout_right_connector_R_L_Main {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: #C0392B;
+  width: 190px;
+  height: 10px;
+  left: 25px;
+  bottom: 20px;
+  z-index: -1;
+  -webkit-transform: rotate(145deg);
+          transform: rotate(145deg);
+}
+
+.inner-div_column_layout_right_connector_R_UP {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: #C0392B;
+  width: 130px;
+  height: 10px;
+  bottom: 10px;
+  left: 55%;
+  z-index: -1;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.inner-div_column_layout_right_connector_L_UP {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background: #C0392B;
+  width: 130px;
+  height: 10px;
+  bottom: 10px;
+  right: 33px;
+  z-index: -1;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.inner-div_column_layout_right_bubbleLabelLeft {
+  top: 30px;
+  right: 150px;
+  width: 150px;
+  position: relative;
+}
+
+.inner-div_column_layout_right_bubbleLabelRight {
+  top: 40px;
+  left: 240px;
+  width: 150px;
+  position: relative;
+}
+
+.inner-div_column_layout_right_bubble_blue {
+  z-index: 7;
+  float: left;
+  cursor: pointer;
+  background: #0054a6;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+}
+
+.inner-div_column_layout_right_bubble_yellow {
+  z-index: 7;
+  float: right;
+  cursor: pointer;
+  background: #f1c40f;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+}
+
+.inner-div label {
+  top: 10px;
+}
+
+.inner-div_margin_bot {
+  margin-bottom: 15px;
+}
+
+.inner-div_img-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  border: 1px solid #C4C4C4;
+  height: 300px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+.inner-div_img-div img {
+  height: 100%;
+  width: 100%;
+}
+/*# sourceMappingURL=device.css.map */

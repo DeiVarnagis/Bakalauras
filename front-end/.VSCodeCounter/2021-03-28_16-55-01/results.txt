@@ -1,0 +1,95 @@
+Date : 2021-03-28 16:55:01
+Directory : c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end
+Total : 59 files,  18436 codes, 35 comments, 599 blanks, all 19070 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          2 |     12,026 |          0 |          2 |     12,028 |
+| Vue        |         29 |      3,784 |          9 |        191 |      3,984 |
+| CSS        |          9 |      1,285 |         16 |        147 |      1,448 |
+| SCSS       |         10 |      1,087 |          9 |        219 |      1,315 |
+| JavaScript |          7 |        218 |          0 |         32 |        250 |
+| Markdown   |          1 |         20 |          0 |          7 |         27 |
+| HTML       |          1 |         16 |          1 |          1 |         18 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                           | files      | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                              |         59 |     18,436 |         35 |        599 |     19,070 |
+| public                                                                                                         |          1 |         16 |          1 |          1 |         18 |
+| src                                                                                                            |         54 |      6,369 |         34 |        588 |      6,991 |
+| src\components                                                                                                 |         17 |      2,254 |          7 |        135 |      2,396 |
+| src\router                                                                                                     |          1 |        112 |          0 |          8 |        120 |
+| src\styles                                                                                                     |         19 |      2,372 |         25 |        366 |      2,763 |
+| src\views                                                                                                      |         11 |      1,496 |          2 |         52 |      1,550 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                       | language   | code       | comment    | blank      | total      |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\README.md                                 | Markdown   |         20 |          0 |          7 |         27 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\babel.config.js                           | JavaScript |          5 |          0 |          1 |          6 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\package-lock.json                         | JSON       |     11,972 |          0 |          1 |     11,973 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\package.json                              | JSON       |         54 |          0 |          1 |         55 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\public\index.html                         | HTML       |         16 |          1 |          1 |         18 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\App.vue                               | Vue        |         34 |          0 |          4 |         38 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\Errors.js                             | JavaScript |         19 |          0 |          2 |         21 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\Images.js                             | JavaScript |          0 |          0 |          1 |          1 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\axios.js                              | JavaScript |          3 |          0 |          1 |          4 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\AccessoryAddModal.vue      | Vue        |        149 |          0 |         17 |        166 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\AccessoryEdit.vue          | Vue        |        151 |          0 |         15 |        166 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\AccessoryHandlingModal.vue | Vue        |        174 |          0 |          9 |        183 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\AddUserModal.vue           | Vue        |         32 |          0 |          2 |         34 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeleteModal.vue            | Vue        |        122 |          0 |          2 |        124 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeleteUserModal.vue        | Vue        |         99 |          0 |          2 |        101 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeviceAddModal.vue         | Vue        |        212 |          0 |         16 |        228 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeviceHandlingModal.vue    | Vue        |        252 |          0 |         10 |        262 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeviceHistory.vue          | Vue        |        113 |          0 |          5 |        118 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\DeviceUpdateModal.vue      | Vue        |        206 |          0 |         14 |        220 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\EmailVerification.vue      | Vue        |         16 |          7 |          4 |         27 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\LeaveWorkModal.vue         | Vue        |        153 |          0 |          6 |        159 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\NavBar.vue                 | Vue        |         94 |          0 |          3 |         97 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\ProfileEdit.vue            | Vue        |        223 |          0 |         17 |        240 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\Tab.vue                    | Vue        |         26 |          0 |          4 |         30 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\Table.vue                  | Vue        |        190 |          0 |          6 |        196 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\components\Tabs.vue                   | Vue        |         42 |          0 |          3 |         45 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\main.js                               | JavaScript |         38 |          0 |          8 |         46 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\router\index.js                       | JavaScript |        112 |          0 |          8 |        120 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\_variables.scss                | SCSS       |          3 |          0 |          1 |          4 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\accessoriesSelect.css          | CSS        |         95 |          1 |         15 |        111 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\accessoriesSelect.scss         | SCSS       |         87 |          0 |         15 |        102 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\device.css                     | CSS        |        379 |          1 |         41 |        421 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\device.scss                    | SCSS       |        300 |          0 |         62 |        362 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\devicesHandling.css            | CSS        |         45 |          1 |          4 |         50 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\devicesHandling.scss           | SCSS       |         40 |          0 |          7 |         47 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\login.css                      | CSS        |        256 |          2 |         33 |        291 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\login.scss                     | SCSS       |        233 |          2 |         52 |        287 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\messages.css                   | CSS        |         32 |          1 |          5 |         38 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\messages.scss                  | SCSS       |         33 |          0 |          8 |         41 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\navbar.css                     | CSS        |         76 |          7 |          8 |         91 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\navbar.scss                    | SCSS       |         72 |          7 |         14 |         93 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\notFound.css                   | CSS        |         14 |          1 |          0 |         15 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\notFound.scss                  | SCSS       |         10 |          0 |          4 |         14 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\profile.css                    | CSS        |        166 |          1 |         15 |        182 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\profile.scss                   | SCSS       |        112 |          0 |         22 |        134 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\table.css                      | CSS        |        222 |          1 |         26 |        249 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\styles\table.scss                     | SCSS       |        197 |          0 |         34 |        231 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\validations.js                        | JavaScript |         41 |          0 |         11 |         52 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\DeviceView.vue                  | Vue        |        263 |          0 |          6 |        269 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\EmailResend.vue                 | Vue        |         95 |          0 |          4 |         99 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\EmailVerification.vue           | Vue        |         24 |          0 |          3 |         27 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\Home.vue                        | Vue        |        140 |          0 |          5 |        145 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\Login.vue                       | Vue        |         87 |          0 |          4 |         91 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\Messages.vue                    | Vue        |        270 |          1 |          4 |        275 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\NotFound.vue                    | Vue        |         11 |          0 |          3 |         14 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\PasswordReset.vue               | Vue        |         86 |          0 |          4 |         90 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\Profile.vue                     | Vue        |        131 |          1 |          4 |        136 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\Registration.vue                | Vue        |        172 |          0 |         11 |        183 |
+| c:\Users\PC\Desktop\teltonika-praktika\teltonika-projektas\front-end\src\views\UsersTable.vue                  | Vue        |        217 |          0 |          4 |        221 |
+| Total                                                                                                          |            |     18,436 |         35 |        599 |     19,070 |
++----------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

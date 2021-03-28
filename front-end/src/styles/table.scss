@@ -1,0 +1,230 @@
+
+
+@import './_variables';
+
+.container{
+  padding: 4rem;
+  
+}
+
+.search{
+  
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 15px;
+  justify-content: space-between;
+  
+  
+  .filter {
+    width: 220px;
+    height: 54px;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid $borderColor;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    padding: .6em 1.4em .5em .8em;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: .65em auto, 100%;
+  }
+  
+   .filter::-ms-expand {
+    display: none;
+  }
+  
+  .filter:hover {
+    border-color: #888;
+  }
+
+  .filter:focus{
+    outline-width: 0
+  }
+
+  .searchInput{
+   width: 600px;
+   height: 54px;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    background: #FFFFFF;
+    border: 1px solid $borderColor;
+  }
+
+  .searchInput:hover {
+    border-color: #888;
+  }
+
+  .centered{
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .addDevice{
+    cursor: pointer;
+    font-size: 30px;
+    display:block;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    border: 1px solid $borderColor;
+  }
+
+  .addDevice:hover{
+    background: $primaryColor;
+    color: white; 
+    transition: 0.4s;
+  }
+}
+
+.innerDiv{
+  height: 85vh;
+  width: 85vw;
+  display: block;
+  justify-content: center;
+  padding: 25px;
+  border-radius: 15px;
+  margin-left: 11vw;  
+  text-align: center;
+  min-height: 800px;
+  min-width: 1600px;
+  background-color: white;
+}
+
+.pagination {
+  padding: 10px;
+  margin: auto;
+  margin-top: 15px;
+  display: inline-block;
+
+  button {
+    color: black;
+    float: left;
+    padding: 2px 4px;
+    text-decoration: none;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+  }
+
+  .page{
+    font-size: 18px;
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+  .page:hover{
+    background: $primaryColor;
+    color: white;
+  }
+  .pageSelected{
+    font-size: 18px;
+    margin-right: 2px;
+    margin-left: 2px;
+    background: $primaryColor;
+    color: white;
+  }
+
+  .arrow {
+    font-size: 20px;
+  }
+  .arrow:hover{
+    background: $primaryColor;
+    color: white;
+  }
+}
+
+  .home_table {
+    font-family: Oswald;
+    margin: auto;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: white;
+    
+    thead{
+      
+     background: $primaryColor;
+    }
+
+    tr {
+      min-height: 50px;
+      border-bottom: 1px solid $borderColor;
+    }
+
+    th, td {
+      text-align: center;
+      max-width: 250px;
+      min-width: var(--minWidth);
+    }
+
+    td{
+      height: 40px;
+    }
+
+    th {
+      color: white;
+      font-size: 14px;
+      padding: 10px;
+      text-transform: uppercase;
+    }
+
+    img{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      height: 64px;
+      width: 64px;
+      border-radius: 50%;
+      border-width: 5px;
+      margin: 2px;
+      background: #FFFFFF;
+      box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+      border: 1px solid $borderColor;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    table {
+
+      border: 0;
+      thead {
+        display: none;
+      }
+      tr {
+        border-bottom: 2px solid $borderColor;
+        display: block;
+        margin-bottom: 10px;
+      }
+      td {
+        border-bottom: 1px dotted $borderColor;
+        display: block;
+        font-size: 13px;
+        text-align: right;
+      }
+      td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+      td:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+
