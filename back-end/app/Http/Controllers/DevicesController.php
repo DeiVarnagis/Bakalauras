@@ -36,7 +36,6 @@ class DevicesController extends Controller
         $path = null;
         if (request()->hasFile('src')) {
             $path = request()->file('src')->store('devicesImages', 'public');
-            $path = $path;
         }
 
         $this->instance::create([
@@ -59,13 +58,16 @@ class DevicesController extends Controller
 
             $device = $this->instance::find($request['id']);
             if ($device != null) {
-                
-                if (auth()->user()->id != $device->user_id) {
-                    $accessories = $device->DevicesLends()->first();
-                    $device->accessories =  $accessories->lendAccessories()->get();
-                } else {
-                    $device->accessories = $device->Accessories();
+
+                if (!auth()->user()->admin) {
+                    if (auth()->user()->id != $device->user_id) {
+                        $accessories = $device->DevicesLends()->first();
+                        $device->accessories =  $accessories->lendAccessories()->get();
+                    } else {
+                        $device->accessories = $device->Accessories();
+                    }
                 }
+                $device->accessories = $device->Accessories();
 
                 return response()->json(["data" => $device], 200);
             }
@@ -100,21 +102,6 @@ class DevicesController extends Controller
         }
     }
 
-    public function showDeviceWithAccessories(Request $request)
-    {
-        if (!$this->checkIfClassExist($request['type'])) {
-            return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
-
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
-
-                return response()->json(["data" => $device], 200);
-            }
-            return response()->json(["error" => 'Pretaisas nerastas'], 404);
-        }
-    }
-
     public function update(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
@@ -127,8 +114,8 @@ class DevicesController extends Controller
                 $this->instance->validateUpdate($request['id']);
                 if (request()->hasFile('src')) {
 
-                    if (Storage::disk('public')->exists($device->src)) {
-                        Storage::disk('public')->delete($device->src);
+                    if (Storage::disk('public')->exists($device->src, 9)) {
+                        Storage::disk('public')->delete($device->src, 9);
                     }
                     $path = request()->file('src')->store('devicesImages', 'public');
                 }
@@ -163,7 +150,7 @@ class DevicesController extends Controller
                 if (auth()->user()->id == $device->user_id) {
 
                     if (Storage::disk('public')->exists($device->src, 9)) {
-                        Storage::disk('public')->delete($device->src);
+                        Storage::disk('public')->delete($device->src, 9);
                     }
                     $device->destroy($request['id']);
                     if ($device) {

@@ -123,17 +123,17 @@
 <script>
 import { Errors } from "../Errors";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import AccessoryHandlingModal from "../components/AccessoryHandlingModal";
 export default {
   name: "DeviceHandleModal",
   components: {
     AccessoryHandlingModal,
   },
-  props: ["device", "updateValue", "index", "type"],
+  props: ["device", "updateValue", "index", "type", "decoded"],
   data() {
     return {
       request: {
+        owner_id: null,
         user_id: null,
         longTerm_id: null,
         shortTerm_id: null,
@@ -147,7 +147,6 @@ export default {
       user: "",
       users: [],
       filteredUsers: [],
-      decoded: null,
       backEndErrors: new Errors(),
     };
   },
@@ -157,13 +156,15 @@ export default {
         if (!success) {
           return;
         }
-
-        this.decoded = jwt_decode(localStorage["token"]);
         if (action == 2 && this.decoded.id == this.device.user_id) {
           this.display = true;
         } else {
           this.show = false;
           this.request.accessories = accessories;
+          if(action == 3)
+          {
+            this.request.owner_id = this.decoded.id
+          }
           axios
             .post("devices/transfer", this.request, {
               headers: {
@@ -220,6 +221,7 @@ export default {
     },
     setState(state) {
       this.user = state.name + " " + state.surname;
+      this.request.owner_id = this.device.user_id
       this.request.user_id = state.id;
       if (this.device.type == "LongTerm") {
         this.request.longTerm_id = this.device.id;

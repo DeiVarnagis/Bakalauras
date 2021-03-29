@@ -106,7 +106,7 @@
       <div v-if="!loading && users.length == 0">
         <h1 class="centered" v-if="devices.length == 0">Duomenų nėra</h1>
       </div>
-      <div class="pagination">
+      <div v-if="!loading" class="pagination">
         <button
           @click="current_page > 1 ? current_page-- : current_page, getUsers()"
         >

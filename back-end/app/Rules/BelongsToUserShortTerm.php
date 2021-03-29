@@ -22,7 +22,7 @@ class BelongsToUserShortTerm implements
     public function __construct($data)
     {
         $this->data = $data;
-        $this->user = auth()->user()->id;
+        $this->user = auth()->user();
         $this->state = $data->action;
         $this->errorMessage = 0;
     }
@@ -36,7 +36,7 @@ class BelongsToUserShortTerm implements
     public function passes($attribute, $value)
     {
         if ($this->state == 3) {
-            $check = DeviceLend::where('user_id', $this->user)
+            $check = DeviceLend::where('user_id', $this->user->id)
                 ->where("shortTerm_id", $this->data->shortTerm_id)
                 ->where('owner_id', $this->data->user_id)->first();
 
@@ -46,19 +46,21 @@ class BelongsToUserShortTerm implements
             $this->errorMessage = 3;
             return false;
         } elseif ($this->state == 2) {
-            $device = User::find($this->user)->DevicesShortTerm()->find($this->data->shortTerm_id);
+            $device = User::find($this->user->id)->DevicesShortTerm()->find($this->data->shortTerm_id);
             if (
                 !empty(DeviceLend::where('user_id', $this->user)->where('shortTerm_id', $this->data->shortTerm_id)->first())
-                || ($device !== null
-                    && $device->state == 0)
+                || ($device !== null && $device->state == 0) || ($this->user->admin)
             ) {
                 return true;
             }
-            $this->errorMessage = 2;
             return false;
         } else {
-            $device = User::find($this->user)->DevicesShortTerm()->find($this->data->shortTerm_id);
-            if ($device !== null && !isset($this->data->longTerm_id)) {
+            $device = User::find($this->user->id)->DevicesShortTerm()->find($this->data->shortTerm_id);
+            if($this->user->admin)
+            {
+                return true;
+            }
+            if (($device !== null && !isset($this->data->longTerm_id))) {
                 if ($device->state == 0 || $device->state == -1) {
                     return true;
                 }
@@ -72,7 +74,7 @@ class BelongsToUserShortTerm implements
 
     public function message()
     {
-        if (isset($this->data->shortTerm_id)) {
+        if (isset($this->data->longTerm_id)) {
             return 'Tik vienas iš laukų shortTerm_id arba longTerm_id yra būtinas';
         } elseif ($this->errorMessage == 1) {
             return 'Prietaisas jau laukia patvirtinimo';

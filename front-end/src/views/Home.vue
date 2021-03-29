@@ -26,10 +26,11 @@
             class="filter"
             @change="(current_page = 1), fetchData()"
           >
-            <option value="All">Tavo įrenginiai</option>
+            <option value="Yours">Tavo įrenginiai</option>
             <option value="ShortTerm">Trumpalaikiai įrenginiai</option>
             <option value="LongTerm">Ilgalaikiai įrenginiai</option>
             <option value="Borrowed">Pasiskolinti įrenginiai</option>
+            <option v-if="decoded.admin"  value="All">Visi įrenginiai</option>
           </select>
         </div>
 
@@ -47,7 +48,7 @@
           </select>
         </div>
       </div>
-      <Table v-bind:type="type" v-bind:devices="devices"></Table>
+      <Table  :decoded="decoded" v-bind:type="type" v-bind:devices="devices"></Table>
       <div v-if="loading && devices.length == 0">
         <h1 class="centered" v-if="devices.length == 0">Duomenų nėra</h1>
       </div>
@@ -83,12 +84,13 @@
 import Table from "../components/Table";
 import axios from "axios";
 import DeviceAddModal from "../components/DeviceAddModal";
+import jwt_decode from "jwt-decode";
  
 export default {
   data() {
     return {
       devices: [],
-      type: "All",
+      type: "Yours",
       filter: "all",
       deviceType: null,
       clickedType: null,
@@ -98,6 +100,7 @@ export default {
       clickedDevice: {},
       index: null,
       loading: false,
+      decoded:null
     };
   },
   components: {
@@ -135,6 +138,7 @@ export default {
     },
   },
   created: async function () {
+    this.decoded = jwt_decode(localStorage["token"]);
     await this.fetchData();
   },
 };

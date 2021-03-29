@@ -23,7 +23,7 @@ class UsersController extends Controller
 
     public function allUsers()
     {
-        return User::where('id', '!=', auth()->user()->id)->get();
+        return User::all();
     }
 
     public function show()
@@ -44,8 +44,8 @@ class UsersController extends Controller
             $path = $user->src;
             if (request()->hasFile('src')) {
 
-                if (Storage::disk('public')->exists($user->src)) {
-                    Storage::disk('public')->delete($user->src);
+                if (Storage::disk('public')->exists(substr($user->src, 9))) {
+                    Storage::disk('public')->delete(substr($user->src, 9));
                 }
                 $path = request()->file('src')->store('profileImages', 'public');
             }
@@ -71,8 +71,8 @@ class UsersController extends Controller
         if ($user != null) {
 
             if (auth()->user()->admin) {
-                if (Storage::disk('public')->exists($user->src)) {
-                    Storage::disk('public')->delete($user->src);
+                if (Storage::disk('public')->exists(substr($user->src, 9))) {
+                    Storage::disk('public')->delete(substr($user->src, 9));
                 }
 
                 $user->destroy(request('id'));

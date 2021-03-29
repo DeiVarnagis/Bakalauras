@@ -26,11 +26,6 @@ class CreateDevicesLongTermTable extends Migration
             $table->timestamps();
           
         });
-
-
-
-
-
     }
 
     /**

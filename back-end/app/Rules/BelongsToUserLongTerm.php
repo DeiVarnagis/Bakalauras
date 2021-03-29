@@ -23,7 +23,7 @@ class BelongsToUserLongTerm implements
     public function __construct($data)
     {
         $this->data = $data;
-        $this->user = auth()->user()->id;
+        $this->user = auth()->user();
         $this->state = $data->action;
         $this->errorMessage = 0;
     }
@@ -40,7 +40,7 @@ class BelongsToUserLongTerm implements
         if ($this->state == 3) {
 
             if (
-                DeviceLend::where('user_id', $this->user)
+                DeviceLend::where('user_id', $this->user->id)
                 ->where("longTerm_id", $this->data->longTerm_id)
                 ->where('owner_id', $this->data->user_id)->first() !== null
             ) {
@@ -49,10 +49,10 @@ class BelongsToUserLongTerm implements
             $this->errorMessage = 3;
             return false;
         } elseif ($this->state == 2) {
-            $device = User::find($this->user)->DevicesLongTerm()->find($this->data->longTerm_id);
+            $device = User::find($this->user->id)->DevicesLongTerm()->find($this->data->longTerm_id);
             if (
-                !empty(DeviceLend::where('user_id', $this->user)->where('longTerm_id', $this->data->longTerm_id)->first())
-                || ($device !== null && $device->state == 0)
+                !empty(DeviceLend::where('user_id', $this->user->id)->where('longTerm_id', $this->data->longTerm_id)->first())
+                || ($device !== null && $device->state == 0) || ($this->user->admin)
                 ) 
             {
                 return true;
@@ -60,9 +60,13 @@ class BelongsToUserLongTerm implements
             $this->errorMessage = 1;
             return false;
         } else {
-            $device = User::find($this->user)->DevicesLongTerm()->find($this->data->longTerm_id);
-            if ($device !== null && !isset($this->data->shortTerm_id)) {
-                if ($device->state == 0 || $device->state == -1) {
+            $device = User::find($this->user->id)->DevicesLongTerm()->find($this->data->longTerm_id);
+            if($this->user->admin)
+            {
+                return true;
+            }
+            if (($device !== null && !isset($this->data->shortTerm_id))) {
+                if ($device->state == 0 || $device->state == -1 )  {
                     return true;
                 }
                 $this->errorMessage = $device->state;

@@ -108,8 +108,8 @@ class AccessoriesController extends Controller
         $accessory = Accessories::find(request('id'));
         if( $accessory != null)
         {
-            if(Storage::disk('public')->exists(substr($accessory->src, 9))){
-                Storage::disk('public')->delete(substr($accessory->src, 9));
+            if(Storage::disk('public')->exists($accessory->src, 9)){
+                Storage::disk('public')->delete($accessory->src, 9);
             }
             $accessory->destroy(request('id'));
             return response()->json(["data" => $accessory ], 204);

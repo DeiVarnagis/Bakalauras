@@ -25,7 +25,7 @@ class DevicesTransferController extends Controller
     {
         $this->validateData();
         $transfer = DevicesTransfer::create([
-            'owner_id' => auth()->user()->id,
+            'owner_id' => $request['owner_id'],
             'user_id' => $request['user_id'],
             'shortTerm_id' => $request['shortTerm_id'],
             'longTerm_id' => $request['longTerm_id'],
@@ -57,7 +57,7 @@ class DevicesTransferController extends Controller
             return response()->json(["error" => "Užklausa neegzistuoja"], 404);
         }
 
-        if (auth()->user()->id == $transfer->user_id) {
+      
             switch ($transfer->action) {
                 case "1":
                     $values = $transfer->returnDeviceType();
@@ -81,8 +81,6 @@ class DevicesTransferController extends Controller
                     return response()->json(["message" => "Device was returned successfully"], 200);
                     break;
             }
-        }
-        return response()->json(["error" => "Unauthorized"], 401);
     }
 
 

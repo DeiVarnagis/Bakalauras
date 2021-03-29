@@ -27,7 +27,7 @@ class DevicesShortTermFactory extends Factory
             'name' => Str::random(5),
             'serialNumber' => Str::random(10),
             'amount' => 1,
-            'user_id' => 1,
+            'user_id' => 2,
             'src' => null
         ];
     }

@@ -23,8 +23,12 @@ class UserDevicesController extends Controller
                     break;
                 case "ShortTerm":
                     return response()->json(["data" => CollectionHelper::paginateWithoutKey($user->getFilteredShort($state, $search), 8)], 200);
-                case "All":
+                case "Yours":
                     return response()->json(["data" => CollectionHelper::paginateWithoutKey($user->userDevices($state, $search), 8)], 200);
+                    break;
+                    return response()->json(["data" => CollectionHelper::paginateWithoutKey($user->getFilteredShort($state, $search), 8)], 200);
+                case "All":
+                    return response()->json(["data" => CollectionHelper::paginateWithoutKey($user->allDevices($state, $search), 8)], 200);
                     break;
                 case "Borrowed":
                     return response()->json(["data" => CollectionHelper::paginateWithoutKey($user->getBorrowedDevices($state, $search), 8)], 200);
@@ -36,5 +40,4 @@ class UserDevicesController extends Controller
 
         return response()->json(["error" => 'Duomenų nėra'], 404);
     }
-
 }

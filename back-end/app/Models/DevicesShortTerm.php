@@ -25,7 +25,7 @@ class DevicesShortTerm extends Model
     
     public function user()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function getTypeAttribute()

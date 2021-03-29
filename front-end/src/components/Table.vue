@@ -10,6 +10,8 @@
           <th>Kiekis</th>
           <th>Tipas</th>
           <th>Statusas</th>
+          <th v-if="decoded.admin && type == 'All'">Vardas</th>
+          <th v-if="decoded.admin && type == 'All'">Pavardė</th>
           <th>Įrankiai</th>
         </tr>
       </thead>
@@ -48,6 +50,8 @@
           <td v-if="device.state == 0">Laisvas</td>
           <td v-if="device.state == 1">Laukia užklausoje</td>
           <td v-if="device.state == 2">Paskolintas</td>
+          <td v-if="decoded.admin && type == 'All'">{{device.user.name}}</td>
+          <td v-if="decoded.admin && type == 'All'">{{device.user.surname}}</td>
           <td>
             <button
               :disabled="disabledDolly(device)"
@@ -61,7 +65,7 @@
                 icon="dolly"
               />
             </button>
-            
+
             <a v-bind:href="'/device/' + device.type + '/' + device.id">
               <button class="iconButton" @click="clicked(device, index)">
                 <font-awesome-icon class="confirmButton" icon="eye" /></button
@@ -114,6 +118,7 @@
       @updateValue="updateValue"
       v-bind:index="index"
       v-bind:type="type"
+      v-bind:decoded="decoded"
       ref="handleDevice"
     ></DeviceHandlingModal>
 
@@ -129,7 +134,6 @@
 <script>
 import DeviceHandlingModal from "../components/DeviceHandlingModal";
 import DeleteModal from "../components/DeleteModal";
-import jwt_decode from "jwt-decode";
 import DeviceUpdateModal from "../components/DeviceUpdateModal";
 export default {
   data() {
@@ -145,7 +149,7 @@ export default {
       loading: false,
     };
   },
-  props: ["devices", "type"],
+  props: ["devices", "type", "decoded"],
   components: {
     DeviceHandlingModal,
     DeleteModal,
@@ -181,9 +185,8 @@ export default {
       }
       return true;
     },
-      disabledButton(device) {
-      var decoded = jwt_decode(localStorage["token"]);
-      if (device.user_id == decoded.id) {
+    disabledButton(device) {
+      if (device.user_id == this.decoded.id || this.decoded.admin) {
         return false;
       }
       return true;

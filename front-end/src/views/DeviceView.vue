@@ -121,7 +121,7 @@
           </div>
         </Tab>
         <Tab
-          v-if="device.user_id == decoded.id"
+          v-if="device.user_id == decoded.id || decoded.admin"
           name="Istorija"
           :selected="false"
         >
@@ -194,7 +194,6 @@ export default {
 
     getDevice: async function () {
       this.decoded = jwt_decode(localStorage["token"]);
-      console.log(this.decoded, "user");
       await axios
         .get(
           "devices/" + this.$route.params.type + "/" + this.$route.params.id,
@@ -231,8 +230,7 @@ export default {
       this.device.accessories[id].src = data.data.src;
     },
     disabledButton(device) {
-      var decoded = jwt_decode(localStorage["token"]);
-      if (device.user_id == decoded.id) {
+      if (device.user_id == this.decoded.id || this.decoded.admin) {
         return true;
       }
       return false;

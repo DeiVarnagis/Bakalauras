@@ -134,8 +134,8 @@
           </tr>
         </tbody>
       </table>
-      <h1 v-if="messages.length == 0">Duomenų nėra</h1>
-      <div v-if="messages.length !== 0" class="pagination">
+      <h1 v-if="messages.length == 0 && !loading">Duomenų nėra</h1>
+      <div v-if="messages.length !== 0 && !loading" class="pagination">
         <button
           @click="current_page > 1 ? current_page-- : current_page, fetchData()"
         >
@@ -172,7 +172,7 @@ export default {
       filter: 0,
       current_page: 1,
       last_page: null,
-      loading: false,
+      loading: true,
     };
   },
   methods: {
