@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerLogin">
     <ValidationObserver ref="form">
       <form
         @submit.prevent="register()"
@@ -56,7 +56,7 @@
           </ValidationProvider>
 
           <ValidationProvider
-            rules="required|min:6|password:@confirm"
+            rules="required|min:8|password:@confirm"
             v-slot="{ errors }"
             mode="eager"
           >
@@ -74,7 +74,7 @@
 
           <ValidationProvider
             name="confirm"
-            rules="required|min:6"
+            rules="required|min:8"
             v-slot="{ errors }"
             mode="eager"
           >
@@ -114,12 +114,6 @@ export default {
       type:String,
       default:"Registruotis"
     },
-    closeModal:{
-      type:Function,
-      default:function(){
-        console.log("hello")
-      },
-    }
   },
   data() {
     return {
@@ -143,22 +137,15 @@ export default {
           .post("auth/register", this.user)
           .then((res) => {
             console.log(res);
-            if (this.addUser != null) {
               this.user.name = null;
               this.user.surname = null;
               this.user.email = null;
               this.user.password = null;
               this.user.password_confirmation = null;
+            if (this.addUser) {
               this.$emit("closeModal");
-              this.$vToastify.success(
-                "Naujas vartotojas sėkmingai buvo sukurtas"
-              );
+              this.$vToastify.success("Naujas vartotojas sėkmingai buvo sukurtas");
             } else {
-              this.user.name = null;
-              this.user.surname = null;
-              this.user.email = null;
-              this.user.password = null;
-              this.user.password_confirmation = null;
               this.$router.push("/login");
               this.$vToastify.success("Sveikinu prisiregistravus!!");
               this.$refs.from.reset();

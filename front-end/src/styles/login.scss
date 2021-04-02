@@ -1,13 +1,6 @@
 
 @import './_variables';
 
-* {
-    padding: 0;
-    margin: 0;
-    font-family: sans-serif;
-    box-sizing: border-box;
-}
-
 input:focus{
 
     outline-width: 0
@@ -17,15 +10,19 @@ button:focus{
     outline-width: 0
 }
 
+.containerLogin{
+    margin-top: 8rem;
+}
+
 .formLogin {
     vertical-align: middle;
     width: 450px;
     min-height: 325px;
     height: auto;
     margin: auto;
-    background: #FFFFFF;
+    background: #FFFFFF; 
     border-radius: 15px;
-    box-shadow: 1px 1px 1px 3px $primaryColor;
+    box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.25);
     padding: 1%;
     background-color: #ffffff;
     z-index: 0;
@@ -230,7 +227,6 @@ button:focus{
         left: 23px;
         padding: 2px;
         z-index: 1;
-        font-family: Oswald;
     }
 
     label:after {

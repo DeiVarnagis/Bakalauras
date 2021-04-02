@@ -13,15 +13,17 @@ class LeavingWorkController extends Controller
     {
         $row = LeavingWork::where('owner_id', auth()->user()->id)->first();
         $this->validateData();
-        if ($row == null || $row->state != 0) {
-            $leavingWork = LeavingWork::create([
-                'owner_id' => auth()->user()->id,
-                'user_id' => request('user_id')
-            ]);
-            
+        if ($row != null || $row->state == 0) {
             return response()->json(["data" => $leavingWork], 200);
+            return response()->json(["error" => "Vartotojas jau pateikė užklausa dėl išėjimo iš darbo"], 400);
         }
-        return response()->json(["error" => "Vartotojas jau pateikė užklausa dėl išėjimo iš darbo"], 400);
+
+        $leavingWork = LeavingWork::create([
+            'owner_id' => auth()->user()->id,
+            'user_id' => request('user_id')
+        ]);
+        
+       
     }
 
     public function confirmLeaveWork()

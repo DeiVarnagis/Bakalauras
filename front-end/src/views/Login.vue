@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerLogin">
     <ValidationObserver ref="form">
       <form @submit.prevent="login" class="formLogin" @keydown="clearError()">
         <div>
@@ -39,8 +39,8 @@
             </ValidationProvider> 
             <button type="submit" class="buttonLogin">Prisijungti</button>
           </div>
-          <a href="/password/forgot" :method="'password'" :title="'Elektroninio pašto persiuntimas'">Pamiršai slaptažodį?</a>
-          <a href="/register">Registruotis</a>
+          <router-link :to="{name:'passwordForgot'}" :method="'password'" :title="'Elektroninio pašto persiuntimas'">Pamiršai slaptažodį?</router-link>
+          <router-link :to="'/register'">Registruotis</router-link>
         </div>
       </form>
     </ValidationObserver>

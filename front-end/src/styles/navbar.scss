@@ -1,93 +1,137 @@
 @import './_variables';
 
-/* -------------
-Sidebar
-----------------*/
-.sidebar {
-  position: absolute;
-  left: 0px;
-  width: 12%;
-  min-width: 175px;
-  max-width: 600px;
-  height: 100%;
-  top: 0;
-  overflow:hidden;
-  visibility: visible;
-  border: 1px solid black;
+.navi_wrap {
+  font-family: "Oswald";
+  background-color: #ffffff;
+  transition: 0.2s;
+  height: 100vh;
+  min-height: 800px;
+  left: 0;
   border-radius: 0px 15px 15px 0px;
-  
-  header{
-    background-color: white;
-    border-bottom: 1px dotted black;
-    color: white;
-    width: 100%;
-    display:block;
-    font-size: 1rem;
-    padding: 0.75rem	1rem;
-    margin: 0;
-
-    img{
-      max-width:100%;
-    height:auto;
-    }
+  z-index: 100;
+  .badge {
+      position: absolute;
+      margin: 5px 0 0 25px;
+      background-color: #0054A6;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 2px;
+      min-width: 20px;
+      min-height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 25%;
   }
-}
-
-/* -------------
-Sidebar Nav
-----------------*/
-.sidebar-nav {
-
-  background-color: white;
-  height: 100%;
-  font-weight: 400; 
-  font-size: 1.2em;
-  overflow: auto;
-  padding-bottom: 6em;
-  z-index: 9;
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
- 
-  
-  ul{
-    list-style:none;
-    padding: 0; 
-    margin: 0;
-    
-    li{
-      margin-left: 0;
-      padding-left: 0;
-      //min-width: 13em;
-      display:inline-block;
-      width: 100%;
-      
-      a{
-        font-family:Oswald;
-        font-size: 1em;
-        color: black;
-        padding: 1.05em	1em;
-        text-decoration: none;
-        display:flex;
-        justify-content: center;
-        border-bottom: 1px dotted black;
-        
-        &:hover{
-          background-color: $primaryColor;
-          color: white;
-          transition: all 0.6s ease;
-        }
+  .toggle-menu {
+      padding: 20px;
+      cursor: pointer;
+  }
+  &.open {
+      width: 18rem;
+  }
+  &.closed {
+      width: 4.5rem;
+      .navi_img,
+      .link-text,
+      .navi_students,
+      .navi_trigger {
+          display: none !important;
       }
-
-      i{
-        font-size: 1.8em;
-        padding-right: 0.5em;
-        width: 9em;
-        display: inline;
-        vertical-align:middle;
-      }  
-
-    }
   }
+  .navi_link {
+      display: flex;
+  }
+  .unselectable {
+      -moz-user-select: -moz-none;
+      -khtml-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      img {
+          margin-right: 20px;
+      }
+      .navi_img {
+          margin-right: auto;
+      }
+  }
+  .navi_img {
+      margin: auto;
+      display: block;
+      padding-top: 3rem;
+      width: 12rem;
+      cursor: pointer;
+  }
+  .navi_links {
 
-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 16rem;
+      margin-left: 20px;
+      margin-top: 4rem;
+      a {
+          font-size: 1.2rem;
+          color: #5c5c5c;
+          text-decoration: none;
+          margin-top: 1.5rem;
+          cursor: pointer;
+          &:hover {
+              color: #0054A6;
+          }
+      }
+      .text_active {
+          color: #0054A6;
+        
+          img {
+              filter: invert(16%) sepia(52%) saturate(5362%) hue-rotate(198deg) brightness(97%) contrast(101%);
+          }
+          
+      }
+      .navi_trigger {
+          display: inline-block;
+          width: 0.7rem;
+          margin-left: 10px;
+      }
+      .active {
+          content: url('../assets/tick_active.svg')
+      }
+      .navi_students {
+          display: none;
+          color: #5c5c5c;
+          ul {
+              font-size: 0.72rem;
+              list-style-type: none;
+              width: auto;
+          }
+          li {
+              display: flex;
+              justify-content: space-between;
+              width: 95%;
+              padding: 0.5rem 0 0.5rem 0;
+              cursor: pointer;
+              &:hover {
+                  color:#0054A6;
+              }
+          }
+          .list_name {
+              width: 55%;
+          }
+          .separator {
+              color: #c4c4c4;
+          }
+          hr {
+              border-top: 1px solid #c4c4c4;
+              width: 100%;
+              margin-left: -2.5%;
+          }
+      }
+      .list_active {
+          display: block;
+      }
+  }
 }

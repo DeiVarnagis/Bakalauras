@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="modal" v-if="show">
       <div class="modal__backdrop" @click="closeModal()" />
-      <Registration :buttonName="'Patvirtinti'" :header="'Pridekite nauja vartotoja'" v-bind:addUser="addUser" :closeModal="closeModal"></Registration>
+      <Registration :buttonName="'Patvirtinti'" :header="'Pridekite nauja vartotoja'" v-bind:addUser="addUser" @closeModal="closeModal"></Registration>
     </div>
   </transition>
 </template>

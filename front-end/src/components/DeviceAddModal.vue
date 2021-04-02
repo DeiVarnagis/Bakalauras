@@ -202,7 +202,6 @@ export default {
 
       if (this.device.src) {
         if (/\.(jpe?g|png|gif)$/i.test(this.device.src.name)) {
-          console.log("here");
           reader.readAsDataURL(this.device.src);
         }
       }

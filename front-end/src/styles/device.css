@@ -24,14 +24,13 @@
   height: 600px;
   width: 100%;
   overflow: auto;
-  border-bottom: 1px solid #0054A6;
 }
 
 .tableDiv thead th {
   position: -webkit-sticky;
   position: sticky;
-  color: white;
-  background: #0054A6;
+  color: #c4c4c4;
+  background: white;
   top: 0;
 }
 
@@ -117,18 +116,13 @@
 }
 
 .inner-div {
-  height: 85vh;
-  width: 85vw;
   display: block;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   padding: 25px;
   border-radius: 15px;
-  margin-left: 11vw;
   text-align: center;
-  min-height: 800px;
-  min-width: 1600px;
   background-color: white;
 }
 
@@ -284,7 +278,7 @@
   padding: 0;
   margin: 0;
   background: #C0392B;
-  width: 200px;
+  width: 210px;
   bottom: 10px;
   height: 10px;
   z-index: -1;
@@ -297,7 +291,7 @@
   padding: 0;
   margin: 0;
   background: #C0392B;
-  width: 190px;
+  width: 200px;
   height: 10px;
   left: 25px;
   bottom: 20px;

@@ -12,6 +12,7 @@ use App\Http\Controllers\LeavingWorkController;
 use App\Http\Controllers\UserDevicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,15 +27,19 @@ use App\Http\Controllers\MessagesController;
 
 Route::group(['middleware' => ['auth:api']], function () {
 
+    Route::get('/pdf/download/{id}', [PdfController::class, 'downloadPdf']);
+    
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/refresh', [LoginController::class, 'refresh']);
     Route::get('/user-profile', [LoginController::class, 'userProfile']);
 
     Route::get('/userDevices', [UserDevicesController::class, 'index']);
+      Route::get('users/devices/count', [DevicesController::class, 'deviceCounts']);
 
     Route::post('/devices/transfer', [DevicesTransferController::class, 'store']);
     Route::get('/devices/transfer/confirm/{id}', [DevicesTransferController::class, 'confirmTransfer']);
     Route::get('/devices/transfer/decline/{id}', [DevicesTransferController::class, 'declineTransfer']);
+
 
     Route::get('/devices/{type}', [DevicesController::class, 'index']);
     Route::post('/devices/{type}', [DevicesController::class, 'store']);
@@ -46,13 +51,17 @@ Route::group(['middleware' => ['auth:api']], function () {
   
 
     Route::get('/users/messages', [MessagesController::class, 'index']);
-    Route::put('/users/{id}', [UsersController::class, 'update']);
-    Route::get('/users', [UsersController::class, 'index']);
-    Route::get('/allUsers', [UsersController::class, 'allUsers']);
-    Route::get('/users/{id}', [UsersController::class, 'show']);
-    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+    Route::get('/users/messages/generalData', [MessagesController::class, 'messagesGeneral']);
     Route::get('/users/messages/count', [MessagesController::class, 'messagesCount']);
 
+    Route::get('/users/devices/count', [UserDevicesController::class, 'devicesCount']);
+    Route::get('/users/count', [UsersController::class, 'usersCount']);
+    Route::get('/users', [UsersController::class, 'index']);
+    Route::get('/allUsers', [UsersController::class, 'allUsers']);
+    Route::put('/users/{id}', [UsersController::class, 'update']);
+    Route::get('/users/{id}', [UsersController::class, 'show']);
+    Route::delete('/users/{id}', [UsersController::class, 'destroy']);
+    
     Route::get('/accessories',[AccessoriesController::class, 'index']);
     Route::get('/accessories/{id}',[AccessoriesController::class, 'show']);
     Route::post('/accessories',[AccessoriesController::class, 'store']);
@@ -62,6 +71,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/leaveWork',[LeavingWorkController::class, 'store']);
     Route::get('/leaveWork/confirm/{id}',[LeavingWorkController::class, 'confirmLeaveWork']);
     Route::get('/leaveWork/decline/{id}',[LeavingWorkController::class, 'declineLeaveWork']);
+ 
 });
 
 Route::group([
@@ -70,7 +80,8 @@ Route::group([
 
 ], function () {
     Route::post('/register', [RegistrationController::class, 'register']);
-    Route::post('/login', [LoginController::class, 'login']);
+    Route::post('/login', [LoginController::class, 'login']); 
+    
 });
 
 Route::post('/email/resend', [VerificationApiController::class, 'resend'])->name('verification.resend');
@@ -80,4 +91,6 @@ Route::get('/email/verify/{id}', [VerificationApiController::class, 'verify'])->
 Route::get('/{any?}', function () {
     return response()->json(["error" => "Not Found"], 404);
 });
+
+
 

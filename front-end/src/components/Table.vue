@@ -66,10 +66,10 @@
               />
             </button>
 
-            <a v-bind:href="'/device/' + device.type + '/' + device.id">
+            <router-link :to="'/device/' + device.type + '/' + device.id">
               <button class="iconButton" @click="clicked(device, index)">
                 <font-awesome-icon class="confirmButton" icon="eye" /></button
-            ></a>
+            ></router-link>
 
             <button
               :disabled="disabledButton(device)"

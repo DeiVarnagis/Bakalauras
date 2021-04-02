@@ -224,7 +224,6 @@ export default {
       if (this.profile.phoneNumber != null) {
         data.append("phoneNumber", this.profile.phoneNumber);
       }
-
       data.append("src", this.profile.src);
       data.append("_method", "PUT");
 

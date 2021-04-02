@@ -28,21 +28,14 @@ class AccessoriesController extends Controller
     {
         $this->validateData();
         $path = null;
-        if(request()->hasFile('src'))
-        {
+
+        if (request()->hasFile('src')) {
             $path = request()->file('src')->store('accessoriesImages', 'public');
         }
 
-        $accessory = Accessories::create([
-            'name' => request('name'),
-            'amount' => request('amount'),
-            'longTerm_id' => request('longTerm_id'),
-            'shortTerm_id' => request('shortTerm_id'),
-            'src' => $path
+        $accessory = Accessories::create(array_merge($this->validateData(), ['src' => $path]));
 
-        ]);
-
-        return response()->json(["data" => $accessory], 200) ;
+        return response()->json(["data" => $accessory], 200);
     }
 
     /**
@@ -54,11 +47,10 @@ class AccessoriesController extends Controller
     public function show()
     {
         $accessory = Accessories::find(request('id'));
-        if( $accessory != null)
-        {
-            return response()->json(["data" => $accessory ], 200);
+        if ($accessory == null) {
+            return response()->json(["error" => "aksesuaras nerastas"], 404);
         }
-        return response()->json(["error" => "aksesuaras nerastas"], 404);
+        return response()->json(["data" => $accessory], 200);
     }
 
     /**
@@ -71,30 +63,25 @@ class AccessoriesController extends Controller
     public function update()
     {
         $accessory = Accessories::find(request('id'));
-        if( $accessory != null)
-        {
 
-            $this->validateData();
-            $path = $accessory->src;
-            if (request()->hasFile('src')) {
-
-                if (Storage::disk('public')->exists($accessory->src, 9)) {
-                    Storage::disk('public')->delete($accessory->src, 9);
-                }
-                $path = request()->file('src')->store('accessoriesImages', 'public');
-            }
-
-            $accessory->update([
-                'name' => request('name'), 
-                'amount' => request('amount'),
-                'longTerm_id' => request('longTerm_id'),
-                'shorTerm_id' => request('shorTerm_id'),
-                'src' => $path
-            ]);
-
-            return response()->json(["data" => $accessory ], 200);
+        if ($accessory == null) {
+            return response()->json(["error" => "aksesuaras nerastas"], 404);
         }
-        return response()->json(["error" => "aksesuaras nerastas"], 404);
+
+        $this->validateData();
+        $path = $accessory->src;
+
+        if (request()->hasFile('src')) {
+
+            if (Storage::disk('public')->exists($accessory->src)) {
+                Storage::disk('public')->delete($accessory->src);
+            }
+            $path = request()->file('src')->store('accessoriesImages', 'public');
+        }
+
+        $accessory->update(array_merge($this->validateData(), ['src' => $path]));
+
+        return response()->json(["data" => $accessory], 200);
     }
 
     /**
@@ -106,15 +93,16 @@ class AccessoriesController extends Controller
     public function destroy()
     {
         $accessory = Accessories::find(request('id'));
-        if( $accessory != null)
-        {
-            if(Storage::disk('public')->exists($accessory->src, 9)){
-                Storage::disk('public')->delete($accessory->src, 9);
-            }
-            $accessory->destroy(request('id'));
-            return response()->json(["data" => $accessory ], 204);
+        if ($accessory == null) {
+            return response()->json(["error" => "aksesuaras nerastas"], 404);
         }
-        return response()->json(["error" => "aksesuaras nerastas"], 404);
+
+        if (Storage::disk('public')->exists($accessory->src)) {
+            Storage::disk('public')->delete($accessory->src);
+        }
+
+        $accessory->destroy(request('id'));
+        return response()->json(["data" => $accessory], 204);
     }
 
 

@@ -10,7 +10,7 @@
         <header class="headerLogin">
           <h2>Pasirinkite aksesuarus</h2>
         </header>
-        <div class="table" id="scroller">
+        <div class="tableAccessories" id="scroller">
           <table class="accessoriesTable">
             <thead>
               <tr>

@@ -2,29 +2,28 @@
 
 
 
-.table{
+.tableAccessories{
     height: 500px;
     width: 100%;
     overflow: auto;
     border-bottom: 1px solid $borderColor;
 }
 
-.table thead th {
+.tableAccessories thead th {
     position: sticky; 
-    background: $primaryColor;
+    background: white;
     top: 0;
    }
 
 .accessoriesTable{
-    font-family: Oswald;
-    margin: auto;
-    border-collapse: collapse;
-    width: 100%;
-    background-color: white;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  margin: auto;
+  border-collapse: collapse;
+  width: 100%;
+  background-color: white;
 
     thead{
-      
-        background: $primaryColor;
+        background-color: gray;
        }
    
        tr {
@@ -43,7 +42,6 @@
        }
    
        th {
-         color: white;
          font-size: 14px;
          padding: 10px;
          text-transform: uppercase;
@@ -57,9 +55,15 @@
     justify-content: center;
     padding: 0;
     height: 100%;
+  
+    border: none;
+    outline: none;
+
   }
   .quantity_minus,
   .quantity_plus {
+    border: none;
+    outline: none;
     display: block;
     width: 25px;
     height: 25px;
@@ -67,36 +71,25 @@
     text-decoration: none;
     text-align: center;
     justify-content: center;
+    background: white;
   }
 
-  .quantity_minus{
-    background: lightsalmon;
-  }
-
-  .quantity_plus{
-    background: lightgreen;
-  }
+ 
   .quantity_minus:hover,
   .quantity_plus:hover {
     background: $primaryColor;
     color: #fff;
+    border-radius: 10px;
   } 
-  .quantity_minus {
-    border-radius: 3px 0 0 3px;
-  }
-  .quantity_plus {
-    border-radius: 0 3px 3px 0;
-  }
   .quantity_input {
     width: 32px;
     height: 25px;
     margin: 0;
     padding: 0;
     text-align: center;
-    border-top: 2px solid #dee0ee;
-    border-bottom: 2px solid #dee0ee;
-    border-left: 1px solid #dee0ee;
-    border-right: 2px solid #dee0ee;
     background: #fff;
     color: #8184a1;
+
+    border: none;
+    outline: none;
   }

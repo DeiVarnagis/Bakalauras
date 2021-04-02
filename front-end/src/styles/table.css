@@ -1,5 +1,5 @@
 .container {
-  padding: 4rem;
+  margin-right: 1rem;
 }
 
 .search {
@@ -16,6 +16,24 @@
           justify-content: space-between;
 }
 
+.search .pdfButton {
+  width: 100px;
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  background-color: #FFFFFF;
+  height: 54px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.search .pdfButton:hover {
+  background: #0054A6;
+  color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
 .search .filter {
   width: 220px;
   height: 54px;
@@ -23,8 +41,6 @@
           box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   margin-bottom: 20px;
-  border: 1px solid #C4C4C4;
-  font-weight: 500;
   font-size: 18px;
   line-height: 20px;
   padding: .6em 1.4em .5em .8em;
@@ -35,6 +51,8 @@
   background-repeat: no-repeat, repeat;
   background-position: right .7em top 50%, 0 0;
   background-size: .65em auto, 100%;
+  border: none;
+  outline: none;
 }
 
 .search .filter::-ms-expand {
@@ -52,13 +70,18 @@
 .search .searchInput {
   width: 600px;
   height: 54px;
-  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
-          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+  -webkit-box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 5px;
-  font-size: 20px;
+  font-size: 1.3rem;
+  margin-top: auto;
+  margin-bottom: auto;
   background: #FFFFFF;
-  border: 1px solid #C4C4C4;
+  border: none;
+  outline: none;
+  background: url(../assets/search.svg) no-repeat 96% 52%;
+  padding: 0 60px 0 20px;
 }
 
 .search .searchInput:hover {
@@ -66,7 +89,6 @@
 }
 
 .search .centered {
-  font-size: 50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -84,11 +106,12 @@
   display: block;
   height: 64px;
   width: 64px;
+  border: none;
+  outline: none;
   border-radius: 50%;
   background: #FFFFFF;
   -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
-  border: 1px solid #C4C4C4;
 }
 
 .search .addDevice:hover {
@@ -98,20 +121,37 @@
   transition: 0.4s;
 }
 
+.generaldata_container {
+  font-family: "Oswald";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem 0;
+  height: 8rem;
+  margin: 0 20px 0 0;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.generaldata_container .data_text {
+  margin-right: 1rem;
+}
+
+.generaldata_container .data_text:last-child {
+  margin: 0;
+}
+
 .innerDiv {
-  height: 85vh;
-  width: 85vw;
   display: block;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   padding: 25px;
   border-radius: 15px;
-  margin-left: 11vw;
   text-align: center;
-  min-height: 800px;
-  min-width: 1600px;
   background-color: white;
+  min-height: 700px;
 }
 
 .pagination {
@@ -163,7 +203,7 @@
 }
 
 .home_table {
-  font-family: Oswald;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   margin: auto;
   border-collapse: collapse;
   width: 100%;
@@ -171,7 +211,7 @@
 }
 
 .home_table thead {
-  background: #0054A6;
+  color: #c4c4c4;
 }
 
 .home_table tr {
@@ -190,8 +230,7 @@
 }
 
 .home_table th {
-  color: white;
-  font-size: 14px;
+  font-size: 16px;
   padding: 10px;
   text-transform: uppercase;
 }
@@ -216,34 +255,5 @@
   -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
           box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
   border: 1px solid #C4C4C4;
-}
-
-@media screen and (max-width: 600px) {
-  table {
-    border: 0;
-  }
-  table thead {
-    display: none;
-  }
-  table tr {
-    border-bottom: 2px solid #C4C4C4;
-    display: block;
-    margin-bottom: 10px;
-  }
-  table td {
-    border-bottom: 1px dotted #C4C4C4;
-    display: block;
-    font-size: 13px;
-    text-align: right;
-  }
-  table td:before {
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  table td:last-child {
-    border-bottom: 0;
-  }
 }
 /*# sourceMappingURL=table.css.map */

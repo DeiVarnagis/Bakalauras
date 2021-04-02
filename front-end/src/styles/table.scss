@@ -2,8 +2,10 @@
 
 @import './_variables';
 
+
+
 .container{
-  padding: 4rem;
+  margin-right: 1rem;
   
 }
 
@@ -13,7 +15,22 @@
   flex-direction: row;
   margin-bottom: 15px;
   justify-content: space-between;
-  
+
+  .pdfButton{
+    width: 100px;
+    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+    background-color: #FFFFFF;
+    height: 54px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+
+    &:hover{
+      background: $primaryColor;
+      color: white; 
+      transition: 0.4s;
+    }
+  }
   
   .filter {
     width: 220px;
@@ -21,8 +38,6 @@
     box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     margin-bottom: 20px;
-    border: 1px solid $borderColor;
-    font-weight: 500;
     font-size: 18px;
     line-height: 20px;
     padding: .6em 1.4em .5em .8em;
@@ -34,6 +49,8 @@
     background-repeat: no-repeat, repeat;
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;
+    border: none;
+    outline: none;
   }
   
    .filter::-ms-expand {
@@ -51,12 +68,17 @@
   .searchInput{
    width: 600px;
    height: 54px;
-    box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
+   box-shadow: 0px 0px 4px 3px rgba(0, 0, 0, 0.10);
     border-radius: 10px;
     padding: 5px;
-    font-size: 20px;
+    font-size: 1.3rem;
+    margin-top: auto;
+    margin-bottom: auto;
     background: #FFFFFF;
-    border: 1px solid $borderColor;
+    border: none;
+    outline: none;
+    background: url(../assets/search.svg) no-repeat 96% 52%;
+    padding: 0 60px 0 20px;
   }
 
   .searchInput:hover {
@@ -64,7 +86,7 @@
   }
 
   .centered{
-    font-size: 50px;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,10 +98,11 @@
     display:block;
     height: 64px;
     width: 64px;
+    border: none;
+    outline: none;
     border-radius: 50%;
     background: #FFFFFF;
     box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.25);
-    border: 1px solid $borderColor;
   }
 
   .addDevice:hover{
@@ -89,18 +112,30 @@
   }
 }
 
+.generaldata_container {
+  font-family: "Oswald";
+  display: flex;
+  padding: 1rem 0;
+  height: 8rem;
+  margin: 0 20px 0 0;
+  justify-content: space-between;
+  .data_text {
+      margin-right: 1rem;
+  }
+  .data_text:last-child {
+      margin:0;
+  }
+}
+
 .innerDiv{
-  height: 85vh;
-  width: 85vw;
+
   display: block;
   justify-content: center;
   padding: 25px;
   border-radius: 15px;
-  margin-left: 11vw;  
   text-align: center;
-  min-height: 800px;
-  min-width: 1600px;
   background-color: white;
+  min-height: 700px;
 }
 
 .pagination {
@@ -149,15 +184,15 @@
 }
 
   .home_table {
-    font-family: Oswald;
+
+    font-family: Avenir, Helvetica, Arial, sans-serif;
     margin: auto;
     border-collapse: collapse;
     width: 100%;
     background-color: white;
     
     thead{
-      
-     background: $primaryColor;
+      color:#c4c4c4;
     }
 
     tr {
@@ -176,8 +211,7 @@
     }
 
     th {
-      color: white;
-      font-size: 14px;
+      font-size: 16px;
       padding: 10px;
       text-transform: uppercase;
     }
@@ -198,33 +232,4 @@
     }
   }
 
-  @media screen and (max-width: 600px) {
-    table {
-
-      border: 0;
-      thead {
-        display: none;
-      }
-      tr {
-        border-bottom: 2px solid $borderColor;
-        display: block;
-        margin-bottom: 10px;
-      }
-      td {
-        border-bottom: 1px dotted $borderColor;
-        display: block;
-        font-size: 13px;
-        text-align: right;
-      }
-      td:before {
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-      td:last-child {
-        border-bottom: 0;
-      }
-    }
-  }
 

@@ -1,62 +1,350 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Teltonika-praktika
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+This app was made using [Laravel](http://laravel.com/). Be sure to check [their documentation](laravel.com/docs).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Installation
+------------
+Back-end
+------------
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+First, you will need to install [Composer](http://getcomposer.org/) following the instructions on their site.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Then, simply run the following command:
 
-## Learning Laravel
+```sh
+git clone https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system.git
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Alternatively, you may download the [(https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system/archive/main.zip)](https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system/archive/main.zip) and run `composer install` from your project's root directory.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Configuration
+-------------
+Modify the .env file to suit your needs
 
-## Laravel Sponsors
+```
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
 
-### Premium Partners
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
-## Contributing
+MEMCACHED_HOST=127.0.0.1
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
-## Code of Conduct
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
 
-## Security Vulnerabilities
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+```
 
-## License
+When you have the .env with your database connection set up you can run your migrations
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+php artisan migrate
+```
+Now just run one more command to seed your database
+
+```bash
+php artisan db:seed
+```
+
+After that you can generate your secret
+```bash
+php artisan jwt:secret
+```
+
+Also to create storage link
+
+```bash
+php artisan storage:link
+```
+
+Now your app is ready!! Just run last command to start your localhost server!
+
+```bash
+php artisan serve
+```
+Test Data
+
+```bash
+Admin - admin@test.com | password -> password
+User - user@test.com | password -> password
+```
+
+Api calls
+---------------------------------
+
+```bash
+No auth routes
+---------------------------------------------------
+Hedears:
+Content-Type:application/json
+Accept:application/json
+
+---------------------------------------------------
+http://127.0.0.1:8000/api/auth/register
+
+Body -json
+{
+    "name":"xxxxxx",
+    "surname":"xxxxxx",
+    "email":"xxxxxx@gmail.com",
+    "password":"xxxxxx",
+    "password_confirmation":"xxxxxx"
+}
+---------------------------------------------------
+http://127.0.0.1:8000/api/auth/login
+
+Body -json
+{
+    "email": "xxxxx@gmail.com",
+    "password": "xxxxxxx"
+}
+---------------------------------------------------
+http://127.0.0.1:8000/api/email/resend
+
+Body -json
+{
+    "email":"xxxxxx@gmail.com"
+}
+---------------------------------------------------
+http://127.0.0.1:8000/api/email/verify/{token}
+
+ After registration specific url will be send to user email. 
+ Click the url to verify user email.
+---------------------------------------------------
+http://127.0.0.1:8000/api/password/forgot 
+
+This route will send email with a specific url which will redirect user to http://127.0.0.1:8000/api/password/reset/{token}
+
+Body -json
+{
+    "email":"xxxxxx@gmail.com"
+}
+---------------------------------------------------
+http://127.0.0.1:8000/api/password/reset/{token}
+
+Don't forget to add body to the request for password reset.
+
+Body -json
+{
+    "password":"xxxxx",
+    "password_confirmation":"xxxxx"
+}
+-------------------------------------------------------------------
+Auth urls - need to be logged!
+
+Hedears:
+Content-Type:application/json
+Accept:application/json
+Authorization: bearer {token}
+{token} - you will get token after you login
+
+http://127.0.0.1:8000/api/auth/logout
+
+http://127.0.0.1:8000/api/auth/refresh
+
+http://127.0.0.1:8000/api/auth/user-profile
+
+------------------------------------------------------------------------
+Auth - verified routes
+User must be logged and have verified account because of the middleware protection.
+
+Devices routes
+{type} - Only ShortTerm/LongTerm types will work, otherwise you will get 404 (NotFound).
+ShortTerm - devices that most of the times will be used temporary. Code - not unique
+LongTerm - devices that most of the times will be used for long-term . Code - unique
+
+Headers:
+Content-Type:application/json
+Accept:application/json
+Authorization: bearer {token} 
+
+http://127.0.0.1:8000/api/devices/{type} - Get
+---------------------------------------------------
+http://127.0.0.1:8000/api/devices/{type} - Post
+
+Body
+{
+    "code": "xxxxxxxxx",
+    "name": "xxxxxxxx",
+    "serialNumber": "xxxxxxxxx",
+    "amount": "Number"-> 1 2 3
+}
+---------------------------------------------------
+
+http://127.0.0.1:8000/api/devices/{type}/{id} - patch
+
+Body
+{
+    "code": "xxxxxxxxx",
+    "name": "xxxxxxxx",
+    "serialNumber": "xxxxxxxxx",
+    "amount": "Number"-> 1 2 3
+}
+---------------------------------------------------
+http://127.0.0.1:8000/api/devices/{type}/{id} Get
+http://127.0.0.1:8000/api/devices/{type}/{id} Delete
+
+---------------------------------------------------------------------------
+Devices tranfer routes
+
+http://127.0.0.1:8000/api/devices/transfer Post
+
+user_id -> Id of the user you want to transfer or lend your device.
+----------
+you can pass only one of following
+longTerm_id -> if you want to do actions with long term devices(id of the device)
+shortTerm_id -> if you want to do actions with short term devices(id of the device)
+--------
+action -> 1 means transfer, 2 means lend
+Body
+{
+    "user_id": xx,
+    "longTerm_id":xx,
+    "action":x (1,2)
+}
+
+http://127.0.0.1:8000/api/devices/transfer/confirm/{id} - Patch
+{id} - pass id of the transfer request. It will automatically do the operation depending 
+on the action(lend, transfer) of the request.
+
+http://127.0.0.1:8000/api/devices/transfer/decline/{id} - Patch
+{id} - pass id of the transfer request. It will decline the request.
+It can be done by owner and user who will get the device.
+
+------------------------------------------------------------------------
+User Devices (filter)
+
+http://127.0.0.1:8000/api/userDevices?queary - Get
+
+------------------------------------------------------------------------
+Users api
+
+Update (Put)
+http://127.0.0.1:8000/api/users/{id}
+
+body
+{
+    "name":"qqqqqq",
+    "surname":"asdfgdfg",
+    "email":"qweqwe@gmail.com",
+    "birth":null
+}
+
+Messages count (Get)
+http://127.0.0.1:8000/api/users/messages/count
+
+User messages(Get)
+http://127.0.0.1:8000/api/users/messages
+
+All users(Get)
+http://127.0.0.1:8000/api/users
+
+------------------------------------------------------------------------
+Accessories Api
+
+All accessories
+http://127.0.0.1:8000/api/accessories
+
+Spesific accessory(Get)
+http://127.0.0.1:8000/api/accessories/{id}
+
+Update accessory(Put)
+http://127.0.0.1:8000/api/accessories/{id}
+
+{
+    "name":"sdfasdfasdf",
+    "amount":"1",
+    "longTerm_id":null,
+    "shortTerm_id":4
+}
+
+Delete accessory(Delete)
+http://127.0.0.1:8000/api/accessories/{id}
+
+Add accessory(Post)
+http://127.0.0.1:8000/api/accessories
+
+body
+{
+    "name":"sdfasdfasdf",
+    "amount":"1",
+    "longTerm_id":null,
+    "shortTerm_id":4
+}
+
+------------------------------------------------------------------------
+leave work api
+
+Add request to transfer all devices(post)
+
+http://127.0.0.1:8000/api/leaveWork
+
+body
+{
+    "user_id": 2
+}
+
+Confirm request
+http://127.0.0.1:8000/api/leaveWork/confirm/{id}
+
+Decline request
+http://127.0.0.1:8000/api/leaveWork/decline/1
+```
+
+New update -> added email verification and password reset api. 
+How to use?
+```
+First thing to do is to update yours env fail. Example:
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=10f87e52a3540d
+MAIL_PASSWORD=500c62abed7b3f
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=6e224e622f-f38aef@inbox.mailtrap.io
+MAIL_FROM_NAME="${APP_NAME}""
+
+```
+You will get all verification links into your mailtrap.
+Now you can use [PostMan](https://www.postman.com/) to try out Api calls.
+

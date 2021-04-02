@@ -25,178 +25,145 @@ class DevicesController extends Controller
         return response()->json($this->instance::all(), 200);
     }
 
+
     public function store(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
         }
 
-        $this->instance->validateData($request);
-
         $path = null;
         if (request()->hasFile('src')) {
             $path = request()->file('src')->store('devicesImages', 'public');
         }
 
-        $this->instance::create([
-            'name' => $request['name'],
-            'code' => $request['code'],
-            'serialNumber' => $request['serialNumber'],
-            'amount' => $request['amount'],
-            'user_id' => auth()->user()->id,
-            'src' => $path
-        ]);
+        $this->instance::create(array_merge($this->instance->validateData($request), ['src' => $path, 'user_id' => auth()->user()->id]));
 
         return response()->json(["message" => "Prietaisas sėkmingai buvo sukurtas"], 201);
     }
+
 
     public function show(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
+        }
 
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
-
-                if (!auth()->user()->admin) {
-                    if (auth()->user()->id != $device->user_id) {
-                        $accessories = $device->DevicesLends()->first();
-                        $device->accessories =  $accessories->lendAccessories()->get();
-                    } else {
-                        $device->accessories = $device->Accessories();
-                    }
-                }
-                $device->accessories = $device->Accessories();
-
-                return response()->json(["data" => $device], 200);
-            }
+        $device = $this->instance::find($request['id']);
+        if ($device == null) {
             return response()->json(["error" => 'Pretaisas nerastas'], 404);
         }
+
+        if (auth()->user()->id != $device->user_id || !auth()->user()->admin) {
+            $accessories = $device->DevicesLends()->first();
+            $device->accessories =  $accessories->lendAccessories()->get();
+            return response()->json(["data" => $device], 200);
+        }
+
+        $device->accessories = $device->Accessories();
+        return response()->json(["data" => $device], 200);
     }
+
 
     public function getDeviceAccessories(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
-                return response()->json(["data" => $device->Accessories()], 200);
-            }
+        }
+
+        $device = $this->instance::find($request['id']);
+        if ($device == null) {
             return response()->json(["error" => 'Pretaisas nerastas'], 404);
         }
+
+        return response()->json(["data" => $device->Accessories()], 200);
     }
+
 
     public function getDeviceWithLendAccessories(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
+        }
+        $device = $this->instance::find($request['id']);
 
-                return response()->json(["data" => $device], 200);
-            }
+        if ($device == null) {
             return response()->json(["error" => 'Pretaisas nerastas'], 404);
         }
+        return response()->json(["data" => $device], 200);
     }
+
 
     public function update(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
+        }
 
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
-                $path = $device->src;
-                $this->instance->validateUpdate($request['id']);
-                if (request()->hasFile('src')) {
+        $device = $this->instance::find($request['id']);
 
-                    if (Storage::disk('public')->exists($device->src, 9)) {
-                        Storage::disk('public')->delete($device->src, 9);
-                    }
-                    $path = request()->file('src')->store('devicesImages', 'public');
-                }
-
-                $device->update([
-                    'name' => $request['name'],
-                    'code' => $request['code'],
-                    'serialNumber' => $request['serialNumber'],
-                    'amount' => $request['amount'],
-                    'user_id' => auth()->user()->id,
-                    'src' => $path
-                ]);
-
-                if ($request['type'] !== $request['deviceType']) {
-                    return $this->switchTypes($device, $request);
-                }
-
-                return response()->json($device, 200);
-            }
+        if ($device == null) {
             return response()->json(["error" => 'Pretaisas nerastas'], 404);
         }
+
+        $path = $device->src;
+
+        if (request()->hasFile('src')) {
+
+            $this->deleteFileIfExist($path);
+            $path = request()->file('src')->store('devicesImages', 'public');
+        }
+
+        if ($request['type'] !== $request['deviceType']) {
+            if (is_a($this->instance, DevicesShortTerm::class)) {
+                $newInstance = DevicesLongTerm::class;
+            } else {
+                $newInstance = DevicesShortTerm::class;
+            }
+
+            $newDevice = $newInstance::create(array_merge($this->instance->validateUpdate($request['id']), ['src' => $path]));
+            $this->instance->destroy($device->id);
+            return response()->json($newDevice, 200);
+        }
+
+        $device->update(array_merge($this->instance->validateUpdate($request['id']), ['src' => $path]));
+
+        return response()->json($device, 200);
     }
+
 
     public function destroy(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json('Pretaiso tipas nerastas', 404);
-        } else {
-            $this->instance = new $this->model;
-            $device = $this->instance->find($request['id']);
-            if ($device != null) {
-                if (auth()->user()->id == $device->user_id) {
+        }
 
-                    if (Storage::disk('public')->exists($device->src, 9)) {
-                        Storage::disk('public')->delete($device->src, 9);
-                    }
-                    $device->destroy($request['id']);
-                    if ($device) {
-                        return response()->json($device, 204);
-                    }
-                }
-                return response()->json(["error" => 'Šis prietaisas priklauso ne jums'], 400);
-            }
+        $this->instance = new $this->model;
+        $device = $this->instance->find($request['id']);
+        if ($device == null) {
             return response()->json(["error" => 'Pretaisas nerastas'], 404);
         }
+
+        if (auth()->user()->id == $device->user_id || auth()->user()->admin) {
+            $this->deleteFileIfExist($device->src);
+            $device->destroy($request['id']);
+            return response()->json($device, 204);
+        }
+        return response()->json(["error" => 'Šis prietaisas priklauso ne jums'], 400);
     }
+
 
 
     public function history(Request $request)
     {
         if (!$this->checkIfClassExist($request['type'])) {
             return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        } else {
-            $device = $this->instance::find($request['id']);
-            if ($device != null) {
-                return $device->getHistory();
-            }
+        }
+        $device = $this->instance::find($request['id']);
+        if ($device == null) {
             return response()->json(["error" => 'Pretaiso istorija nerasta'], 404);
         }
-    }
-
-    protected function switchTypes($device)
-    {
-        if (is_a($this->instance, DevicesShortTerm::class)) {
-            $newInstance = DevicesLongTerm::class;
-        } elseif (is_a($this->instance, DevicesLongTerm::class)) {
-            $newInstance = DevicesShortTerm::class;
-        }
-
-        $newDevice = $newInstance::create([
-            'name' => $device->name,
-            'code' => $device->code,
-            'serialNumber' => $device->serialNumber,
-            'amount' => $device->amount,
-            'state' => $device->state,
-            'action' => $device->action,
-            'src' => $device->src,
-            'user_id' => $device->user_id
-        ]);
-        $this->instance->destroy($device->id);
-        return response()->json($newDevice, 200);
+        return $device->getHistory();
     }
 
     protected function checkIfClassExist(String $class)
@@ -208,5 +175,12 @@ class DevicesController extends Controller
             return true;
         }
         return false;
+    }
+
+    protected function deleteFileIfExist($src)
+    {
+        if (Storage::disk('public')->exists($src)) {
+            Storage::disk('public')->delete($src);
+        }
     }
 }

@@ -10,16 +10,10 @@ class RegistrationController extends Controller
 {
     public function register(Request $request)
     {
-        $this->validateRegistration();
-        $user = User::create([
-            'name' => $request['name'],
-            'surname' => $request['surname'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
-            'admin' => false
-        ]);
+        
+        $user = User::create(array_merge($this->validateRegistration(),[ 'password' => Hash::make($request['password'])]));
 
-        $user->sendApiEmailVerificationNotification();
+        //$user->sendApiEmailVerificationNotification(); //siusti laiška
 
         return response()->json($user, 201);
     }

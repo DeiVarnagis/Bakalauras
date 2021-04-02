@@ -27,7 +27,7 @@
               Patvirtinti
             </button>
           </div>
-          <a href="/login">Prisijungimas</a>
+          <router-link :to="'/login'">Prisijungimas</router-link>
         </div>
       </form>
     </ValidationObserver>

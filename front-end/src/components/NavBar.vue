@@ -1,57 +1,89 @@
 <template>
-  <section class="app">
-    <div class="sidebar">
-      <header>
-        <a href="/"
-          ><img alt="teltonika" src="../images/Teltonika-logo.png"
-        /></a>
-      </header>
-      <nav class="sidebar-nav">
-        <ul>
-          <li>
-            <a href="/">Prietaisai</a>
-          </li>
-          <li>
-            <div>
-              <a href="/messages"
-                >Užklausos
-                <notification-bell
-                  :size="25"
-                  :count="messages"
-                  :upperLimit="50"
-                  counterLocation="upperRight"
-                  counterStyle="round"
-                  counterBackgroundColor="#FF0000"
-                  counterTextColor="#FFFFFF"
-                  iconColor="#000000"
-              /></a>
-            </div>
-          </li>
-          <li v-if="!loading && decoded.admin">
-             <a href="/usersTable">Vartotojai</a>
-          </li>
-          <li>
-            <a href="/profile">Profilis</a>
-          </li>
-          <li>
-            <a href="/login" @click.prevent="logout()">Atsijungti</a>
-          </li>
-        </ul>
-      </nav>
+  <div>
+    <div class="navi_wrap" :class="toggledNav ? 'open' : 'closed'">
+      <div class="toggle-menu">
+        <a class="unselectable" @click="toggledNav = !toggledNav">
+          <img height="30px" src="../assets/menu.svg" />
+        </a>
+      </div>
+      <a class="unselectable" @click="push('Home')">
+        <img class="navi_img" src="../assets/logo.svg" alt="Teltonika" />
+      </a>
+      <div class="navi_links">
+        <a
+          class="unselectable navi_link"
+          @click="push('Home')"
+          :class="{ text_active: $route.name == 'Home' }"
+        >
+          <img height="30px" src="../assets/devices.svg" />
+          <span class="link-text">INVENTORIUS</span>
+        </a>
+        
+        <a
+          class="unselectable navi_link"
+          @click="push('Messages')"
+          :class="{ text_active: $route.name == 'Messages' }"
+        >
+        <div style=" margin-right: 20px;">
+            <notification-bell
+            :size="30"
+            :count="messages"
+            :upperLimit="50"
+            counterLocation="upperRight"
+            counterStyle="round"
+            counterBackgroundColor="#FF0000"
+            counterTextColor="#FFFFFF"
+            iconColor="#000000"
+          />
+        </div>
+          <span class="link-text">ĮVYKIAI</span>
+        </a>
+
+          <a
+          v-if="decoded.admin"
+          class="unselectable navi_link"
+          @click="push('usersTable')"
+          :class="{ text_active: $route.name == 'usersTable' }"
+        >
+          <img height="30px" src="../assets/workers.svg" />
+          <span class="link-text">VARTOTOJAI</span>
+        </a>
+
+          <a
+          class="unselectable navi_link"
+          @click="push('Profile')"
+          :class="{ text_active: $route.name == 'Profile' }"
+        >
+          <img height="30px" src="../assets/profile.svg" />
+          <span class="link-text">PROFILIS</span>
+        </a>
+
+            <a
+          class="unselectable navi_link"
+          @click="logout()"
+        >
+          <img height="30px" src="../assets/logout.svg" />
+          <span class="link-text">ATSIJUNGTI</span>
+        </a>
+
+      </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import NotificationBell from "vue-notification-bell";
+import Pusher from "pusher-js";
 export default {
   data() {
     return {
+      listActive: false,
+      toggledNav: true,
       messages: null,
-      decoded:null,
-      loading:true,
+      loading: true,
+      decoded: jwt_decode(localStorage["token"]),
     };
   },
   components: {
@@ -72,7 +104,6 @@ export default {
         });
     },
     messagesCount() {
-         
       axios
         .get("users/messages/count", {
           headers: {
@@ -83,11 +114,33 @@ export default {
           this.messages = res.data;
         });
     },
+    push(route) {
+      if (this.$route.name !== route) {
+        this.$router.push({ name: route });
+      }
+    },
+    watchCount() {
+      var pusher = new Pusher("911c4c72971affe5f999", {
+        cluster: "eu",
+      });
+
+      var channel = pusher.subscribe("notiflication-channel");
+      channel.bind(
+        "NotificationSend",
+        (data) => {
+          if (this.decoded.id == data.id) {
+            this.messages = data.count;
+          }
+        },
+        this
+      );
+    },
   },
+
   async mounted() {
-    this.decoded = jwt_decode(localStorage["token"]);
-    this.loading=false;
+    this.loading = false;
     this.messagesCount();
+    this.watchCount();
   },
 };
 </script>

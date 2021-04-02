@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="containerLogin">
     <ValidationObserver ref="form">
       <form
         @submit.prevent="resetPassword()"
@@ -86,5 +86,6 @@ export default {
 };
 </script>
 
-<style>
+<style scoped >
+@import "../styles/login.css";
 </style>

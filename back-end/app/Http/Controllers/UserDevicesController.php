@@ -40,4 +40,16 @@ class UserDevicesController extends Controller
 
         return response()->json(["error" => 'Duomenų nėra'], 404);
     }
+
+    
+    public function devicesCount()
+    {
+       $user = User::find(auth()->user()->id);
+       $borrowed = $user->DevicesLends()->count(); 
+       $lended = $user->DevicesLongTerm()->where('state', 2)->count() + $user->DevicesShortTerm()->where('state', 2)->count();
+       $allDevices = $user->DevicesLongTerm()->count() + $user->DevicesShortTerm()->count();     
+
+       return response()->json(['borrowed' => $borrowed, 'lended' => $lended, 'allDevices' => $allDevices ], 200);
+
+    }
 }

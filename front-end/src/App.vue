@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <div class="row">
-      <div class="column" v-if="ifLogged()">
-        <NavBar></NavBar>
-      </div>
-      <router-view />
+    <div v-if="ifLogged()">
+      <NavBar class="navigation-component"></NavBar>
     </div>
+    <router-view class="router-view" />
   </div>
 </template>
 
@@ -28,10 +26,23 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Oswald&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html {
-  background-color: #e5e5e5;
+  background-color: #efefefef;
 }
 #app {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+}
+.navigation-component {
+  margin-right: 15px;
+}
+.router-view {
+  width: 100%;
 }
 </style>

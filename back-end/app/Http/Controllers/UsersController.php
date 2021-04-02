@@ -13,7 +13,7 @@ class UsersController extends Controller
     {
         $search = request("search");
         if (Str::length($search) > 0) {
-            $users = User::where('name', 'like', "%" . $search . "%")->orWhere('email', 'like', "%" . $search . "%")->get();
+            $users = User::where('name', 'like', "%" . $search . "%")->orWhere('email', 'like', "%" . $search . "%")->orWhere('surname', 'like', "%" . $search . "%")->get();
         } else {
             $users = User::all();
         }
@@ -23,64 +23,56 @@ class UsersController extends Controller
 
     public function allUsers()
     {
-        return User::all();
+        return response()->json(User::all(), 200);
+    }
+
+    public function usersCount()
+    {
+        return response()->json(User::all()->count(), 200);
     }
 
     public function show()
     {
         $user = User::find(request('id'));
-        if ($user != null) {
-            return  response()->json($user, 200);
+        if ($user == null) {
+            return response()->json(["error" => 'Vartotojas nerastas'], 404);
         }
-        return response()->json(["error" => 'Vartotojas nerastas'], 404);
+        return  response()->json($user, 200);
     }
 
     public function update()
     {
         $user = User::find(request('id'));
-        if ($user != null) {
+        if ($user == null) {
 
-            $this->validateEdit($user->id);
-            $path = $user->src;
-            if (request()->hasFile('src')) {
-
-                if (Storage::disk('public')->exists(substr($user->src, 9))) {
-                    Storage::disk('public')->delete(substr($user->src, 9));
-                }
-                $path = request()->file('src')->store('profileImages', 'public');
-            }
-
-            $user->update([
-                'name' => request('name'),
-                'surname' => request('surname'),
-                'address' => request('address'),
-                'email' => request('email'),
-                'phoneNumber' => request('phoneNumber'),
-                'birth' => request('birth'),
-                'src' => $path
-            ]);
-
-            return response()->json(["data" => $user], 200);
+            return response()->json(["error" => "Vartotojas nerastas"], 404);
         }
-        return response()->json(["error" => "Vartotojas nerastas"], 404);
+
+        $path = $user->src;
+        if (request()->hasFile('src')) {
+
+            $this->deleteFileIfExist($user->src);
+            $path = request()->file('src')->store('profileImages', 'public');
+        }
+
+        $user->update(array_merge($this->validateEdit($user->id), ['src' => $path]));
+
+        return response()->json(["data" => $user], 200);
     }
 
     public function destroy()
     {
         $user = User::find(request('id'));
-        if ($user != null) {
-
-            if (auth()->user()->admin) {
-                if (Storage::disk('public')->exists(substr($user->src, 9))) {
-                    Storage::disk('public')->delete(substr($user->src, 9));
-                }
-
-                $user->destroy(request('id'));
-                return response()->json(["data" => $user], 204);
-            }
-            return response()->json(["error" => "Unauthenticated"], 404);
+        if ($user == null) {
+            return response()->json(["error" => "Vartotojas nerastas"], 404);
         }
-        return response()->json(["error" => "Vartotojas nerastas"], 404);
+
+        if (auth()->user()->admin) {
+            $this->deleteFileIfExist($user->src);
+            $user->destroy(request('id'));
+            return response()->json(["data" => $user], 204);
+        }
+        return response()->json(["error" => "Unauthenticated"], 404);
     }
 
     protected function validateEdit($id)
@@ -95,5 +87,12 @@ class UsersController extends Controller
             'src' => 'nullable',
 
         ]);
+    }
+
+    protected function deleteFileIfExist($src)
+    {
+        if (Storage::disk('public')->exists($src)) {
+            Storage::disk('public')->delete($src);
+        }
     }
 }

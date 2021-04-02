@@ -138,6 +138,7 @@ export default {
         serialNumber: null,
         amount: 1,
         deviceType: null,
+        user_id:null,
         src: null,
       },
       type: null,
@@ -155,6 +156,7 @@ export default {
       this.device.code = data.code;
       this.device.serialNumber = data.serialNumber;
       this.device.amount = data.amount;
+      this.device.user_id = data.user_id;
       this.device.deviceType = data.type;
       this.type = data.type;
       this.show = true;
@@ -183,6 +185,7 @@ export default {
             );
           })
           .catch((err) => {
+            console.log(err.response)
             this.backEndErrors.record(err.response.data);
           });
       });
@@ -202,6 +205,7 @@ export default {
         const data = new FormData();
         data.append("code", this.device.code);
         data.append("name", this.device.name);
+        data.append("user_id", this.device.user_id);
         data.append("serialNumber", this.device.serialNumber);
         data.append("amount", this.device.amount);
         data.append("src", this.device.src);

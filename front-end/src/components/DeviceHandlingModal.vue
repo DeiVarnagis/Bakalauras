@@ -161,9 +161,8 @@ export default {
         } else {
           this.show = false;
           this.request.accessories = accessories;
-          if(action == 3)
-          {
-            this.request.owner_id = this.decoded.id
+          if (action == 3) {
+            this.request.owner_id = this.decoded.id;
           }
           axios
             .post("devices/transfer", this.request, {
@@ -176,12 +175,13 @@ export default {
               this.request.user_id = null;
               this.request.longTerm_id = null;
               this.request.shortTerm_id = null;
-              this.action = 0;
+              this.request.action = 0;
               this.$emit("updateValue", this.index);
               this.closeModal();
               this.$vToastify.success("Užklausa sėkmingai buvo įvygdyta");
             })
             .catch((err) => {
+              console.log(err.response)
               this.backEndErrors.record(err.response.data);
               if (this.backEndErrors.has("longTerm_id")) {
                 this.$vToastify.error(this.backEndErrors.get("longTerm_id"));
@@ -196,6 +196,7 @@ export default {
       this.$emit("updateValue", this.index);
     },
     closeModal() {
+      this.request.action = 0;
       this.show = false;
       this.user = "";
       this.modal = false;
@@ -221,7 +222,7 @@ export default {
     },
     setState(state) {
       this.user = state.name + " " + state.surname;
-      this.request.owner_id = this.device.user_id
+      this.request.owner_id = this.device.user_id;
       this.request.user_id = state.id;
       if (this.device.type == "LongTerm") {
         this.request.longTerm_id = this.device.id;

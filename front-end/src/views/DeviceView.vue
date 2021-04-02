@@ -40,84 +40,87 @@
           </div>
         </Tab>
         <Tab name="Aksesuarai" :selected="false">
-          <div class="search">
-            <button
-              :disabled="!disabledButton(device)"
-              class="addDevice"
-              @click="$refs.addAccessoryModal.openModal()"
-            >
-              <font-awesome-icon icon="plus" />
-            </button>
-            <div class="textOnInput">
-              <label style="top: -10px" for="inputText">Paieška</label>
-              <input
-                class="searchInput"
-                placeholder="Paieška"
-                type="text"
-                v-model="search"
-                @change="filterAccessories"
-                name="search"
-              />
+          <div>
+            <div class="search">
+              <button
+                :disabled="!disabledButton(device)"
+                class="addDevice"
+                @click="$refs.addAccessoryModal.openModal()"
+              >
+                <font-awesome-icon icon="plus" />
+              </button>
+              <div class="textOnInput">
+                <label style="top: -10px" for="inputText">Paieška</label>
+                <input
+                  class="searchInput"
+                  placeholder="Paieška"
+                  type="text"
+                  v-model="search"
+                  @change="filterAccessories"
+                  name="search"
+                />
+              </div>
             </div>
-          </div>
-          <div v-if="!loading" class="tableDiv" id="scroller">
-            <table class="home_table" cellspacing="0" cellpadding="0">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Pavadinimas</th>
-                  <th>Kiekis</th>
-                  <th>Data</th>
-                  <th v-if="disabledButton(device)">Įrankiai</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="(accessory, index) in resultQuery" :key="index">
-                  <td>
-                    <img
-                      v-if="accessory.src == null"
-                      alt="device"
-                      src="../images/devices.png"
-                    />
-                    <img
-                      v-else
-                      alt=""
-                      :src="'http://127.0.0.1:8000/storage/' + accessory.src"
-                    />
-                  </td>
-                  <td data-label="Pavadinimas">{{ accessory.name }}</td>
-                  <td data-label="Kiekis">{{ accessory.amount }}</td>
-                  <td data-label="Data">{{ accessory.created_at }}</td>
-                  <td>
-                    <button
-                      v-if="disabledButton(device)"
-                      class="iconButton"
-                      @click="
-                        clicked(accessory, index),
-                          $refs.editAccessory.openModal(clickedAccessory)
-                      "
-                    >
-                      <font-awesome-icon class="confirmButton" icon="edit" />
-                    </button>
-                    <button
-                      v-if="disabledButton(device)"
-                      class="iconButton"
-                      @click="
-                        clicked(accessory, index), $refs.deleteModal.openModal()
-                      "
-                    >
-                      <font-awesome-icon
-                        class="confirmButton"
-                        icon="trash-alt"
+            <div v-if="!loading" class="tableDiv" id="scroller">
+              <table class="home_table" cellspacing="0" cellpadding="0">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Pavadinimas</th>
+                    <th>Kiekis</th>
+                    <th>Data</th>
+                    <th v-if="disabledButton(device)">Įrankiai</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="(accessory, index) in resultQuery" :key="index">
+                    <td>
+                      <img
+                        v-if="accessory.src == null"
+                        alt="device"
+                        src="../images/devices.png"
                       />
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <h1 class="centered" v-if="device.accessories.length == 0">
-              Prietaisas neturi aksesuarų
-            </h1>
+                      <img
+                        v-else
+                        alt=""
+                        :src="'http://127.0.0.1:8000/storage/' + accessory.src"
+                      />
+                    </td>
+                    <td data-label="Pavadinimas">{{ accessory.name }}</td>
+                    <td data-label="Kiekis">{{ accessory.amount }}</td>
+                    <td data-label="Data">{{ accessory.created_at }}</td>
+                    <td>
+                      <button
+                        v-if="disabledButton(device)"
+                        class="iconButton"
+                        @click="
+                          clicked(accessory, index),
+                            $refs.editAccessory.openModal(clickedAccessory)
+                        "
+                      >
+                        <font-awesome-icon class="confirmButton" icon="edit" />
+                      </button>
+                      <button
+                        v-if="disabledButton(device)"
+                        class="iconButton"
+                        @click="
+                          clicked(accessory, index),
+                            $refs.deleteModal.openModal()
+                        "
+                      >
+                        <font-awesome-icon
+                          class="confirmButton"
+                          icon="trash-alt"
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h1 class="centered" v-if="device.accessories.length == 0">
+                Prietaisas neturi aksesuarų
+              </h1>
+            </div>
           </div>
         </Tab>
         <Tab
