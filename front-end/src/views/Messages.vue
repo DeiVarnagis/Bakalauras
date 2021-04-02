@@ -254,7 +254,7 @@ export default {
     },
     declineRequestAll(id, index) {
       axios
-        .get("leaveWork/decline" + id, {
+        .get("leaveWork/decline/" + id, {
           headers: {
             Authorization: "Bearer".concat(localStorage["token"]),
           },

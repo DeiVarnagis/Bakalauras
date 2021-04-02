@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationSend;
 use App\Models\LeavingWork;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,16 +14,20 @@ class LeavingWorkController extends Controller
     {
         $row = LeavingWork::where('owner_id', auth()->user()->id)->first();
         $this->validateData();
-        if ($row != null || $row->state == 0) {
-            return response()->json(["data" => $leavingWork], 200);
+        if($row == null)
+        {
+            event(new NotificationSend(User::find(auth()->user()->id)->messagesCount(), auth()->user()->id));
+            return response()->json(LeavingWork::create([
+                'owner_id' => auth()->user()->id,
+                'user_id' => request('user_id')
+            ]), 200); 
+        }
+
+        if ($row->state == 0) {
+            return response()->json(["data" => $row], 200);
             return response()->json(["error" => "Vartotojas jau pateikė užklausa dėl išėjimo iš darbo"], 400);
         }
 
-        $leavingWork = LeavingWork::create([
-            'owner_id' => auth()->user()->id,
-            'user_id' => request('user_id')
-        ]);
-        
        
     }
 
@@ -50,7 +55,7 @@ class LeavingWorkController extends Controller
         }
         $row->state = -1;
         $row->save();
-        return response()->json(["error" => "Užklausa atšaukta sėkmingai"], 400);
+        return response()->json(["message" => "Užklausa atšaukta sėkmingai"], 200);
     }
 
     protected function validateData()
