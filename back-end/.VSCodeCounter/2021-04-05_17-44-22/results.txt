@@ -1,0 +1,173 @@
+Date : 2021-04-05 17:44:22
+Directory : c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end
+Total : 106 files,  22672 codes, 1641 comments, 1068 blanks, all 25381 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JSON       |          4 |     19,079 |          0 |          4 |     19,083 |
+| PHP        |         93 |      3,245 |      1,583 |        963 |      5,791 |
+| Markdown   |          1 |        270 |          0 |         81 |        351 |
+| XML        |          1 |         29 |          2 |          1 |         32 |
+| JavaScript |          4 |         24 |         56 |         16 |         96 |
+| YAML       |          1 |         13 |          0 |          1 |         14 |
+| HTML       |          1 |         12 |          0 |          1 |         13 |
+| CSS        |          1 |          0 |          0 |          1 |          1 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                                                | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                                                   |        106 |     22,672 |      1,641 |      1,068 |     25,381 |
+| app                                                                                                                                 |         44 |      1,822 |        347 |        472 |      2,641 |
+| app\Console                                                                                                                         |          1 |         17 |         18 |          7 |         42 |
+| app\Events                                                                                                                          |          1 |         28 |          0 |          8 |         36 |
+| app\Exceptions                                                                                                                      |          1 |         18 |         17 |          6 |         41 |
+| app\Helpers                                                                                                                         |          1 |         28 |          0 |          8 |         36 |
+| app\Http                                                                                                                            |         23 |        845 |        111 |        248 |      1,204 |
+| app\Http\Controllers                                                                                                                |         13 |        704 |         31 |        199 |        934 |
+| app\Http\Middleware                                                                                                                 |          9 |        102 |         59 |         40 |        201 |
+| app\Models                                                                                                                          |          8 |        545 |         15 |        120 |        680 |
+| app\Notifications                                                                                                                   |          2 |        114 |         97 |         29 |        240 |
+| app\Providers                                                                                                                       |          5 |         84 |         65 |         30 |        179 |
+| app\Rules                                                                                                                           |          2 |        143 |         24 |         16 |        183 |
+| bootstrap                                                                                                                           |          1 |         17 |         30 |          9 |         56 |
+| config                                                                                                                              |         16 |        566 |        906 |        273 |      1,745 |
+| database                                                                                                                            |         15 |        345 |        146 |         72 |        563 |
+| database\factories                                                                                                                  |          4 |         78 |         40 |         20 |        138 |
+| database\migrations                                                                                                                 |         10 |        231 |        101 |         41 |        373 |
+| database\seeders                                                                                                                    |          1 |         36 |          5 |         11 |         52 |
+| public                                                                                                                              |          1 |         14 |         30 |         12 |         56 |
+| resources                                                                                                                           |         10 |        367 |         78 |         79 |        524 |
+| resources\css                                                                                                                       |          1 |          0 |          0 |          1 |          1 |
+| resources\js                                                                                                                        |          2 |         15 |         18 |         13 |         46 |
+| resources\lang                                                                                                                      |          4 |        133 |         60 |         24 |        217 |
+| resources\lang\en                                                                                                                   |          4 |        133 |         60 |         24 |        217 |
+| resources\views                                                                                                                     |          3 |        219 |          0 |         41 |        260 |
+| resources\views\vendor                                                                                                              |          1 |         55 |          0 |          8 |         63 |
+| resources\views\vendor\notifications                                                                                                |          1 |         55 |          0 |          8 |         63 |
+| routes                                                                                                                              |          4 |         80 |         40 |         36 |        156 |
+| tests                                                                                                                               |          4 |         41 |         15 |         19 |         75 |
+| tests\Feature                                                                                                                       |          1 |         12 |          5 |          5 |         22 |
+| tests\Unit                                                                                                                          |          1 |         10 |          5 |          4 |         19 |
+| vendor                                                                                                                              |          2 |         17 |         27 |          1 |         45 |
+| vendor\facade                                                                                                                       |          2 |         17 |         27 |          1 |         45 |
+| vendor\facade\ignition                                                                                                              |          2 |         17 |         27 |          1 |         45 |
+| vendor\facade\ignition\resources                                                                                                    |          2 |         17 |         27 |          1 |         45 |
+| vendor\facade\ignition\resources\compiled                                                                                           |          2 |         17 |         27 |          1 |         45 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                                            | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\.styleci.yml                                                              | YAML       |         13 |          0 |          1 |         14 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\README.md                                                                 | Markdown   |        270 |          0 |         81 |        351 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Console\Kernel.php                                                    | PHP        |         17 |         18 |          7 |         42 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Events\NotificationSend.php                                           | PHP        |         28 |          0 |          8 |         36 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Exceptions\Handler.php                                                | PHP        |         18 |         17 |          6 |         41 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Helpers\CollectionHelper.php                                          | PHP        |         28 |          0 |          8 |         36 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\AccessoriesController.php                            | PHP        |         69 |         30 |         21 |        120 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\Controller.php                                       | PHP        |         10 |          0 |          4 |         14 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\DevicesController.php                                | PHP        |        141 |          0 |         46 |        187 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\DevicesTransferController.php                        | PHP        |        109 |          0 |         23 |        132 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\LeavingWorkController.php                            | PHP        |         55 |          0 |         13 |         68 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\LoginController.php                                  | PHP        |         42 |          0 |         13 |         55 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\MessagesController.php                               | PHP        |         32 |          0 |         12 |         44 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\PasswordResetsController.php                         | PHP        |         36 |          0 |         11 |         47 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\PdfController.php                                    | PHP        |         27 |          0 |         10 |         37 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\RegistrationController.php                           | PHP        |         22 |          1 |          8 |         31 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\UserDevicesController.php                            | PHP        |         45 |          0 |         11 |         56 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\UsersController.php                                  | PHP        |         80 |          0 |         19 |         99 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Controllers\VerificationApiController.php                        | PHP        |         36 |          0 |          8 |         44 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Kernel.php                                                       | PHP        |         39 |         21 |          9 |         69 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\Authenticate.php                                      | PHP        |         12 |          6 |          4 |         22 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\EncryptCookies.php                                    | PHP        |          8 |          6 |          4 |         18 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\PreventRequestsDuringMaintenance.php                  | PHP        |          8 |          6 |          4 |         18 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\RedirectIfAuthenticated.php                           | PHP        |         19 |          8 |          6 |         33 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\TrimStrings.php                                       | PHP        |         10 |          5 |          4 |         19 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\TrustHosts.php                                        | PHP        |         12 |          5 |          4 |         21 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\TrustProxies.php                                      | PHP        |          9 |         10 |          5 |         24 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\VerifiedUser.php                                      | PHP        |         16 |          7 |          5 |         28 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Http\Middleware\VerifyCsrfToken.php                                   | PHP        |          8 |          6 |          4 |         18 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\Accessories.php                                                | PHP        |         28 |          0 |          9 |         37 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\AccessoriesLend.php                                            | PHP        |         24 |          0 |          8 |         32 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\DeviceLend.php                                                 | PHP        |         35 |          0 |         11 |         46 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\DevicesLongTerm.php                                            | PHP        |         89 |          0 |         16 |        105 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\DevicesShortTerm.php                                           | PHP        |         88 |          0 |         18 |        106 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\DevicesTransfer.php                                            | PHP        |         72 |          0 |         18 |         90 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\LeavingWork.php                                                | PHP        |         22 |          0 |          7 |         29 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Models\User.php                                                       | PHP        |        187 |         15 |         33 |        235 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Notifications\PasswordReset.php                                       | PHP        |         60 |         51 |         14 |        125 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Notifications\VerifyApiEmail.php                                      | PHP        |         54 |         46 |         15 |        115 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Providers\AppServiceProvider.php                                      | PHP        |         12 |         12 |          5 |         29 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Providers\AuthServiceProvider.php                                     | PHP        |         13 |         12 |          6 |         31 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Providers\BroadcastServiceProvider.php                                | PHP        |         12 |          5 |          5 |         22 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Providers\EventServiceProvider.php                                    | PHP        |         17 |         11 |          5 |         33 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Providers\RouteServiceProvider.php                                    | PHP        |         30 |         25 |          9 |         64 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Rules\BelongsToUserLongTerm.php                                       | PHP        |         73 |         12 |          9 |         94 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\app\Rules\BelongsToUserShortTerm.php                                      | PHP        |         70 |         12 |          7 |         89 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\bootstrap\app.php                                                         | PHP        |         17 |         30 |          9 |         56 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\composer.json                                                             | JSON       |         68 |          0 |          1 |         69 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\composer.lock                                                             | JSON       |      8,282 |          0 |          1 |      8,283 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\app.php                                                            | PHP        |         85 |        120 |         34 |        239 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\auth.php                                                           | PHP        |         35 |         70 |         15 |        120 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\broadcasting.php                                                   | PHP        |         30 |         22 |         13 |         65 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\cache.php                                                          | PHP        |         55 |         34 |         18 |        107 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\cors.php                                                           | PHP        |          3 |         29 |          3 |         35 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\database.php                                                       | PHP        |         81 |         45 |         22 |        148 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\filesystems.php                                                    | PHP        |         28 |         32 |         13 |         73 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\hashing.php                                                        | PHP        |         12 |         32 |          9 |         53 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\image.php                                                          | PHP        |          4 |         12 |          5 |         21 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\jwt.php                                                            | PHP        |         32 |        229 |         44 |        305 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\logging.php                                                        | PHP        |         64 |         24 |         17 |        105 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\mail.php                                                           | PHP        |         46 |         47 |         18 |        111 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\queue.php                                                          | PHP        |         43 |         32 |         15 |         90 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\services.php                                                       | PHP        |         16 |         11 |          7 |         34 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\session.php                                                        | PHP        |         22 |        147 |         33 |        202 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\config\view.php                                                           | PHP        |         10 |         20 |          7 |         37 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\factories\AccessoriesFactory.php                                 | PHP        |         18 |         10 |          5 |         33 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\factories\DevicesLongTermFactory.php                             | PHP        |         20 |         10 |          5 |         35 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\factories\DevicesShortTermFactory.php                            | PHP        |         20 |         10 |          5 |         35 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\factories\UserFactory.php                                        | PHP        |         20 |         10 |          5 |         35 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2014_10_12_000000_create_users_table.php              | PHP        |         28 |         10 |          5 |         43 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_02_02_120740_create_password_resets_table.php    | PHP        |         20 |         10 |          3 |         33 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_02_04_125745_create_devices_long_term_table.php  | PHP        |         26 |         10 |          5 |         41 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_02_04_131909_create_devices_short_term_table.php | PHP        |         26 |         10 |          4 |         40 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_02_08_064004_create_devices_transfers_table.php  | PHP        |         24 |         10 |          4 |         38 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_02_11_094344_create_deivice_lends_table.php      | PHP        |         22 |         10 |          4 |         36 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_03_05_073225_create_accessories_table.php        | PHP        |         23 |         10 |          4 |         37 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_03_16_104150_create_leaving_works_table.php      | PHP        |         21 |         10 |          4 |         35 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_03_17_133632_create_accessories_lends_table.php  | PHP        |         25 |         10 |          4 |         39 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\migrations\2021_03_19_124745_add_row.php                         | PHP        |         16 |         11 |          4 |         31 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\database\seeders\DatabaseSeeder.php                                       | PHP        |         36 |          5 |         11 |         52 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\package-lock.json                                                         | JSON       |     10,711 |          0 |          1 |     10,712 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\package.json                                                              | JSON       |         18 |          0 |          1 |         19 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\phpunit.xml                                                               | XML        |         29 |          2 |          1 |         32 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\public\index.php                                                          | PHP        |         14 |         30 |         12 |         56 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\css\app.css                                                     | CSS        |          0 |          0 |          1 |          1 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\js\app.js                                                       | JavaScript |          1 |          0 |          1 |          2 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\js\bootstrap.js                                                 | JavaScript |         14 |         18 |         12 |         44 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\lang\en\auth.php                                                | PHP        |          6 |         10 |          5 |         21 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\lang\en\pagination.php                                          | PHP        |          5 |         10 |          5 |         20 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\lang\en\passwords.php                                           | PHP        |          8 |         10 |          5 |         23 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\lang\en\validation.php                                          | PHP        |        114 |         30 |          9 |        153 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\views\invoice.blade.php                                         | PHP        |         51 |          0 |         13 |         64 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\views\vendor\notifications\email.blade.php                      | PHP        |         55 |          0 |          8 |         63 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\resources\views\welcome.blade.php                                         | PHP        |        113 |          0 |         20 |        133 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\routes\api.php                                                            | PHP        |         64 |         10 |         23 |         97 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\routes\channels.php                                                       | PHP        |          8 |         10 |          5 |         23 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\routes\console.php                                                        | PHP        |          6 |         10 |          4 |         20 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\routes\web.php                                                            | PHP        |          2 |         10 |          4 |         16 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\server.php                                                                | PHP        |          8 |          9 |          5 |         22 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\tests\CreatesApplication.php                                              | PHP        |         12 |          5 |          6 |         23 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\tests\Feature\ExampleTest.php                                             | PHP        |         12 |          5 |          5 |         22 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\tests\TestCase.php                                                        | PHP        |          7 |          0 |          4 |         11 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\tests\Unit\ExampleTest.php                                                | PHP        |         10 |          5 |          4 |         19 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\vendor\facade\ignition\resources\compiled\ignition.js                     | JavaScript |          5 |         27 |          0 |         32 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\vendor\facade\ignition\resources\compiled\index.html                      | HTML       |         12 |          0 |          1 |         13 |
+| c:\Users\PC\Desktop\Praktika-Trainees\Bakalauras\back-end\webpack.mix.js                                                            | JavaScript |          4 |         11 |          3 |         18 |
+| Total                                                                                                                               |            |     22,672 |      1,641 |      1,068 |     25,381 |
++-------------------------------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

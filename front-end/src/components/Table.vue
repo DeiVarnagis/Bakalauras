@@ -50,8 +50,8 @@
           <td v-if="device.state == 0">Laisvas</td>
           <td v-if="device.state == 1">Laukia užklausoje</td>
           <td v-if="device.state == 2">Paskolintas</td>
-          <td v-if="decoded.admin && type == 'All'">{{device.user.name}}</td>
-          <td v-if="decoded.admin && type == 'All'">{{device.user.surname}}</td>
+          <td v-if="device.user && decoded.admin && type == 'All'">{{device.user.name}}</td>
+          <td v-if="device.user && decoded.admin && type == 'All'">{{device.user.surname}}</td>
           <td>
             <button
               :disabled="disabledDolly(device)"
