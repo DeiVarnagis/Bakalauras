@@ -8,6 +8,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PasswordResetsController;
 use App\Http\Controllers\VerificationApiController;
 use App\Http\Controllers\DevicesTransferController;
+use App\Http\Controllers\InventorizationController;
 use App\Http\Controllers\LeavingWorkController;
 use App\Http\Controllers\UserDevicesController;
 use App\Http\Controllers\UsersController;

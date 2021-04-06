@@ -1,13 +1,18 @@
 <template>
   <div>
     <div class="generaldata_container">
-      <DataBlock class="data_text" :data="generalData.allDevices">PRIETAISŲ SKAIČIUS:</DataBlock>
+      <DataBlock class="data_text" :data="generalData.allDevices"
+        >PRIETAISŲ SKAIČIUS:</DataBlock
+      >
       <DataBlock class="data_text" :data="generalData.borrowed"
         >PASISKOLINTI PRIETAISAI:</DataBlock
       >
-      <DataBlock class="data_text" :data="generalData.lended"
-        >PASKOLINTI PRIETAISAI</DataBlock
-      >
+      <DataBlock class="data_text" :data="null">
+        <vue-countdown :time="time" v-slot="{ days, hours, minutes }">
+          INVENTORIZACIJA: {{ days }} Dienos, {{ hours }} valandos,
+          {{ minutes }} minutės.
+        </vue-countdown>
+      </DataBlock>
     </div>
     <div class="container">
       <div class="innerDiv">
@@ -112,12 +117,14 @@ import DeviceAddModal from "../components/DeviceAddModal";
 import PdfGeneratorModal from "../components/PdfGeneratorModal";
 import DataBlock from "../components/DataBlock";
 import jwt_decode from "jwt-decode";
+import VueCountdown from "@chenfengyuan/vue-countdown";
 
 export default {
   data() {
     return {
       devices: [],
-      generalData:[],
+      generalData: [],
+      time: null,
       type: "Yours",
       filter: "all",
       deviceType: null,
@@ -128,13 +135,14 @@ export default {
       clickedDevice: {},
       index: null,
       loading: false,
-      decoded : jwt_decode(localStorage["token"])
+      decoded: jwt_decode(localStorage["token"]),
     };
   },
   components: {
     PdfGeneratorModal,
     DeviceAddModal,
     DataBlock,
+    VueCountdown,
     Table,
   },
   methods: {
@@ -157,7 +165,7 @@ export default {
         )
         .then((res) => {
           this.last_page = res.data.data.last_page;
-          this.loading = true;
+
           this.devices = res.data.data.data;
         })
         .catch((err) => {
@@ -165,29 +173,47 @@ export default {
           this.devices = [];
         });
     },
-       fetchCounts: async function () {
+    fetchCounts: async function () {
       await axios
-        .get("users/devices/count",
-          {
-            headers: {
-              Authorization: "Bearer".concat(localStorage["token"]),
-            },
-          }
-        )
+        .get("users/devices/count", {
+          headers: {
+            Authorization: "Bearer".concat(localStorage["token"]),
+          },
+        })
         .then((res) => {
           this.generalData = res.data;
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
+    },
+
+    fetchInventorization: async function () {
+      await axios
+        .get("inventorization", {
+          headers: {
+            Authorization: "Bearer".concat(localStorage["token"]),
+          },
+        })
+        .then((res) => {
+          const now = new Date();
+          const endDate = new Date(res.data);
+          this.time = this.getDifferenceInSeconds(now, endDate);
+          this.loading = true;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getDifferenceInSeconds(date1, date2) {
+      var diff = date2.getTime() - date1.getTime();
+      return Math.abs(Math.round(diff));
     },
   },
   created: async function () {
-  
-   this.fetchCounts();
-    setTimeout(() => {
-      this.fetchData();
-    }, 250);
+    await this.fetchData();
+    await this.fetchCounts();
+    await this.fetchInventorization();
   },
 };
 </script>

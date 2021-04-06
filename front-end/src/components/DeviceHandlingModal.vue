@@ -20,27 +20,27 @@
             </header>
 
             <span>
-              <div class="textOnInput">
+              <div class="textOnDiv">
                 <label for="inputText">Pavadinimas</label>
-                <div class="inputLogin">
+                <div class="inputDiv">
                   {{ device.name }}
                 </div>
               </div>
             </span>
 
             <span>
-              <div class="textOnInput">
+              <div class="textOnDiv">
                 <label for="inputText">Kodas</label>
-                <div class="inputLogin">
+                <div class="inputDiv">
                   {{ device.code }}
                 </div>
               </div>
             </span>
 
             <span>
-              <div class="textOnInput">
+              <div class="textOnDiv">
                 <label for="inputText">Serijos numeris</label>
-                <div class="inputLogin">
+                <div class="inputDiv">
                   {{ device.serialNumber }}
                 </div>
               </div>
@@ -156,7 +156,7 @@ export default {
         if (!success) {
           return;
         }
-        if (action == 2 && this.decoded.id == this.device.user_id) {
+        if (action == 2) {
           this.display = true;
         } else {
           this.show = false;

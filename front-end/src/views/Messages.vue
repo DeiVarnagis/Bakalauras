@@ -58,12 +58,16 @@
                 v-if="message.device_name_long"
               >
                 {{ message.device_name_long }}
+                 <button class="iconButton" @click="$refs.deviceInfo.openModal(message.id)">
+                <font-awesome-icon class="confirmButton" icon="eye" /></button>
               </td>
               <td
                 data-label="Prietaiso pavadinimas"
                 v-if="message.device_name_short"
               >
                 {{ message.device_name_short }}
+                <button class="iconButton" @click="$refs.deviceInfo.openModal(message.id)">
+                <font-awesome-icon class="confirmButton" icon="eye" /></button>
               </td>
               <td
                 data-label="Prietaiso pavadinimas"
@@ -183,6 +187,7 @@
           </button>
         </div>
       </div>
+      <MessageInformationModal  ref="deviceInfo"></MessageInformationModal>
     </div>
   </div>
 </template>
@@ -190,6 +195,7 @@
 <script>
 import axios from "axios";
 import DataBlock from "../components/DataBlock";
+import MessageInformationModal from "../components/MessageInformationModal";
 export default {
   data() {
     return {
@@ -204,6 +210,7 @@ export default {
   },
   components: {
     DataBlock,
+    MessageInformationModal
   },
   methods: {
     confirmRequest(id, index) {

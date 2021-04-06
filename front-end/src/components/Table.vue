@@ -50,8 +50,10 @@
           <td v-if="device.state == 0">Laisvas</td>
           <td v-if="device.state == 1">Laukia užklausoje</td>
           <td v-if="device.state == 2">Paskolintas</td>
-          <td v-if="device.user && decoded.admin && type == 'All'">{{device.user.name}}</td>
-          <td v-if="device.user && decoded.admin && type == 'All'">{{device.user.surname}}</td>
+          <td v-if="decoded.admin && type == 'All'">{{ device.user.name }}</td>
+          <td v-if="decoded.admin && type == 'All'">
+            {{ device.user.surname }}
+          </td>
           <td>
             <button
               :disabled="disabledDolly(device)"
@@ -185,8 +187,9 @@ export default {
       }
       return true;
     },
+
     disabledButton(device) {
-      if (device.user_id == this.decoded.id || this.decoded.admin) {
+      if (device.user_id == this.decoded.id && device.state == 0 || this.decoded.admin && device.state == 0) {
         return false;
       }
       return true;

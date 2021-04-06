@@ -34,6 +34,20 @@
   top: 0;
 }
 
+.infoTableDiv {
+  height: 200px;
+  width: 100%;
+  overflow: auto;
+}
+
+.infoTableDiv thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  color: #c4c4c4;
+  background: white;
+  top: 0;
+}
+
 .addDevice {
   cursor: pointer;
   font-weight: 200;

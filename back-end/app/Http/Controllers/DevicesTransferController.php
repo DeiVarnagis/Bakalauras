@@ -98,28 +98,24 @@ class DevicesTransferController extends Controller
             return response()->json(["error" => "Užklausa neegzistuoja"], 404);
         }
 
-        if($transfer->shortTerm_id != null)
-        {
-             $device = $transfer->DevicesShortTerm()->first();
+        if ($transfer->shortTerm_id != null) {
+            $device = $transfer->DevicesShortTerm()->first();
         }
 
-        if($transfer->longTerm_id != null)
-        {
+        if ($transfer->longTerm_id != null) {
             $device = $transfer->DevicesLongTerm()->first();
         }
 
-        if($transfer->action == 2 || $transfer->action == 3)
-        {
-            $device->accessories = $transfer->lendAccessories()->get();
+        if ($transfer->action == 2 || $transfer->action == 3) {
+            $accessories = $transfer->lendAccessories()->get();
+            $device->accessories =  $accessories;
         }
 
-        if($transfer->action == 1)
-        {
+        if ($transfer->action == 1) {
             $device->accessories = $device->accessories();
         }
-        
+
         return response()->json($device, 200);
-        
     }
 
 
@@ -138,7 +134,7 @@ class DevicesTransferController extends Controller
             $lendRow->save();
             $transfer->lendAccessories()->update(array("lend_device_id" => $lendRow->id));
         } else {
-            
+
             $lend = DeviceLend::create([
                 'owner_id' =>  $transfer->owner_id,
                 'user_id' => $transfer->user_id,

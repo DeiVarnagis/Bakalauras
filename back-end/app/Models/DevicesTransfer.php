@@ -40,12 +40,12 @@ class DevicesTransfer extends Model
 
     public function DevicesLongTerm()
     {
-        return $this->belongsTo(DevicesLongTerm::class);
+        return $this->belongsTo(DevicesLongTerm::class, 'longTerm_id', 'id');
     }
 
     public function DevicesShortTerm()
     {
-        return $this->belongsTo(DevicesShortTerm::class);
+        return $this->belongsTo(DevicesShortTerm::class, 'shortTerm_id', 'id');
     }
 
 
