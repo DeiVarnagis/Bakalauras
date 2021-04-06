@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRow extends Migration
+class CreateInventorizationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddRow extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->boolean('admin')->default(false);
+        Schema::create('inventorizations', function (Blueprint $table) {
+            $table->id();
+            $table->date("inventorization_time");
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ class AddRow extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('inventorizations');
     }
 }

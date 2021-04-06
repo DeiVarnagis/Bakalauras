@@ -28,6 +28,9 @@ use App\Http\Controllers\PdfController;
 Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('/pdf/download/{id}', [PdfController::class, 'downloadPdf']);
+
+    Route::post('/inventorization', [InventorizationController::class, 'store']);
+    Route::get('/inventorization', [InventorizationController::class, 'index']);
     
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/refresh', [LoginController::class, 'refresh']);
@@ -37,6 +40,7 @@ Route::group(['middleware' => ['auth:api']], function () {
       Route::get('users/devices/count', [DevicesController::class, 'deviceCounts']);
 
     Route::post('/devices/transfer', [DevicesTransferController::class, 'store']);
+    Route::get('/devices/transfer/info/{id}', [DevicesTransferController::class, 'getTranferInfo']);
     Route::get('/devices/transfer/confirm/{id}', [DevicesTransferController::class, 'confirmTransfer']);
     Route::get('/devices/transfer/decline/{id}', [DevicesTransferController::class, 'declineTransfer']);
 

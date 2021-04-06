@@ -91,6 +91,37 @@ class DevicesTransferController extends Controller
         return response()->json(["error" => "Unauthorized"], 401);
     }
 
+    public function getTranferInfo(Request $request)
+    {
+        $transfer = DevicesTransfer::find($request['id']);
+        if ($transfer == null) {
+            return response()->json(["error" => "Užklausa neegzistuoja"], 404);
+        }
+
+        if($transfer->shortTerm_id != null)
+        {
+             $device = $transfer->DevicesShortTerm()->first();
+        }
+
+        if($transfer->longTerm_id != null)
+        {
+            $device = $transfer->DevicesLongTerm()->first();
+        }
+
+        if($transfer->action == 2 || $transfer->action == 3)
+        {
+            $device->accessories = $transfer->lendAccessories()->get();
+        }
+
+        if($transfer->action == 1)
+        {
+            $device->accessories = $device->accessories();
+        }
+        
+        return response()->json($device, 200);
+        
+    }
+
 
     protected function getLendRow($short, $long)
     {
