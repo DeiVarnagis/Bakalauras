@@ -127,7 +127,6 @@ export default {
       }
     },
     watchCount() {
-      Pusher.logToConsole = true;
 
       var pusher = new Pusher("911c4c72971affe5f999", {
         cluster: "eu",
@@ -138,7 +137,6 @@ export default {
         "NotificationSend",
         (data) => {
           if (this.decoded.id == data.id) {
-            console.log("hello")
             this.messages = data.count;
           }
         },
