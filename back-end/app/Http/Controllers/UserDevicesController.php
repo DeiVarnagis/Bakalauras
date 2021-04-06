@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationSend;
 use App\Models\User;
 use App\Helpers\CollectionHelper;
 use App\Models\LeavingWork;
