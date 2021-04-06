@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accessories;
+use App\Models\AccessoriesLend;
 use App\Models\DevicesLongTerm;
 use App\Models\DevicesShortTerm;
+use App\Models\DevicesTransfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -164,6 +166,26 @@ class DevicesController extends Controller
             return response()->json(["error" => 'Pretaiso istorija nerasta'], 404);
         }
         return $device->getHistory();
+    }
+
+    public function transferedDeviceInfo(Request $request)
+    {
+
+       /* if (!$this->checkIfClassExist($request['type'])) {
+            return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
+        }
+
+        $device = $this->instance::find($request['device_id']);
+
+        if ($device == null) {
+            return response()->json(["error" => 'Pretaisas nerastas'], 404);
+        }
+
+        $accessories = AccessoriesLend::where('transfer_id', $request['transfer_id']);*/
+
+
+        
+
     }
 
     protected function checkIfClassExist(String $class)

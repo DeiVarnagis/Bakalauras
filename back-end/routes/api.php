@@ -12,6 +12,7 @@ use App\Http\Controllers\LeavingWorkController;
 use App\Http\Controllers\UserDevicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\InventorizationController;
 use App\Http\Controllers\PdfController;
 
 /*
@@ -28,6 +29,9 @@ use App\Http\Controllers\PdfController;
 Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('/pdf/download/{id}', [PdfController::class, 'downloadPdf']);
+
+    Route::post('/inventorization', [InventorizationController::class, 'store']);
+    Route::get('/inventorization', [InventorizationController::class, 'index']);
     
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/refresh', [LoginController::class, 'refresh']);
@@ -37,6 +41,7 @@ Route::group(['middleware' => ['auth:api']], function () {
       Route::get('users/devices/count', [DevicesController::class, 'deviceCounts']);
 
     Route::post('/devices/transfer', [DevicesTransferController::class, 'store']);
+    Route::get('/devices/transfer/info/{id}', [DevicesTransferController::class, 'getTranferInfo']);
     Route::get('/devices/transfer/confirm/{id}', [DevicesTransferController::class, 'confirmTransfer']);
     Route::get('/devices/transfer/decline/{id}', [DevicesTransferController::class, 'declineTransfer']);
 
@@ -49,7 +54,7 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::put('/devices/{type}/{id}', [DevicesController::class, 'update']); 
     Route::get('/devices/{type}/{id}/history', [DevicesController::class, 'history']);
   
-
+    
     Route::get('/users/messages', [MessagesController::class, 'index']);
     Route::get('/users/messages/generalData', [MessagesController::class, 'messagesGeneral']);
     Route::get('/users/messages/count', [MessagesController::class, 'messagesCount']);

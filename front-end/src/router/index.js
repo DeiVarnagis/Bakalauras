@@ -11,7 +11,6 @@ import PasswordReset from '../views/PasswordReset.vue';
 import Profile from '../views/Profile.vue';
 import DeviceView from '../views/DeviceView';
 import UsersTable from '../views/UsersTable';
-import Statistics from '../views/Statistics'
 
 Vue.use(VueRouter)
 
@@ -41,14 +40,8 @@ const routes = [
     meta: {requiresAuth:true}
   },
   {
-    path: '/statistics',
-    name: 'Statistics',
-    component: Statistics,
-    meta: {requiresAuth:true}
-  },
-  {
     path: '/profile/:id',
-    name: 'ProfileUser',
+    name: 'Profile',
     component: Profile,
     meta: {requiresAuth:true}
   },

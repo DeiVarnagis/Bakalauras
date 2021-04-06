@@ -6,6 +6,9 @@
           <img height="30px" src="../assets/menu.svg" />
         </a>
       </div>
+      <a class="unselectable" @click="push('Home')">
+        <img class="navi_img" src="../assets/logo.svg" alt="Teltonika" />
+      </a>
       <div class="navi_links">
         <a
           class="unselectable navi_link"
@@ -34,16 +37,6 @@
           />
         </div>
           <span class="link-text">ĮVYKIAI</span>
-        </a>
-
-            <a
-          v-if="decoded.admin"
-          class="unselectable navi_link"
-          @click="push('Statistics')"
-          :class="{ text_active: $route.name == 'Statistics' }"
-        >
-          <img height="30px" src="../assets/statistics.svg" />
-          <span class="link-text">STATISTIKA</span>
         </a>
 
           <a
@@ -146,7 +139,7 @@ export default {
 
   async mounted() {
     this.loading = false;
-    this.messagesCount();
+    await this.messagesCount();
     this.watchCount();
   },
 };

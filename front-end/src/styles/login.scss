@@ -27,7 +27,7 @@ button:focus{
     background-color: #ffffff;
     z-index: 0;
 
-    img{
+    .show_img{
         display: flex;
         cursor: pointer;
         height: 120px;
@@ -122,11 +122,34 @@ button:focus{
     height: 50px;
     margin:auto;
     margin-top: 6%;
-    //margin-bottom: 1%;
     padding: 15px;
     font-size: 16px;
     border-radius: 10px;
     border: 1px solid black;
+    z-index: 20;
+   
+    
+}
+
+.accessoriesH4{
+    display: flex;
+    min-width: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.inputDiv{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 325px;
+    min-height: 50px;
+    margin:auto;
+    margin-top: 6%;
+    margin-bottom: 1%;
+    padding-top: 25px;
+    padding-bottom: 5px;
+    font-size: 16px;
     z-index: 20;
    
     
@@ -225,6 +248,40 @@ button:focus{
         position: absolute;
         top: -10px;
         left: 23px;
+        padding: 2px;
+        z-index: 1;
+    }
+
+    label:after {
+        content: " ";
+        background-color: #fff;
+      
+        width: 100%;
+        height: 13px;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    .top{
+        top: 3px;
+    }
+}
+
+
+.textOnDiv {
+    position: relative;
+    margin-bottom: 10px;
+
+    label {
+        font-weight: bold;
+        width: 100%;
+        border-bottom: 1px solid $borderColor;
+        text-align: left;
+        position: absolute;
+        top: -5px;
+        left: 0px;
         padding: 2px;
         z-index: 1;
     }

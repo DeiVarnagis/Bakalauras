@@ -59,7 +59,7 @@
                   @change="upload_src"
                 />
                 <p>{{ errors[0] }}</p>
-                <img v-if="showPreview" :src="imagePreview" />
+                <img class="show_img" v-if="showPreview" :src="imagePreview" />
               </div>
             </ValidationProvider>
 
