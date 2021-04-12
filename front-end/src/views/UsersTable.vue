@@ -1,13 +1,21 @@
 <template>
   <div>
     <div class="generaldata_container">
-      <DataBlock class="data_text" :data="usersCount">VARTOTOJŲ SKAIČIUS:</DataBlock>
+      <DataBlock
+        class="data_text"
+        :data="usersCount"
+      >
+        VARTOTOJŲ SKAIČIUS:
+      </DataBlock>
     </div>
     <div class="container">
       <div class="innerDiv">
         <div class="search">
           <div>
-            <button class="addDevice" @click="$refs.addUser.openModal()">
+            <button
+              class="addDevice"
+              @click="$refs.addUser.openModal()"
+            >
               <font-awesome-icon icon="plus" />
             </button>
           </div>
@@ -15,18 +23,22 @@
             <label for="inputText">Paieška</label>
             <input
               v-model="searchQuery"
-              @input="(current_page = 1), getUsers()"
               class="searchInput"
               placeholder="Paieška"
               type="text"
               name="search"
-            />
+              @input="(current_page = 1), getUsers()"
+            >
           </div>
         </div>
-        <table class="home_table" cellspacing="0" cellpadding="0">
+        <table
+          class="home_table"
+          cellspacing="0"
+          cellpadding="0"
+        >
           <thead>
             <tr>
-              <th></th>
+              <th />
               <th>Vardas</th>
               <th>Pavardė</th>
               <th>Adresas</th>
@@ -38,14 +50,23 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(user, index) in users" :key="index">
+            <tr
+              v-for="(user, index) in users"
+              :key="index"
+            >
               <td style="--minWidth: 50px">
                 <img
                   v-if="user.src != null"
+                  class="home_table-img"
                   alt=""
                   :src="'http://127.0.0.1:8000/storage/' + user.src"
-                />
-                <img v-else alt="" src="../images/defaultProfile.jpg" />
+                >
+                <img
+                  v-else
+                  class="home_table-img"
+                  alt=""
+                  src="../images/defaultProfile.jpg"
+                >
               </td>
               <td data-label="Vardas">
                 {{ user.name }}
@@ -61,15 +82,38 @@
                 {{ user.address }}
               </td>
 
-              <td v-else data-label="Adresas" style="--minWidth: 200px">-</td>
-              <td v-if="user.birth" data-label="Gimimo metai">
+              <td
+                v-else
+                data-label="Adresas"
+                style="--minWidth: 200px"
+              >
+                -
+              </td>
+              <td
+                v-if="user.birth"
+                data-label="Gimimo metai"
+              >
                 {{ user.birth }}
               </td>
-              <td v-else data-label="Telefonas" style="--minWidth: 200px">-</td>
-              <td v-if="user.phoneNumber" data-label="Gimimo metai">
+              <td
+                v-else
+                data-label="Telefonas"
+                style="--minWidth: 200px"
+              >
+                -
+              </td>
+              <td
+                v-if="user.phoneNumber"
+                data-label="Gimimo metai"
+              >
                 {{ user.phoneNumber }}
               </td>
-              <td v-else data-label="Gimimo metai">-</td>
+              <td
+                v-else
+                data-label="Gimimo metai"
+              >
+                -
+              </td>
               <td data-label="Elektroninis Paštas">
                 {{ user.email }}
               </td>
@@ -80,84 +124,119 @@
               >
                 Adminas
               </td>
-              <td v-else data-label="Adminas" style="--minWidth: 75px">
+              <td
+                v-else
+                data-label="Adminas"
+                style="--minWidth: 75px"
+              >
                 Vartotojas
               </td>
               <td>
                 <router-link :to="'/profile/' + user.id">
                   <button class="iconButton">
-                    <font-awesome-icon class="confirmButton" icon="eye" />
+                    <img
+                      height="30px"
+                      src="../assets/eye.svg"
+                    >
                   </button>
                 </router-link>
                 <button
+                  class="iconButton"
                   @click="
                     (clickedIndex = index), $refs.editProfile.openModal(user)
                   "
-                  class="iconButton"
                 >
-                  <font-awesome-icon class="confirmButton" icon="edit" />
+                  <img
+                    height="30px"
+                    src="../assets/edit.svg"
+                  >
                 </button>
                 <button
-                  @click="(clickedUser = user), $refs.deleteModal.openModal()"
                   class="iconButton"
+                  @click="(clickedUser = user), $refs.deleteModal.openModal()"
                 >
-                  <font-awesome-icon class="confirmButton" icon="trash-alt" />
+                  <img
+                    height="30px"
+                    src="../assets/delete.png"
+                  >
                 </button>
               </td>
             </tr>
           </tbody>
         </table>
         <div v-if="!loading && users.length == 0">
-          <h1 class="centered" v-if="devices.length == 0">Duomenų nėra</h1>
+          <h1
+            v-if="devices.length == 0"
+            class="centered"
+          >
+            Duomenų nėra
+          </h1>
         </div>
-        <div v-if="!loading" class="pagination">
+        <div
+          v-if="!loading"
+          class="pagination"
+        >
           <button
             @click="
               current_page > 1 ? current_page-- : current_page, getUsers()
             "
           >
-            <font-awesome-icon class="arrow" icon="chevron-left" />
+            <font-awesome-icon
+              class="arrow"
+              icon="chevron-left"
+            />
           </button>
           <button
-            v-for="(times, index) in this.last_page"
-            @click="(current_page = times), getUsers()"
+            v-for="(times, index) in last_page"
             :key="index"
-            v-bind:class="[times == current_page ? 'pageSelected' : 'page']"
+            :class="[times == current_page ? 'pageSelected' : 'page']"
+            @click="(current_page = times), getUsers()"
           >
             {{ times }}
           </button>
           <button
             @click="
               current_page < last_page ? current_page++ : current_page,
-                getUsers()
+              getUsers()
             "
           >
-            <font-awesome-icon class="arrow" icon="chevron-right" />
+            <font-awesome-icon
+              class="arrow"
+              icon="chevron-right"
+            />
           </button>
         </div>
       </div>
-      <AddUserModal v-bind:addUser="true" ref="addUser"></AddUserModal>
+      <AddUserModal
+        ref="addUser"
+        :add-user="true"
+      />
       <ProfileEdit
         ref="editProfile"
         @updateProfile="updateProfile"
-      ></ProfileEdit>
+      />
       <DeleteModal
-        v-bind:device="clickedUser"
-        @deleteValue="deleteValue"
         ref="deleteModal"
-      ></DeleteModal>
+        :device="clickedUser"
+        @deleteValue="deleteValue"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import jwt_decode from "jwt-decode";
 import DataBlock from "../components/DataBlock";
 import AddUserModal from "../components/AddUserModal";
 import ProfileEdit from "../components/ProfileEdit";
 import DeleteModal from "../components/DeleteModal";
 export default {
+  components: {
+    DeleteModal,
+    AddUserModal,
+    ProfileEdit,
+    DataBlock,
+  },
   data() {
     return {
       clickedIndex: null,
@@ -168,14 +247,13 @@ export default {
       searchQuery: "",
       current_page: 1,
       loading: true,
-      usersCount:0
+      usersCount: 0,
     };
   },
-  components: {
-    DeleteModal,
-    AddUserModal,
-    ProfileEdit,
-    DataBlock
+
+  created: function () {
+    this.getUsersCount();
+    this.getUsers();
   },
   methods: {
     logout() {
@@ -207,20 +285,18 @@ export default {
           console.log(err.response);
         });
     },
-      getUsersCount() {
+    getUsersCount() {
       axios
-        .get("users/count",
-          {
-            headers: {
-              Authorization: "Bearer".concat(localStorage["token"]),
-            },
-          }
-        )
+        .get("users/count", {
+          headers: {
+            Authorization: "Bearer".concat(localStorage["token"]),
+          },
+        })
         .then((res) => {
           this.usersCount = res.data;
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
         });
     },
     updateProfile(data) {
@@ -235,16 +311,6 @@ export default {
     deleteValue() {
       this.users.splice(this.clickedIndex + 1, 1);
     },
-  },
-
-  created: function () {
-    this.decoded = jwt_decode(localStorage["token"]);
-    if (!this.decoded.admin) {
-      this.logout();
-      this.$vToastify.error("Jūs neautorizuotas šiam veiksmui");
-    }
-    this.getUsersCount();
-    this.getUsers();
   },
 };
 </script>

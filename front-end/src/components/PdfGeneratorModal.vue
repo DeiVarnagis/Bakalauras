@@ -1,12 +1,26 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
-        <form id="form" @submit.prevent="submitPdf()" class="formLogin">
+        <form
+          id="form"
+          class="formLogin"
+          @submit.prevent="submitPdf()"
+        >
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -16,15 +30,23 @@
 
             <span>
               <div class="textOnInput">
-                <label class="top" for="inputText">Turto tipas</label>
-                <select v-model="type" class="select-css">
+                <label
+                  class="top"
+                  for="inputText"
+                >Turto tipas</label>
+                <select
+                  v-model="type"
+                  class="select-css"
+                >
                   <option value="1">Ilgalaikis</option>
                   <option value="2">Trumpalaikis</option>
                 </select>
               </div>
             </span>
 
-            <button class="buttonLogin">Generuoti</button>
+            <button class="buttonLogin">
+              Generuoti
+            </button>
           </div>
         </form>
       </ValidationObserver>

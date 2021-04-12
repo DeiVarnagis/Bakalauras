@@ -1,12 +1,27 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
-        <form id="form" @submit.prevent="update()" class="formLogin">
+        <form
+          id="form"
+          class="formLogin"
+          @submit.prevent="update()"
+          @keydown="backEndErrors.clear($event.target.name)"
+        >
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -15,41 +30,49 @@
             </header>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Aksesuaro Pavadinimas</label>
                 <input
+                  v-model="accessory.name"
                   class="inputLogin"
                   type="text"
-                  name="code"
-                  v-model="accessory.name"
-                />
+                  name="name"
+                >
+                <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('name')"
+                  class="textSize"
+                >
+                  {{ backEndErrors.get("name") }}
+                </p>
+              </div>
+            </ValidationProvider>
 
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|numeric|minNumber:1|maxNumber:30"
+              mode="eager"
+            >
+              <div class="textOnInput">
+                <label for="inputText">Aksesuaro kiekis</label>
+                <input
+                  v-model="accessory.amount"
+                  class="inputLogin"
+                  type="number"
+                  name="name"
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
-            rules="required|numeric|minNumber:1"
-              mode="eager"
               v-slot="{ errors }"
+              mode="eager"
             >
-              <div class="textOnInput">
-                <label for="inputText">Aksesuaro kiekis</label>
-                <input
-                  class="inputLogin"
-                  type="number"
-                  name="name"
-                  v-model="accessory.amount"
-                />
-                <p>{{ errors[0] }}</p>
-              </div>
-            </ValidationProvider>
-
-            <ValidationProvider mode="eager" v-slot="{ errors }">
               <div class="textOnInput">
                 <label for="inputText">Nauja nuotrauką</label>
                 <input
@@ -57,12 +80,14 @@
                   type="file"
                   name="file"
                   @change="upload_src"
-                />
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
-            <button class="buttonLogin">Atnaujinti</button>
+            <button class="buttonLogin">
+              Atnaujinti
+            </button>
           </div>
         </form>
       </ValidationObserver>
@@ -72,6 +97,7 @@
 
 <script>
 import axios from "axios";
+import { Errors } from "../Errors";
 
 export default {
   name: "AccessoryEditModal",
@@ -86,6 +112,7 @@ export default {
         src: null,
       },
       show: false,
+      backEndErrors: new Errors(),
     };
   },
 
@@ -128,6 +155,7 @@ export default {
           })
           .catch((err) => {
             console.log(err.response);
+             this.backEndErrors.record(err.response.data);
           });
       });
     },

@@ -8,7 +8,6 @@ use DateTimeInterface;
 
 class Inventorization extends Model
 {
-    
     use HasFactory;
 
     protected function serializeDate(DateTimeInterface $date)

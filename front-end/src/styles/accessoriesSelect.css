@@ -37,6 +37,9 @@
 
 .accessoriesTable td {
   height: 40px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .accessoriesTable th {

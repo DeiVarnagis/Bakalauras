@@ -1,16 +1,26 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
         <form
+          class="formLogin"
           @submit.prevent="register()"
           @keydown="backEndErrors.clear($event.target.name)"
-          class="formLogin"
         >
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -19,8 +29,14 @@
             </header>
             <span>
               <div class="textOnInput">
-                <label class="top" for="inputText">Tipas</label>
-                <select v-model="device.type" class="select-css">
+                <label
+                  class="top"
+                  for="inputText"
+                >Tipas</label>
+                <select
+                  v-model="device.type"
+                  class="select-css"
+                >
                   <option value="LongTerm">Ilgalaikis prietaisas</option>
                   <option value="ShortTerm">Trumpalaikis prietaisas</option>
                 </select>
@@ -28,96 +44,119 @@
             </span>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Kodas</label>
                 <input
+                  v-model="device.code"
                   class="inputLogin"
                   type="text"
                   name="code"
-                  v-model="device.code"
-                />
+                >
 
                 <p>{{ errors[0] }}</p>
-                <p v-if="backEndErrors.has('code')" class="textSize">
+                <p
+                  v-if="backEndErrors.has('code')"
+                  class="textSize"
+                >
                   {{ backEndErrors.get("code") }}
                 </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Prietaiso pavadinimas</label>
                 <input
+                  v-model="device.name"
                   class="inputLogin"
                   type="text"
                   name="name"
-                  v-model="device.name"
-                />
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('name')"
+                  class="textSize"
+                >
+                  {{ backEndErrors.get("name") }}
+                </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Serijos numeris</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
+                  v-model="device.serialNumber"
+                  class="inputLogin"
                   type="text"
                   name="serialNumber"
-                  v-model="device.serialNumber"
-                />
+                >
                 <p>{{ errors[0] }}</p>
-                <p v-if="backEndErrors.has('serialNumber')" class="textSize">
+                <p
+                  v-if="backEndErrors.has('serialNumber')"
+                  class="textSize"
+                >
                   {{ backEndErrors.get("serialNumber") }}
                 </p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Įkelkite nuotrauką</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
+                  class="inputLogin"
                   type="file"
                   name="file"
                   @change="upload_src"
-                />
+                >
                 <p>{{ errors[0] }}</p>
-                <img v-if="showPreview" :src="imagePreview" />
+                <img
+                  v-if="showPreview"
+                  class="show_img"
+                  :src="imagePreview"
+                >
               </div>
             </ValidationProvider>
 
             <ValidationProvider
-              rules="required|numeric|minNumber:1"
-              mode="eager"
               v-slot="{ errors }"
+              rules="required|numeric|minNumber:1|maxNumber:2"
+              mode="eager"
             >
               <div class="textOnInput">
                 <label for="inputText">Kiekis</label>
                 <input
+                  v-model="device.amount"
                   class="inputLogin"
                   type="number"
-                  v-model="device.amount"
                   name="amount"
-                />
-                <p class="marginLeft">{{ errors[0] }}</p>
+                >
+                <p class="marginLeft">
+                  {{ errors[0] }}
+                </p>
               </div>
             </ValidationProvider>
-            <button class="buttonLogin">Pridėti</button>
+            <button class="buttonLogin">
+              Pridėti
+            </button>
           </div>
         </form>
       </ValidationObserver>
@@ -131,6 +170,7 @@ import { Errors } from "../Errors";
 
 export default {
   name: "DeviceAddModal",
+  props: ["addDevice"],
   data() {
     return {
       device: {
@@ -147,7 +187,6 @@ export default {
       backEndErrors: new Errors(),
     };
   },
-  props: ["addDevice"],
   methods: {
     closeModal() {
       this.show = false;
@@ -163,7 +202,7 @@ export default {
         let dev = this.gatherFormData();
 
         axios
-          .post("devices/".concat(dev.type), dev, {
+          .post("devices/".concat(this.device.type), dev, {
             headers: {
               Authorization: "Bearer".concat(localStorage["token"]),
             },
@@ -208,7 +247,7 @@ export default {
     },
       gatherFormData() {
         const data = new FormData();
-       data.append("code", this.device.code);
+        data.append("code", this.device.code);
         data.append("name", this.device.name);
         data.append("serialNumber", this.device.serialNumber);
         data.append("amount", this.device.amount);

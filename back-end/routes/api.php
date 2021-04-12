@@ -8,11 +8,11 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\PasswordResetsController;
 use App\Http\Controllers\VerificationApiController;
 use App\Http\Controllers\DevicesTransferController;
-use App\Http\Controllers\InventorizationController;
 use App\Http\Controllers\LeavingWorkController;
 use App\Http\Controllers\UserDevicesController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\InventorizationController;
 use App\Http\Controllers\PdfController;
 
 /*
@@ -32,13 +32,15 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::post('/inventorization', [InventorizationController::class, 'store']);
     Route::get('/inventorization', [InventorizationController::class, 'index']);
+    Route::delete('/inventorization/{id}', [InventorizationController::class, 'delete']);
+    Route::get('/inventorization-closest', [InventorizationController::class, 'closest']);
     
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::post('/refresh', [LoginController::class, 'refresh']);
     Route::get('/user-profile', [LoginController::class, 'userProfile']);
 
     Route::get('/userDevices', [UserDevicesController::class, 'index']);
-      Route::get('users/devices/count', [DevicesController::class, 'deviceCounts']);
+    Route::get('/users/devices/count', [DevicesController::class, 'deviceCounts']);
 
     Route::post('/devices/transfer', [DevicesTransferController::class, 'store']);
     Route::get('/devices/transfer/info/{id}', [DevicesTransferController::class, 'getTranferInfo']);
@@ -46,15 +48,15 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::get('/devices/transfer/decline/{id}', [DevicesTransferController::class, 'declineTransfer']);
 
 
+    Route::get('/devices/accessories/{type}/{id}', [DevicesController::class, 'getDeviceAccessories']);
     Route::get('/devices/{type}', [DevicesController::class, 'index']);
     Route::post('/devices/{type}', [DevicesController::class, 'store']);
-    Route::get('/devices/accessories/{type}/{id}', [DevicesController::class, 'getDeviceAccessories']);
     Route::get('/devices/{type}/{id}', [DevicesController::class, 'show']);
     Route::delete('/devices/{type}/{id}', [DevicesController::class, 'destroy']);
     Route::put('/devices/{type}/{id}', [DevicesController::class, 'update']); 
     Route::get('/devices/{type}/{id}/history', [DevicesController::class, 'history']);
   
-
+    
     Route::get('/users/messages', [MessagesController::class, 'index']);
     Route::get('/users/messages/generalData', [MessagesController::class, 'messagesGeneral']);
     Route::get('/users/messages/count', [MessagesController::class, 'messagesCount']);

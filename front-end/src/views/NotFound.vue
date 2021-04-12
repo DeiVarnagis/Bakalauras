@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <h1>Puslapis nerastas</h1>
-    </div>
+  </div>
 </template>
 
 <script>

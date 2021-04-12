@@ -1,7 +1,10 @@
 <template>
   <div class="container">
     <div class="inner-div">
-      <div v-if="!loading" class="inner-div_column_layout_left_row">
+      <div
+        v-if="!loading"
+        class="inner-div_column_layout_left_row"
+      >
         <div class="inner-div_column_layout_left_column_left">
           <div class="inner-div_column_layout_left_baseColumn">
             <div class="img-div">
@@ -9,14 +12,20 @@
                 v-if="user.src != null"
                 alt=""
                 :src="'http://127.0.0.1:8000/storage/' + user.src"
-              />
-              <img v-else alt="" src="../images/defaultProfile.jpg" />
+              >
+              <img
+                v-else
+                alt=""
+                src="../images/defaultProfile.jpg"
+              >
             </div>
           </div>
         </div>
         <div class="inner-div_column_layout_left_column">
           <div class="nameDiv">
-            <p class="nameStyle">{{ user.name }} {{ user.surname }}</p>
+            <p class="nameStyle">
+              {{ user.name }} {{ user.surname }}
+            </p>
           </div>
           <div class="aboutDiv">
             <p class="about">
@@ -27,46 +36,79 @@
             </p>
           </div>
           <div class="generalInfo">
-            <p class="genaralStyle">Bendra Informacija</p>
+            <p class="genaralStyle">
+              Bendra Informacija
+            </p>
           </div>
           <div class="genaralTabelDiv">
             <div class="generalTable">
               <ul>
-                <li class="generalTable_label_li">Elektroninis paštas</li>
-                <li class="generalTable_label_li">Gimimo metai</li>
-                <li class="generalTable_label_li">Adresas</li>
-                <li class="generalTable_label_li">Telefono Numeris</li>
+                <li class="generalTable_label_li">
+                  Elektroninis paštas
+                </li>
+                <li class="generalTable_label_li">
+                  Gimimo metai
+                </li>
+                <li class="generalTable_label_li">
+                  Adresas
+                </li>
+                <li class="generalTable_label_li">
+                  Telefono Numeris
+                </li>
               </ul>
               <ul>
-                <li class="generalTable_info_li">{{ user.email }}</li>
-                <li v-if="user.birth != null" class="generalTable_info_li">
+                <li class="generalTable_info_li">
+                  {{ user.email }}
+                </li>
+                <li
+                  v-if="user.birth != null"
+                  class="generalTable_info_li"
+                >
                   {{ user.birth }}
                 </li>
-                <li v-else class="generalTable_info_li">-------</li>
-                <li v-if="user.address != null" class="generalTable_info_li">
+                <li
+                  v-else
+                  class="generalTable_info_li"
+                >
+                  -------
+                </li>
+                <li
+                  v-if="user.address != null"
+                  class="generalTable_info_li"
+                >
                   {{ user.address }}
                 </li>
-                <li v-else class="generalTable_info_li">-------</li>
+                <li
+                  v-else
+                  class="generalTable_info_li"
+                >
+                  -------
+                </li>
                 <li
                   v-if="user.phoneNumber != null"
                   class="generalTable_info_li"
                 >
                   {{ user.phoneNumber }}
                 </li>
-                <li v-else class="generalTable_info_li">-------</li>
+                <li
+                  v-else
+                  class="generalTable_info_li"
+                >
+                  -------
+                </li>
               </ul>
             </div>
           </div>
           <div class="buttonsDiv">
             <button
-              @click="$refs.editProfile.openModal(user)"
               class="buttonsDiv_editButton"
+              @click="$refs.editProfile.openModal(user)"
             >
               Redeguoti
             </button>
             <button
-              @click="$refs.leaveWork.openModal()"
               class="buttonsDiv_editButton"
+              @click="$refs.leaveWork.openModal()"
             >
               Perduoti visus prietaisus
             </button>
@@ -74,10 +116,12 @@
         </div>
       </div>
     </div>
-    <ProfileEdit @updateProfile="updateProfile" ref="editProfile">
-    </ProfileEdit>
+    <ProfileEdit
+      ref="editProfile"
+      @updateProfile="updateProfile"
+    />
 
-    <LeaveWorkModal ref="leaveWork"></LeaveWorkModal>
+    <LeaveWorkModal ref="leaveWork" />
   </div>
 </template>
 
@@ -87,6 +131,10 @@ import ProfileEdit from "../components/ProfileEdit";
 import LeaveWorkModal from "../components/LeaveWorkModal";
 import jwt_decode from "jwt-decode";
 export default {
+  components: {
+    ProfileEdit,
+    LeaveWorkModal,
+  },
   data() {
     return {
       user: {},
@@ -94,9 +142,9 @@ export default {
       loading: true,
     };
   },
-  components: {
-    ProfileEdit,
-    LeaveWorkModal,
+  created: function () {
+   // this.decoded = jwt_decode(localStorage["token"]);
+    this.getUser();
   },
   methods: {
     updateProfile(data) {
@@ -123,10 +171,6 @@ export default {
           console.log(err);
         });
     },
-  },
-  created: function () {
-   // this.decoded = jwt_decode(localStorage["token"]);
-    this.getUser();
   },
 };
 </script>

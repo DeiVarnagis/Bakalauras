@@ -38,14 +38,23 @@ class DatabaseSeeder extends Seeder
             'user_id' => '2',
         ]);
 
-         \App\Models\Accessories::factory(10)->create([
-            'shortTerm_id' => null,
-            'longTerm_id' => '1'
-        ]);
+        for ($i = 1; $i <= 9; $i++) {
 
-        \App\Models\Accessories::factory(10)->create([
-            'shortTerm_id' => '1',
-            'longTerm_id' => null
-        ]);
+            \App\Models\Accessories::factory(4)->create([
+                'shortTerm_id' => null,
+                'longTerm_id' => $i
+            ]);
+        }
+
+        for ($i = 1; $i <= 9; $i++) {
+
+            \App\Models\Accessories::factory(4)->create([
+                'shortTerm_id' => $i,
+                'longTerm_id' => null
+            ]);
+        }
+
+        \App\Models\Inventorization::factory(1)->create();
+
     }
 }

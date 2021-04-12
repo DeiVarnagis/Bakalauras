@@ -1,33 +1,43 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <form class="formLogin">
         <div class="con">
           <div class="buttonDiv">
-            <button type="button" class="modal__close" @click="closeModal()">
+            <button
+              type="button"
+              class="modal__close"
+              @click="closeModal()"
+            >
               <font-awesome-icon icon="times" />
             </button>
           </div>
           <header class="headerLogin">
             <h2>Ar tikrai norite ištrinti {{ device.name }}</h2>
           </header>
-          <br />
+          <br>
           <div>
             <button
+              class="buttonLogin"
               @click.prevent="
                 device.type != null
                   ? deleteDevice(device.type, device.id)
                   : device.shortTerm_id != null || device.longTerm_id != null ? deleteAccessory(device.id)
-                  : deleteUser(device.id)"
-              class="buttonLogin"
+                    : deleteUser(device.id)"
             >
               Taip
             </button>
             <button
-              @click.prevent="closeModal()"
               class="buttonLogin"
               style="background: red"
+              @click.prevent="closeModal()"
             >
               Ne
             </button>
@@ -40,13 +50,13 @@
 <script>
 import axios from "axios";
 export default {
-  name: "deleteModal",
+  name: "DeleteModal",
+  props: ["device", "type", "index"],
   data() {
     return {
       show: false,
     };
   },
-  props: ["device", "type", "index"],
   methods: {
     closeModal() {
       this.show = false;

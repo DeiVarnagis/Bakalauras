@@ -1,8 +1,19 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
-      <Registration :buttonName="'Patvirtinti'" :header="'Pridekite nauja vartotoja'" v-bind:addUser="addUser" @closeModal="closeModal"></Registration>
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
+      <Registration
+        :button-name="'Patvirtinti'"
+        :header="'Pridekite nauja vartotoja'"
+        :add-user="addUser"
+        @closeModal="closeModal"
+      />
     </div>
   </transition>
 </template>
@@ -10,10 +21,10 @@
 <script>
 import Registration from "../views/Registration";
 export default {
-  props: ["addUser"],
   components: {
     Registration,
   },
+  props: ["addUser"],
   data() {
     return {
       show: false,

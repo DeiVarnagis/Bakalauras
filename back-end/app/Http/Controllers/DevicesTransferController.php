@@ -24,7 +24,6 @@ class DevicesTransferController extends Controller
 
     public function store(Request $request)
     {
-
         $transfer = DevicesTransfer::create($this->validateData());
 
         if (request('accessories') != null) {
@@ -32,9 +31,29 @@ class DevicesTransferController extends Controller
                 AccessoriesLend::create(array_merge($accessory, ['transfer_id' => $transfer->id]));
             }
         }
+        else
+        {
+            $device = $this->getDevice($transfer);
+  
+            $deviceLend = $device->DevicesLends()->first();
+            if($deviceLend)
+            {
+                $accessories = $deviceLend->lendAccessories()->get();
+                 foreach ($accessories as $accessory) {
+                     AccessoriesLend::create(
+                     [
+                         'name' => $accessory->name,
+                         'amount' => $accessory->amount,
+                         'transfer_id' => $transfer->id,            
+                     ]);
+                 }
+            }
+    
+        }
+       
         event(new NotificationSend(User::find($request['user_id'])->messagesCount(), $request['user_id']));
         $transfer->updateDevices($transfer->action, 1, 0);
-        return response()->json($transfer, 201);
+        return response()->json(['message'=>"Užklausa sėkmingai išsiųsta"], 201);
     }
 
     public function confirmTransfer(Request $request)
@@ -50,8 +69,15 @@ class DevicesTransferController extends Controller
                 $values = $transfer->returnDeviceType();
                 $user = User::find($transfer->owner_id);
                 $user->confirmDeiviceTransfer($transfer->user_id, $values['id'], $values['type']);
-                DevicesTransfer::where("longTerm_id", $transfer->longTerm_id)->delete();
-                DevicesTransfer::where("shortTerm_id", $transfer->shortTerm_id)->delete();
+
+                if ($values['type'] == "LongTerm") {
+                    DevicesTransfer::where("longTerm_id", $transfer->longTerm_id)->delete();
+                }
+
+                if ($values['type'] == "ShortTerm") {
+                    DevicesTransfer::where("shortTerm_id", $transfer->shortTerm_id)->delete();
+                }
+
                 $transfer->updateDevices(0, 0, 1);
                 event(new NotificationSend(User::find(auth()->user()->id)->messagesCount(), auth()->user()->id));
                 return response()->json(["message" => "Transfer was confirmed"], 200);
@@ -106,9 +132,13 @@ class DevicesTransferController extends Controller
             $device = $transfer->DevicesLongTerm()->first();
         }
 
+        if($device->state == 2)
+        {
+
+        }
+
         if ($transfer->action == 2 || $transfer->action == 3) {
-            $accessories = $transfer->lendAccessories()->get();
-            $device->accessories =  $accessories;
+            $device->accessories = $transfer->lendAccessories()->get();
         }
 
         if ($transfer->action == 1) {
@@ -130,20 +160,34 @@ class DevicesTransferController extends Controller
     protected function createLendRow($lendRow, $transfer)
     {
         if ($lendRow != null) {
-            $lendRow->user_id = $transfer->user_id;
-            $lendRow->save();
-            $transfer->lendAccessories()->update(array("lend_device_id" => $lendRow->id));
-        } else {
+            $lendRow->delete();
+        } 
 
-            $lend = DeviceLend::create([
-                'owner_id' =>  $transfer->owner_id,
-                'user_id' => $transfer->user_id,
-                'shortTerm_id' => $transfer->shortTerm_id,
-                'longTerm_id' => $transfer->longTerm_id
-            ]);
-            $transfer->lendAccessories()->update(array("lend_device_id" => $lend->id));
-        }
+        $lend = DeviceLend::create([
+            'owner_id' =>  $transfer->owner_id,
+            'user_id' => $transfer->user_id,
+            'shortTerm_id' => $transfer->shortTerm_id,
+            'longTerm_id' => $transfer->longTerm_id
+        ]);
+
+        $transfer->lendAccessories()->update(array("lend_device_id" => $lend->id));
+        
     }
+
+    public function getDevice($transfer)
+    {
+        if ($transfer->shortTerm_id != null) {
+            $device = $transfer->DevicesShortTerm()->first();
+        }
+    
+        if ($transfer->longTerm_id != null) {
+            $device = $transfer->DevicesLongTerm()->first();
+        }
+
+        return $device;
+    }
+
+   
 
     public function validateData()
     {

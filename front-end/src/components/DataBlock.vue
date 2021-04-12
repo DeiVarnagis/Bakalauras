@@ -1,7 +1,7 @@
 <template>
   <div class="data_container">
     <h1>
-      <slot></slot><span class="data_count">{{ data }}</span>
+      <slot /><span class="data_count">{{ data }}</span>
     </h1>
   </div>
 </template>

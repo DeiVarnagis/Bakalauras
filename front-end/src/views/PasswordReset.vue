@@ -2,8 +2,8 @@
   <div class="containerLogin">
     <ValidationObserver ref="form">
       <form
-        @submit.prevent="resetPassword()"
         class="formLogin"
+        @submit.prevent="resetPassword()"
       >
         <div class="con">
           <header class="headerLogin">
@@ -11,40 +11,46 @@
           </header>
 
           <ValidationProvider
-            rules="required|min:6|password:@confirm"
             v-slot="{ errors }"
+            rules="required|min:6|password:@confirm"
             mode="eager"
           >
             <div class="textOnInput">
               <label for="inputText">Slaptažodis</label>
               <input
+                v-model="user.password"
                 class="inputLogin"
                 type="password"
-                v-model="user.password"
                 name="password"
-              />
-              <p class="marginLeft">{{ errors[0] }}</p>
+              >
+              <p class="marginLeft">
+                {{ errors[0] }}
+              </p>
             </div>
           </ValidationProvider>
 
           <ValidationProvider
+            v-slot="{ errors }"
             name="confirm"
             rules="required|min:6"
-            v-slot="{ errors }"
             mode="eager"
           >
             <div class="textOnInput">
               <label for="inputText">Pakartokite slaptažodį</label>
               <input
+                v-model="user.password_confirmation"
                 class="inputLogin"
                 type="password"
-                v-model="user.password_confirmation"
                 name="password"
-              />
-              <p class="marginLeft">{{ errors[0] }}</p>
+              >
+              <p class="marginLeft">
+                {{ errors[0] }}
+              </p>
             </div>
           </ValidationProvider>
-          <button class="buttonLogin">Patvirtinti</button>
+          <button class="buttonLogin">
+            Patvirtinti
+          </button>
         </div>
       </form>
     </ValidationObserver>

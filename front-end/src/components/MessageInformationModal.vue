@@ -1,11 +1,27 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
-      <form id="form" class="formLogin">
-        <div v-if="!loading" class="con">
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
+      <form
+        id="form"
+        class="formLogin"
+      >
+        <div
+          v-if="!loading"
+          class="con"
+        >
           <div class="buttonDiv">
-            <button type="button" class="modal__close" @click="closeModal()">
+            <button
+              type="button"
+              class="modal__close"
+              @click="closeModal()"
+            >
               <font-awesome-icon icon="times" />
             </button>
           </div>
@@ -34,13 +50,22 @@
             </div>
           </span>
 
-          <h4 class="accessoriesH4">Aksesuarai</h4>
+          <h4 class="accessoriesH4">
+            Aksesuarai
+          </h4>
 
-          <div class="infoTableDiv" id="scroller">
-            <table class="deviceInfo_table" cellspacing="0" cellpadding="0">
+          <div
+            id="scroller"
+            class="infoTableDiv"
+          >
+            <table
+              class="deviceInfo_table"
+              cellspacing="0"
+              cellpadding="0"
+            >
               <thead>
                 <tr>
-                  <th></th>
+                  <th />
                   <th>Pavadinimas</th>
                   <th>Kiekis</th>
                   <th>Data</th>
@@ -56,16 +81,29 @@
                       v-if="accessory.src != null"
                       alt=""
                       :src="'http://127.0.0.1:8000/storage/' + accessory.src"
-                    />
-                    <img v-else alt="" src="../images/devices.png" />
+                    >
+                    <img
+                      v-else
+                      alt=""
+                      src="../images/devices.png"
+                    >
                   </td>
-                  <td data-label="Pavadinimas">{{ accessory.name }}</td>
-                  <td data-label="Kiekis">{{ accessory.amount }}</td>
-                  <td data-label="Data">{{ accessory.created_at }}</td>
+                  <td data-label="Pavadinimas">
+                    {{ accessory.name }}
+                  </td>
+                  <td data-label="Kiekis">
+                    {{ accessory.amount }}
+                  </td>
+                  <td data-label="Data">
+                    {{ accessory.created_at }}
+                  </td>
                 </tr>
               </tbody>
             </table>
-            <h4 class="accessoriesH4" v-if="device.accessories.length == 0">
+            <h4
+              v-if="device.accessories.length == 0"
+              class="accessoriesH4"
+            >
               Prietaisas neturi aksesuarų
             </h4>
           </div>
@@ -78,7 +116,6 @@
 <script>
 import axios from "axios";
 export default {
-  props: ["tranfer_id"],
   data() {
     return {
       transfer_id: null,

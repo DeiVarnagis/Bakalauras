@@ -77,7 +77,10 @@ class DevicesTransfer extends Model
         $instance = new $model;
         $device = $instance::find($values['id']);
         $device->action = $action;
-        $device->state = $state;
+        if($device->state != 2 || $state == 0)
+        {
+            $device->state = $state;
+        }
         $device->updated_at=Carbon::now();
         $device->save();
         $this->state = $transState;

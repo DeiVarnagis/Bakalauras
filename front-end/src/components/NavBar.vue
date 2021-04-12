@@ -1,78 +1,125 @@
 <template>
   <div>
-    <div class="navi_wrap" :class="toggledNav ? 'open' : 'closed'">
+    <div
+      class="navi_wrap"
+      :class="toggledNav ? 'open' : 'closed'"
+    >
       <div class="toggle-menu">
-        <a class="unselectable" @click="toggledNav = !toggledNav">
-          <img height="30px" src="../assets/menu.svg" />
+        <a
+          class="unselectable"
+          @click="toggledNav = !toggledNav"
+        >
+          <img
+            height="30px"
+            src="../assets/menu.svg"
+          >
         </a>
       </div>
+      <a
+        class="unselectable"
+        @click="push('Home')"
+      >
+        <img
+          class="navi_img"
+          src="../assets/logo.svg"
+          alt="Teltonika"
+        >
+      </a>
       <div class="navi_links">
         <a
           class="unselectable navi_link"
-          @click="push('Home')"
           :class="{ text_active: $route.name == 'Home' }"
+          @click="push('Home')"
         >
-          <img height="30px" src="../assets/devices.svg" />
+          <img
+            height="30px"
+            src="../assets/devices.svg"
+          >
           <span class="link-text">INVENTORIUS</span>
         </a>
-        
+
         <a
           class="unselectable navi_link"
-          @click="push('Messages')"
           :class="{ text_active: $route.name == 'Messages' }"
+          @click="push('Messages')"
         >
-        <div style=" margin-right: 20px;">
+          <div style="margin-right: 20px">
             <notification-bell
-            :size="30"
-            :count="messages"
-            :upperLimit="50"
-            counterLocation="upperRight"
-            counterStyle="round"
-            counterBackgroundColor="#FF0000"
-            counterTextColor="#FFFFFF"
-            iconColor="#000000"
-          />
-        </div>
+              :size="30"
+              counter-padding="1px 6px"
+              :count="messages"
+              :upper-limit="50"
+              counter-location="upperRight"
+              counter-style="round"
+              counter-background-color="#FF0000"
+              counter-text-color="#FFFFFF"
+              :icon="require('../assets/notifications.svg')"
+            />
+          </div>
           <span class="link-text">ĮVYKIAI</span>
         </a>
 
-            <a
+        <a
           v-if="decoded.admin"
           class="unselectable navi_link"
-          @click="push('Statistics')"
-          :class="{ text_active: $route.name == 'Statistics' }"
-        >
-          <img height="30px" src="../assets/statistics.svg" />
-          <span class="link-text">STATISTIKA</span>
-        </a>
-
-          <a
-          v-if="decoded.admin"
-          class="unselectable navi_link"
-          @click="push('usersTable')"
           :class="{ text_active: $route.name == 'usersTable' }"
+          @click="push('usersTable')"
         >
-          <img height="30px" src="../assets/workers.svg" />
+          <img
+            height="30px"
+            src="../assets/workers.svg"
+          >
           <span class="link-text">VARTOTOJAI</span>
         </a>
 
-          <a
+        <a
+          v-if="decoded.admin"
           class="unselectable navi_link"
-          @click="push('Profile')"
-          :class="{ text_active: $route.name == 'Profile' }"
+          :class="{ text_active: $route.name == 'Inventorization' }"
+          @click="push('Inventorization')"
         >
-          <img height="30px" src="../assets/profile.svg" />
+          <img
+            height="30px"
+            src="../assets/clock.svg"
+          >
+          <span class="link-text">INVENTORIZACIJA</span>
+        </a>
+
+        <a
+          v-if="decoded.admin"
+          class="unselectable navi_link"
+          :class="{ text_active: $route.name == 'Statistics' }"
+          @click="push('Statistics')"
+        >
+          <img
+            height="30px"
+            src="../assets/statistics.svg"
+          >
+          <span class="link-text">STATISTIKA</span>
+        </a>
+
+        <a
+          class="unselectable navi_link"
+          :class="{ text_active: $route.name == 'Profile' }"
+          @click="push('Profile')"
+        >
+          <img
+            height="30px"
+            src="../assets/profile.svg"
+          >
           <span class="link-text">PROFILIS</span>
         </a>
 
-            <a
+        <a
           class="unselectable navi_link"
           @click="logout()"
         >
-          <img height="30px" src="../assets/logout.svg" />
+          <img
+            height="30px"
+            src="../assets/logout.svg"
+          >
           <span class="link-text">ATSIJUNGTI</span>
         </a>
-
       </div>
     </div>
   </div>
@@ -84,6 +131,9 @@ import jwt_decode from "jwt-decode";
 import NotificationBell from "vue-notification-bell";
 import Pusher from "pusher-js";
 export default {
+  components: {
+    NotificationBell,
+  },
   data() {
     return {
       listActive: false,
@@ -93,8 +143,11 @@ export default {
       decoded: jwt_decode(localStorage["token"]),
     };
   },
-  components: {
-    NotificationBell,
+
+  async mounted() {
+    this.loading = false;
+    await this.messagesCount();
+    this.watchCount();
   },
   methods: {
     logout() {
@@ -127,7 +180,6 @@ export default {
       }
     },
     watchCount() {
-
       var pusher = new Pusher("911c4c72971affe5f999", {
         cluster: "eu",
       });
@@ -143,12 +195,6 @@ export default {
         this
       );
     },
-  },
-
-  async mounted() {
-    this.loading = false;
-    this.messagesCount();
-    this.watchCount();
   },
 };
 </script>

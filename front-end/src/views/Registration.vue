@@ -2,94 +2,111 @@
   <div class="containerLogin">
     <ValidationObserver ref="form">
       <form
+        class="formLogin"
         @submit.prevent="register()"
         @keydown="backEndErrors.clear($event.target.name)"
-        class="formLogin"
       >
         <div class="con">
           <header class="headerLogin">
-            <h2>{{header}}</h2>
+            <h2>{{ header }}</h2>
           </header>
           <ValidationProvider
+            v-slot="{ errors }"
             mode="eager"
             rules="required|alpha"
-            v-slot="{ errors }"
           >
             <div class="textOnInput">
               <label for="inputText">Vardas</label>
-              <input class="inputLogin" type="text" v-model="user.name" />
+              <input
+                v-model="user.name"
+                class="inputLogin"
+                type="text"
+              >
               <p>{{ errors[0] }}</p>
             </div>
           </ValidationProvider>
 
           <ValidationProvider
+            v-slot="{ errors }"
             mode="eager"
             rules="required|alpha"
-            v-slot="{ errors }"
           >
             <div class="textOnInput">
               <label for="inputText">Pavardė</label>
-              <input class="inputLogin" type="text" v-model="user.surname" />
+              <input
+                v-model="user.surname"
+                class="inputLogin"
+                type="text"
+              >
               <p>{{ errors[0] }}</p>
             </div>
           </ValidationProvider>
 
           <ValidationProvider
-            rules="email|required"
             v-slot="{ errors }"
+            rules="email|required"
             mode="eager"
           >
             <div class="textOnInput">
               <label for="inputText">Elektroninis paštas</label>
               <input
-                class="inputLogin"
                 id="txt-input"
+                v-model="user.email"
+                class="inputLogin"
                 type="email"
                 name="email"
-                v-model="user.email"
-              />
+              >
             </div>
             <p>{{ errors[0] }}</p>
-            <p v-if="backEndErrors.has('email')" class="text-danger textSize">
+            <p
+              v-if="backEndErrors.has('email')"
+              class="text-danger textSize"
+            >
               {{ backEndErrors.get("email") }}
             </p>
           </ValidationProvider>
 
           <ValidationProvider
-            rules="required|min:8|password:@confirm"
             v-slot="{ errors }"
+            rules="required|min:8|password:@confirm"
             mode="eager"
           >
             <div class="textOnInput">
               <label for="inputText">Slaptažodis</label>
               <input
+                v-model="user.password"
                 class="inputLogin"
                 type="password"
-                v-model="user.password"
                 name="password"
-              />
-              <p class="marginLeft">{{ errors[0] }}</p>
+              >
+              <p class="marginLeft">
+                {{ errors[0] }}
+              </p>
             </div>
           </ValidationProvider>
 
           <ValidationProvider
+            v-slot="{ errors }"
             name="confirm"
             rules="required|min:8"
-            v-slot="{ errors }"
             mode="eager"
           >
             <div class="textOnInput">
               <label for="inputText">Pakartokite slaptažodį</label>
               <input
+                v-model="user.password_confirmation"
                 class="inputLogin"
                 type="password"
-                v-model="user.password_confirmation"
                 name="password"
-              />
-              <p class="marginLeft">{{ errors[0] }}</p>
+              >
+              <p class="marginLeft">
+                {{ errors[0] }}
+              </p>
             </div>
           </ValidationProvider>
-          <button class="buttonLogin">{{buttonName}}</button>
+          <button class="buttonLogin">
+            {{ buttonName }}
+          </button>
         </div>
       </form>
     </ValidationObserver>

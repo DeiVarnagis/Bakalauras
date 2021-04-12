@@ -1,14 +1,26 @@
 <template>
   <div>
     <div class="generaldata_container">
-      <DataBlock class="data_text" :data="generalData.allDevices"
-        >PRIETAISŲ SKAIČIUS:</DataBlock
+      <DataBlock
+        class="data_text"
+        :data="generalData.allDevices"
       >
-      <DataBlock class="data_text" :data="generalData.borrowed"
-        >PASISKOLINTI PRIETAISAI:</DataBlock
+        PRIETAISŲ SKAIČIUS:
+      </DataBlock>
+      <DataBlock
+        class="data_text"
+        :data="generalData.borrowed"
       >
-      <DataBlock class="data_text" :data="null">
-        <vue-countdown :time="time" v-slot="{ days, hours, minutes }">
+        PASISKOLINTI PRIETAISAI:
+      </DataBlock>
+      <DataBlock
+        class="data_text"
+        :data="null"
+      >
+        <vue-countdown
+          v-slot="{ days, hours, minutes }"
+          :time="time"
+        >
           INVENTORIZACIJA: {{ days }} Dienos, {{ hours }} valandos,
           {{ minutes }} minutės.
         </vue-countdown>
@@ -18,7 +30,10 @@
       <div class="innerDiv">
         <div class="search">
           <div>
-            <button class="addDevice" @click="$refs.addModal.openModal()">
+            <button
+              class="addDevice"
+              @click="$refs.addModal.openModal()"
+            >
               <font-awesome-icon icon="plus" />
             </button>
           </div>
@@ -26,12 +41,12 @@
             <label for="inputText">Paieška</label>
             <input
               v-model="searchQuery"
-              @input="(current_page = 1), fetchData()"
               class="searchInput"
               placeholder="Paieška"
               type="text"
               name="search"
-            />
+              @input="(current_page = 1), fetchData()"
+            >
           </div>
 
           <div class="textOnInput">
@@ -41,11 +56,24 @@
               class="filter"
               @change="(current_page = 1), fetchData()"
             >
-              <option value="Yours">Visas turtas</option>
-              <option value="ShortTerm">Trumpalaikis turtas</option>
-              <option value="LongTerm">Ilgalaikis turtas</option>
-              <option value="Borrowed">Pasiskolintas turtas</option>
-              <option v-if="decoded.admin" value="All">Kitų turtas</option>
+              <option value="Yours">
+                Visas turtas
+              </option>
+              <option value="ShortTerm">
+                Trumpalaikis turtas
+              </option>
+              <option value="LongTerm">
+                Ilgalaikis turtas
+              </option>
+              <option value="Borrowed">
+                Pasiskolintas turtas
+              </option>
+              <option
+                v-if="decoded.admin"
+                value="All"
+              >
+                Kitų turtas
+              </option>
             </select>
           </div>
 
@@ -56,55 +84,80 @@
               class="filter"
               @change="(current_page = 1), fetchData()"
             >
-              <option value="all">Visi</option>
-              <option value="0">Laisvi</option>
-              <option value="1">Laukiantis užklausoje</option>
-              <option value="2">Paskolintas turtas</option>
+              <option value="all">
+                Visi
+              </option>
+              <option value="0">
+                Laisvi
+              </option>
+              <option value="1">
+                Laukiantis užklausoje
+              </option>
+              <option value="2">
+                Paskolintas turtas
+              </option>
             </select>
           </div>
 
-          <button class="pdfButton" @click="$refs.pdfModal.openModal()">
+          <button
+            class="pdfButton"
+            @click="$refs.pdfModal.openModal()"
+          >
             PDF
           </button>
         </div>
         <Table
           :decoded="decoded"
-          v-bind:type="type"
-          v-bind:devices="devices"
-        ></Table>
+          :type="type"
+          :devices="devices"
+        />
         <div v-if="loading && devices.length == 0">
-          <h1 class="centered" v-if="devices.length == 0">Duomenų nėra</h1>
+          <h1
+            v-if="devices.length == 0"
+            class="centered"
+          >
+            Duomenų nėra
+          </h1>
         </div>
-        <div v-if="devices.length !== 0" class="pagination">
+        <div
+          v-if="devices.length !== 0"
+          class="pagination"
+        >
           <button
             @click="
               current_page > 1 ? current_page-- : current_page, fetchData()
             "
           >
-            <font-awesome-icon class="arrow" icon="chevron-left" />
+            <font-awesome-icon
+              class="arrow"
+              icon="chevron-left"
+            />
           </button>
           <button
-            v-for="(times, index) in last_page"
-            :key="index"
+            v-for="(times, ids) in last_page"
+            :key="ids"
+            :class="[times == current_page ? 'pageSelected' : 'page']"
             @click="(current_page = times), fetchData()"
-            v-bind:class="[times == current_page ? 'pageSelected' : 'page']"
           >
             {{ times }}
           </button>
           <button
             @click="
               current_page < last_page ? current_page++ : current_page,
-                fetchData()
+              fetchData()
             "
           >
-            <font-awesome-icon class="arrow" icon="chevron-right" />
+            <font-awesome-icon
+              class="arrow"
+              icon="chevron-right"
+            />
           </button>
         </div>
-        <DeviceAddModal ref="addModal"> </DeviceAddModal>
+        <DeviceAddModal ref="addModal" />
         <PdfGeneratorModal
-          :decoded="decoded"
           ref="pdfModal"
-        ></PdfGeneratorModal>
+          :decoded="decoded"
+        />
       </div>
     </div>
   </div>
@@ -120,6 +173,13 @@ import jwt_decode from "jwt-decode";
 import VueCountdown from "@chenfengyuan/vue-countdown";
 
 export default {
+  components: {
+    PdfGeneratorModal,
+    DeviceAddModal,
+    DataBlock,
+    VueCountdown,
+    Table,
+  },
   data() {
     return {
       devices: [],
@@ -138,12 +198,10 @@ export default {
       decoded: jwt_decode(localStorage["token"]),
     };
   },
-  components: {
-    PdfGeneratorModal,
-    DeviceAddModal,
-    DataBlock,
-    VueCountdown,
-    Table,
+  created: async function () {
+    await this.fetchData();
+    await this.fetchCounts();
+    await this.fetchInventorization();
   },
   methods: {
     fetchData: async function () {
@@ -190,7 +248,7 @@ export default {
 
     fetchInventorization: async function () {
       await axios
-        .get("inventorization", {
+        .get("inventorization-closest", {
           headers: {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
@@ -209,11 +267,6 @@ export default {
       var diff = date2.getTime() - date1.getTime();
       return Math.abs(Math.round(diff));
     },
-  },
-  created: async function () {
-    await this.fetchData();
-    await this.fetchCounts();
-    await this.fetchInventorization();
   },
 };
 </script>

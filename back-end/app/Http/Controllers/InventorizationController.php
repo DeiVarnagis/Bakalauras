@@ -9,11 +9,15 @@ class InventorizationController extends Controller
 {
     public function store()
     {
-       return response()->json(Inventorization::create($this->validateData()),200);
+       return response()->json(Inventorization::create($this->validateData()),201);
     }
 
-
     public function index()
+    {
+        return response()->json(Inventorization::all(), 200);
+    }
+
+    public function closest()
     {
         $time = Inventorization::min('inventorization_time');
         if($time == null)
@@ -21,6 +25,17 @@ class InventorizationController extends Controller
             return response()->json(['error' => "Inventorizacijos laikas nerastas"], 404);
         }
         return response()->json($time, 200);
+    }
+
+    public function delete()
+    {
+        $date = Inventorization::find(request('id'));
+        if($date == null)
+        {
+            return response()->json(['error' => "Laikas nerastas"], 404);
+        }
+        $date->delete();
+        return response()->json("Inventorizacijos laikas sėkmingai ištrintas", 204);
     }
 
 

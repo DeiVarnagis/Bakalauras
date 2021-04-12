@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accessories;
+use App\Models\AccessoriesLend;
 use App\Models\DevicesLongTerm;
 use App\Models\DevicesShortTerm;
+use App\Models\DevicesTransfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -56,8 +58,16 @@ class DevicesController extends Controller
 
         if (auth()->user()->id != $device->user_id || !auth()->user()->admin) {
             $accessories = $device->DevicesLends()->first();
-            $device->accessories =  $accessories->lendAccessories()->get();
+            
+            if($accessories)
+            {
+                $device->accessories =  $accessories->lendAccessories()->get();
+                return response()->json(["data" => $device], 200);
+            }
+
+            $device->accessories =  [];
             return response()->json(["data" => $device], 200);
+
         }
 
         $device->accessories = $device->Accessories();
@@ -78,21 +88,6 @@ class DevicesController extends Controller
 
         return response()->json(["data" => $device->Accessories()], 200);
     }
-
-
-    public function getDeviceWithLendAccessories(Request $request)
-    {
-        if (!$this->checkIfClassExist($request['type'])) {
-            return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
-        }
-        $device = $this->instance::find($request['id']);
-
-        if ($device == null) {
-            return response()->json(["error" => 'Pretaisas nerastas'], 404);
-        }
-        return response()->json(["data" => $device], 200);
-    }
-
 
     public function update(Request $request)
     {
@@ -120,8 +115,7 @@ class DevicesController extends Controller
             } else {
                 $newInstance = DevicesShortTerm::class;
             }
-
-            $newDevice = $newInstance::create(array_merge($this->instance->validateUpdate($request['id']), ['src' => $path]));
+            $newDevice = $newInstance::create(array_merge($this->instance->validateUpdate($request['id']), ['src' => $path, 'user_id' => auth()->user()->id]));
             $this->instance->destroy($device->id);
             return response()->json($newDevice, 200);
         }
@@ -164,6 +158,26 @@ class DevicesController extends Controller
             return response()->json(["error" => 'Pretaiso istorija nerasta'], 404);
         }
         return $device->getHistory();
+    }
+
+    public function transferedDeviceInfo(Request $request)
+    {
+
+       /* if (!$this->checkIfClassExist($request['type'])) {
+            return response()->json(["error" => 'Pretaiso tipas nerastas'], 404);
+        }
+
+        $device = $this->instance::find($request['device_id']);
+
+        if ($device == null) {
+            return response()->json(["error" => 'Pretaisas nerastas'], 404);
+        }
+
+        $accessories = AccessoriesLend::where('transfer_id', $request['transfer_id']);*/
+
+
+        
+
     }
 
     protected function checkIfClassExist(String $class)

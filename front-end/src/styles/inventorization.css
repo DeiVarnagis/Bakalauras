@@ -1,0 +1,45 @@
+.wrapperInventorization {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  padding: 25px;
+  border-radius: 15px;
+  background-color: white;
+  min-height: 700px;
+}
+
+.layout_div {
+  width: 60%;
+  height: 100%;
+}
+
+.button_div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.vfc-week .vfc-day span.vfc-span-day.vfc-today {
+  background-color: white;
+  color: black;
+}
+
+.vfc-week .vfc-day span.vfc-span-day.vfc-marked {
+  background-color: lightcoral;
+}
+
+.markedDates {
+  color: white;
+  background: #0054A6;
+}
+/*# sourceMappingURL=inventorization.css.map */

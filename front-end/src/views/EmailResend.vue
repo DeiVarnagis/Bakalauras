@@ -1,33 +1,42 @@
 <template>
   <div class="container">
     <ValidationObserver ref="form">
-      <form @submit.prevent="methodSelect" class="formLogin">
+      <form
+        class="formLogin"
+        @submit.prevent="methodSelect"
+      >
         <div>
           <div class="con">
             <header class="headerLogin">
-              <h2>{{ this.title }}</h2>
+              <h2>{{ title }}</h2>
             </header>
             <ValidationProvider
+              v-slot="{ errors }"
               mode="eager"
               rules="required|email"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Elektroninis paštas</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
-                  type="email"
                   v-model="email"
-                />
+                  class="inputLogin"
+                  type="email"
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
-            <button type="submit" :disabled="loading" class="buttonLogin">
+            <button
+              type="submit"
+              :disabled="loading"
+              class="buttonLogin"
+            >
               Patvirtinti
             </button>
           </div>
-          <router-link :to="'/login'">Prisijungimas</router-link>
+          <router-link :to="'/login'">
+            Prisijungimas
+          </router-link>
         </div>
       </form>
     </ValidationObserver>
@@ -38,13 +47,13 @@
 import axios from "axios";
 
 export default {
+  props: ["title", "method"],
   data() {
     return {
       email: "",
       loading: false,
     };
   },
-  props: ["title", "method"],
   methods: {
     resend() {
       this.$refs.form.validate().then((success) => {

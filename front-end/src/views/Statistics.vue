@@ -1,10 +1,11 @@
 <template>
   <div>
     <div class="container">
-      <div class="innerDiv" style="overflow: auto">
-        <AreaChart></AreaChart>
-        <LineChart></LineChart>
-        <PieChart></PieChart>
+      <div
+        class="innerDiv"
+        style="overflow: auto"
+      >
+        <AreaChart />
       </div>
     </div>
   </div>
@@ -12,15 +13,15 @@
 
 <script>
 import AreaChart from "../components/AreaChart.vue";
-import LineChart from "../components/LineChart.vue";
-import PieChart from "../components/PieChart.vue";
+/*import LineChart from "../components/LineChart.vue";
+import PieChart from "../components/PieChart.vue";  */
 
 export default {
   name: "App",
   components: {
     AreaChart,
-    LineChart,
-    PieChart
+   /* LineChart,
+    PieChart*/ 
   },
   data() {
     return {

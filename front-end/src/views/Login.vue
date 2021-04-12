@@ -1,46 +1,69 @@
 <template>
   <div class="containerLogin">
     <ValidationObserver ref="form">
-      <form @submit.prevent="login" class="formLogin" @keydown="clearError()">
+      <form
+        class="formLogin"
+        @submit.prevent="login"
+        @keydown="clearError()"
+      >
         <div>
           <div class="con">
             <header class="headerLogin">
               <h2>Prisijungimas</h2>
             </header>
             <ValidationProvider
+              v-slot="{ errors }"
               mode="eager"
               rules="required|email"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Elektroninis paštas</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
-                  type="email"
                   v-model="user.email"
-                />
+                  class="inputLogin"
+                  type="email"
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required|min:6" mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules="required|min:6"
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Slaptažodis</label>
                 <input
+                  id="txt-input"
+                  v-model="user.password"
                   class="inputLogin"
                   type="password"
-                  v-model="user.password"
-                  id="txt-input"
                   name="password"
-                />
+                >
               </div>
               <p>{{ errors[0] }}</p>
-              <p v-if="loginError !== ''">{{ loginError }}</p>
+              <p v-if="loginError !== ''">
+                {{ loginError }}
+              </p>
             </ValidationProvider> 
-            <button type="submit" class="buttonLogin">Prisijungti</button>
+            <button
+              type="submit"
+              class="buttonLogin"
+            >
+              Prisijungti
+            </button>
           </div>
-          <router-link :to="{name:'passwordForgot'}" :method="'password'" :title="'Elektroninio pašto persiuntimas'">Pamiršai slaptažodį?</router-link>
-          <router-link :to="'/register'">Registruotis</router-link>
+          <router-link
+            :to="{name:'passwordForgot'}"
+            :method="'password'"
+            :title="'Elektroninio pašto persiuntimas'"
+          >
+            Pamiršai slaptažodį?
+          </router-link>
+          <router-link :to="'/register'">
+            Registruotis
+          </router-link>
         </div>
       </form>
     </ValidationObserver>

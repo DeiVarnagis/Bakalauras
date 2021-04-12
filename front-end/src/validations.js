@@ -1,6 +1,6 @@
 import { extend } from "vee-validate";
 
-import { required, email, min, numeric, alpha } from "vee-validate/dist/rules";
+import { required, email, min, numeric, alpha, min_value, max_value} from "vee-validate/dist/rules";
 
 extend("email", email);
 
@@ -42,11 +42,20 @@ extend("alpha", {
   message: "Laukas privalo būti sudarytas tik iš raidžių",
 });
 
+extend("maxNumber", {
+  params: ['target'],
+  validate(value, { target }) {
+    return value <= target;
+  },
+  ...max_value,
+  message: "Maksimalus kiekis yra  30",
+});
 
 extend("minNumber", {
   params: ['target'],
   validate(value, { target }) {
     return value >= target;
   },
-  message: "Minimalus kiekis yra 1",
+  ...min_value,
+  message: "Minimalus kiekis yra  1",
 });

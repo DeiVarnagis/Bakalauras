@@ -1,30 +1,48 @@
 <template>
   <ValidationObserver ref="form">
-    <form @submit.prevent="submitAccessories" class="formLogin">
+    <form
+      class="formLogin"
+      @submit.prevent="submitAccessories"
+    >
       <div class="con">
         <div class="buttonDiv">
-          <button type="button" class="modal__close" @click="close()">
+          <button
+            type="button"
+            class="modal__close"
+            @click="close()"
+          >
             <font-awesome-icon icon="times" />
           </button>
         </div>
         <header class="headerLogin">
           <h2>Pasirinkite aksesuarus</h2>
         </header>
-        <div class="tableAccessories" id="scroller">
+        <div
+          id="scroller"
+          class="tableAccessories"
+        >
           <table class="accessoriesTable">
             <thead>
               <tr>
                 <th>
-                  <input type="checkbox" v-model="selectAll" @click="select" />
+                  <input
+                    v-model="selectAll"
+                    type="checkbox"
+                    @click="select"
+                  >
                 </th>
                 <th>Pavadinimas</th>
                 <th>Kiekis</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(i, index) in accessories" :key="index">
+              <tr
+                v-for="(i, index) in accessories"
+                :key="index"
+              >
                 <td>
                   <input
+                    v-model="selected"
                     type="checkbox"
                     :value="{
                       id: i.id,
@@ -32,16 +50,15 @@
                       amount: getAmount(i.id),
                       src: i.src,
                     }"
-                    v-model="selected"
-                  />
+                  >
                 </td>
                 <td>{{ i.name }}</td>
 
                 <td>
                   <div class="quantity">
                     <button
-                      @click.prevent="decrement(i.id)"
                       class="quantity_minus"
+                      @click.prevent="decrement(i.id)"
                     >
                       <span>-</span>
                     </button>
@@ -55,10 +72,10 @@
                           ? selected[checkIfExist(i.id)].amount
                           : 1
                       "
-                    />
+                    >
                     <button
-                      @click.prevent="increment(i.id, index)"
                       class="quantity_plus"
+                      @click.prevent="increment(i.id, index)"
                     >
                       <span>+</span>
                     </button>
@@ -71,7 +88,12 @@
             Prietaisas neturi aksesuarų
           </h2>
         </div>
-        <button type="submit" class="buttonLogin">Patvirtinti</button>
+        <button
+          type="submit"
+          class="buttonLogin"
+        >
+          Patvirtinti
+        </button>
       </div>
     </form>
   </ValidationObserver>
@@ -89,6 +111,9 @@ export default {
       selectAll: false,
       loading: true,
     };
+  },
+  mounted: function () {
+    this.getAccessories();
   },
   methods: {
     select() {
@@ -171,9 +196,6 @@ export default {
     close() {
       this.$emit("closeModal");
     },
-  },
-  mounted: function () {
-    this.getAccessories();
   },
 };
 </script>

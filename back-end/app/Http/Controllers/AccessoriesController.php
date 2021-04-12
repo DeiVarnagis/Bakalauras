@@ -109,7 +109,7 @@ class AccessoriesController extends Controller
     protected function validateData()
     {
         return request()->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|max:125',
             'amount' => 'required|numeric',
             'longTerm_id' => ['nullable', 'required_without:shortTerm_id', 'exists:devices_long_terms,id'],
             'shortTerm_id' => ['nullable', 'required_without:longTerm_id', 'exists:devices_short_terms,id'],

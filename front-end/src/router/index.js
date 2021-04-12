@@ -1,3 +1,4 @@
+import jwt_decode from "jwt-decode";
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -9,8 +10,9 @@ import Email from '../views/EmailVerification.vue';
 import EmailResend from '../views/EmailResend.vue';
 import PasswordReset from '../views/PasswordReset.vue';
 import Profile from '../views/Profile.vue';
-import DeviceView from '../views/DeviceView';
-import UsersTable from '../views/UsersTable';
+import DeviceView from '../views/DeviceView.vue';
+import UsersTable from '../views/UsersTable.vue';
+import Inventorization from '../views/Inventorization.vue';
 import Statistics from '../views/Statistics'
 
 Vue.use(VueRouter)
@@ -41,14 +43,8 @@ const routes = [
     meta: {requiresAuth:true}
   },
   {
-    path: '/statistics',
-    name: 'Statistics',
-    component: Statistics,
-    meta: {requiresAuth:true}
-  },
-  {
     path: '/profile/:id',
-    name: 'ProfileUser',
+    name: 'ProfileSelected',
     component: Profile,
     meta: {requiresAuth:true}
   },
@@ -73,6 +69,20 @@ const routes = [
     path: '/usersTable',
     name: 'usersTable',
     component: UsersTable,
+    meta: {requiresAdmin:true}
+  },
+  {
+    path: '/inventorization',
+    name: 'Inventorization',
+    component: Inventorization,
+    meta: {requiresAdmin:true}
+    
+  },
+  {
+    path: '/statistics',
+    name: 'Statistics',
+    component: Statistics,
+    meta: {requiresAuth:true}
   },
   {
     props: { title: 'Pamiršai slaptažodį? ', method:'password' },
@@ -119,6 +129,17 @@ router.beforeEach((to,from,next) =>{
     }
 } else {
     next();
+}
+
+if (to.matched.some(record => record.meta.requiresAdmin)) {
+  var decoded = jwt_decode(localStorage["token"]);
+  if (!decoded.admin) {
+      next({ path: '/notFound' });
+  } else {
+      next();
+  }
+} else {
+  next();
 }
 
 })

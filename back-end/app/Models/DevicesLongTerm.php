@@ -80,10 +80,9 @@ class DevicesLongTerm extends Model
     public function validateData()
     {
         return request()->validate([
-            'user_id' => 'required|exists:users,id',
-            'name' => 'required|string|max:255',
-            'code' => 'required|string|max:255|unique:devices_long_terms',
-            'serialNumber' => 'required|string|max:255|unique:devices_long_terms',
+            'name' => 'required|string|max:125',
+            'code' => 'required|string|max:125|unique:devices_long_terms',
+            'serialNumber' => 'required|string|max:125|unique:devices_long_terms',
             'amount' => 'required|numeric',
             'src' => 'nullable'
         ]);
@@ -92,10 +91,9 @@ class DevicesLongTerm extends Model
     public function validateUpdate($id)
     {
         return request()->validate([
-            'user_id' => 'required|exists:users,id',
-            'name' => 'required|string|max:255',
-            'code' => "required|string|max:255|unique:devices_long_terms,code,$id",
-            'serialNumber' => "required|string|max:255|unique:devices_long_terms,serialNumber,$id",
+            'name' => 'required|string|max:125',
+            'code' => "required|string|max:125|unique:devices_long_terms,code,$id",
+            'serialNumber' => "required|string|max:125|unique:devices_long_terms,serialNumber,$id",
             'amount' => 'required|numeric',
             'src' => 'nullable',
             'deviceType' => 'required|string'

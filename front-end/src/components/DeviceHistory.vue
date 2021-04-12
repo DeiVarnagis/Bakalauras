@@ -1,8 +1,11 @@
 <template>
-  <div v-if="!loading" class="inner-div_column">
+  <div
+    v-if="!loading"
+    class="inner-div_column"
+  >
     <div
-      id="scroller"
       v-if="history.length > 0"
+      id="scroller"
       class="inner-div_column_layout_right"
     >
       <div
@@ -27,9 +30,9 @@
               ? 'inner-div_column_layout_right_bubble_yellow'
               : 'inner-div_column_layout_right_bubble_blue'
           "
-        ></p>
+        />
 
-        <p :class="getClass(index)"></p>
+        <p :class="getClass(index)" />
       </div>
       <div class="inner-div_column_layout_right_row">
         <p class="inner-div_column_layout_right_bubbleLabelLeft">
@@ -37,11 +40,14 @@
           {{ history[history.length - 1].owner_surname }}
           {{ history[history.length - 1].created_at }}
         </p>
-        <p class="inner-div_column_layout_right_bubble_blue"></p>
-        <p :class="firstConnector()"></p>
+        <p class="inner-div_column_layout_right_bubble_blue" />
+        <p :class="firstConnector()" />
       </div>
     </div>
-    <div v-else class="inner-div_column_layout_right">
+    <div
+      v-else
+      class="inner-div_column_layout_right"
+    >
       <h3>Prietaisas vis dar neturi istorijos</h3>
     </div>
   </div>
@@ -56,6 +62,9 @@ export default {
       history: [],
       loading: true,
     };
+  },
+  created: function () {
+    this.getHistory();
   },
   methods: {
     getClass(index) {
@@ -106,10 +115,6 @@ export default {
           console.log(error.response.data);
         });
     },
-  },
-  created: function () {
-    console.log("i am still here");
-    this.getHistory();
   },
 };
 </script>

@@ -78,11 +78,11 @@ class UsersController extends Controller
     protected function validateEdit($id)
     {
         return request()->validate([
-            'name' => 'required|string|max:255',
-            'surname' => 'required|string|max:255',
-            'email' => "required|string|email|max:255|unique:users,email,$id",
-            'phoneNumber' => "string|nullable|max:255",
-            'address' => "string|nullable|max:255",
+            'name' => 'required|string|max:125',
+            'surname' => 'required|string|max:125',
+            'email' => "required|string|email|max:125|unique:users,email,$id",
+            'phoneNumber' => "string|nullable|max:125",
+            'address' => "string|nullable|max:125",
             'birth' => "nullable|date|date_format:Y-m-d",
             'src' => 'nullable',
 

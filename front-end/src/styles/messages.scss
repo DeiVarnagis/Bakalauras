@@ -1,15 +1,5 @@
 @import './_variables';
 
-.deleteButton{
-    margin-left: 5px;
-    padding: 3px;
-    font-size: 40px; 
-    color: red; 
-    &:hover{
-        color:green
-    }
-}
-
 .confirmButton{
     margin-left: 5px;
     padding: 3px;
@@ -20,21 +10,25 @@
     }
 }
 
-.iconButton{
+.iconButton , .disabledButton{
 
+    margin: 0px 5px 0px 5px;
     background-color: Transparent;
     background-repeat:no-repeat;
+    border-radius: 50%;
     border: none;
+    color: red;
     cursor:pointer;
-    overflow: hidden;
-    outline:none; 
+
+    &:hover{
+        filter: invert(17%) sepia(74%) saturate(3649%) hue-rotate(197deg) brightness(92%) contrast(104%);
+    }
 }
 
 
 .disabledButton{
-
-    margin-left: 5px;
-    padding: 3px;
-    font-size: 35px; 
-    color: lightgray; 
+    cursor: default;
+    filter: invert(94%) sepia(0%) saturate(581%) hue-rotate(110deg) brightness(91%) contrast(86%);
+    pointer-events: none;
 }
+

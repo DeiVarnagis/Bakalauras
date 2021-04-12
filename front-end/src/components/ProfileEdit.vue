@@ -1,18 +1,28 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
         <form
-          enctype="multipart/form-data"
           id="form"
+          enctype="multipart/form-data"
+          class="formLogin"
           @submit.prevent="edit()"
           @keydown="backEndErrors.clear($event.target.name)"
-          class="formLogin"
         >
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -21,52 +31,64 @@
             </header>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required|alpha"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Vardas</label>
                 <input
+                  v-model="profile.name"
                   class="inputLogin"
                   type="text"
                   name="code"
-                  v-model="profile.name"
-                />
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('name')"
+                  class="text-danger textSize"
+                >
+                  {{ backEndErrors.get("name") }}
+                </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required|alpha"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Pavardė</label>
                 <input
+                  v-model="profile.surname"
                   class="inputLogin"
                   type="text"
                   name="surname"
-                  v-model="profile.surname"
-                />
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('surname')"
+                  class="text-danger textSize"
+                >
+                  {{ backEndErrors.get("surname") }}
+                </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               mode="eager"
               rules="required|email"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Elektroninis paštas</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
-                  type="email"
                   v-model="profile.email"
-                />
+                  class="inputLogin"
+                  type="email"
+                >
                 <p>{{ errors[0] }}</p>
                 <p
                   v-if="backEndErrors.has('email')"
@@ -77,21 +99,34 @@
               </div>
             </ValidationProvider>
 
-            <ValidationProvider rules="" mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules=""
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Telefono numeris</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
+                  v-model="profile.phoneNumber"
+                  class="inputLogin"
                   type="text"
                   name="phoneNumber"
-                  v-model="profile.phoneNumber"
-                />
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('phoneNumber')"
+                  class="text-danger textSize"
+                >
+                  {{ backEndErrors.get("phoneNumber") }}
+                </p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Profilio nuotrauką</label>
                 <input
@@ -99,38 +134,62 @@
                   type="file"
                   name="file"
                   @change="upload_src"
-                />
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider rules="" mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules=""
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Gimimo data</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
-                  type="date"
-                  name="date"
                   v-model="profile.birth"
-                />
+                  class="inputLogin"
+                  type="date"
+                  name="birth"
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('birth')"
+                  class="text-danger textSize"
+                >
+                  {{ backEndErrors.get("birth") }}
+                </p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider rules="" mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              rules=""
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Adresas</label>
                 <input
+                  v-model="profile.address"
                   class="inputLogin"
                   type="text"
                   name="amount"
-                  v-model="profile.address"
-                />
-                <p class="marginLeft">{{ errors[0] }}</p>
+                >
+                <p class="marginLeft">
+                  {{ errors[0] }}
+                </p>
+                <p
+                  v-if="backEndErrors.has('address')"
+                  class="text-danger textSize"
+                >
+                  {{ backEndErrors.get("address") }}
+                </p>
               </div>
             </ValidationProvider>
-            <button class="buttonLogin">Atnaujinti</button>
+            <button class="buttonLogin">
+              Atnaujinti
+            </button>
           </div>
         </form>
       </ValidationObserver>

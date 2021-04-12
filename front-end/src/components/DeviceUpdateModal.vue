@@ -1,18 +1,28 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
         <form
-          enctype="multipart/form-data"
           id="form"
+          enctype="multipart/form-data"
+          class="formLogin"
           @submit.prevent="edit()"
           @keydown="backEndErrors.clear($event.target.name)"
-          class="formLogin"
         >
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -20,73 +30,98 @@
               <h2>Atnaujinkite prietaisą</h2>
             </header>
             <div class="textOnInput">
-              <label class="top" for="inputText">Tipas</label>
-              <select v-model="device.deviceType" class="select-css">
-                <option value="LongTerm">Ilgalaikis prietaisas</option>
-                <option value="ShortTerm">Trumpalaikis prietaisas</option>
+              <label
+                class="top"
+                for="inputText"
+              >Tipas</label>
+              <select
+                v-model="device.deviceType"
+                class="select-css"
+              >
+                <option value="LongTerm">
+                  Ilgalaikis prietaisas
+                </option>
+                <option value="ShortTerm">
+                  Trumpalaikis prietaisas
+                </option>
               </select>
             </div>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Kodas</label>
                 <input
+                  v-model="device.code"
                   class="inputLogin"
                   type="text"
                   name="code"
-                  v-model="device.code"
-                />
+                >
 
                 <p>{{ errors[0] }}</p>
-                <p v-if="backEndErrors.has('code')" class="textSize">
+                <p
+                  v-if="backEndErrors.has('code')"
+                  class="textSize"
+                >
                   {{ backEndErrors.get("code") }}
                 </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Prietaiso pavadinimas</label>
                 <input
+                  v-model="device.name"
                   class="inputLogin"
                   type="text"
                   name="name"
-                  v-model="device.name"
-                />
+                >
                 <p>{{ errors[0] }}</p>
+                <p
+                  v-if="backEndErrors.has('name')"
+                  class="textSize"
+                >
+                  {{ backEndErrors.get("name") }}
+                </p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
+              v-slot="{ errors }"
               rules="required"
               mode="eager"
-              v-slot="{ errors }"
             >
               <div class="textOnInput">
                 <label for="inputText">Serijos numeris</label>
                 <input
-                  class="inputLogin"
                   id="txt-input"
+                  v-model="device.serialNumber"
+                  class="inputLogin"
                   type="text"
                   name="serialNumber"
-                  v-model="device.serialNumber"
-                />
+                >
                 <p>{{ errors[0] }}</p>
-                <p v-if="backEndErrors.has('serialNumber')" class="textSize">
+                <p
+                  v-if="backEndErrors.has('serialNumber')"
+                  class="textSize"
+                >
                   {{ backEndErrors.get("serialNumber") }}
                 </p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider mode="eager" v-slot="{ errors }">
+            <ValidationProvider
+              v-slot="{ errors }"
+              mode="eager"
+            >
               <div class="textOnInput">
                 <label for="inputText">Nauja nuotrauką</label>
                 <input
@@ -94,28 +129,32 @@
                   type="file"
                   name="file"
                   @change="upload_src"
-                />
+                >
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
             <ValidationProvider
-              rules="required|numeric|minNumber:1"
-              mode="eager"
               v-slot="{ errors }"
+              rules="required|numeric|minNumber:1|maxNumber:30"
+              mode="eager"
             >
               <div class="textOnInput">
                 <label for="inputText">Kiekis</label>
                 <input
+                  v-model="device.amount"
                   class="inputLogin"
                   type="number"
-                  v-model="device.amount"
                   name="amount"
-                />
-                <p class="marginLeft">{{ errors[0] }}</p>
+                >
+                <p class="marginLeft">
+                  {{ errors[0] }}
+                </p>
               </div>
             </ValidationProvider>
-            <button class="buttonLogin">Atnaujinti</button>
+            <button class="buttonLogin">
+              Atnaujinti
+            </button>
           </div>
         </form>
       </ValidationObserver>

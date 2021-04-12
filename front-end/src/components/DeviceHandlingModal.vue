@@ -1,17 +1,30 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
         <form
           v-if="!display"
-          @submit.prevent="sendRequest(request.action, [])"
           class="formLogin"
+          @submit.prevent="sendRequest(request.action, [])"
         >
-          <div class="autoSelect_backdrop" @click="modal = false" />
+          <div
+            class="autoSelect_backdrop"
+            @click="modal = false"
+          />
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -48,19 +61,28 @@
 
             <span>
               <div class="textOnInput">
-                <label class="top" for="inputText">Veiksmas</label>
+                <label
+                  class="top"
+                  for="inputText"
+                >Veiksmas</label>
                 <select
-                  @change="backEndErrors.clear('action'), getOwner()"
-                  class="select-css"
                   v-model="request.action"
+                  class="select-css"
+                  @change="backEndErrors.clear('action'), getOwner()"
                 >
                   <option value="0">Pasirinkite veiksmą</option>
-                  <option v-if="type != 'Borrowed'" value="1">Perduoti</option>
+                  <option
+                    v-if="type != 'Borrowed'"
+                    value="1"
+                  >Perduoti</option>
                   <option value="2">Paskolinti</option>
-                  <option v-if="type == 'Borrowed'" value="3">Grąžinti</option>
+                  <option
+                    v-if="type == 'Borrowed'"
+                    value="3"
+                  >Grąžinti</option>
                 </select>
               </div>
-              <p v-if="backEndErrors.has('action')">Parisinkite veiksmą</p>
+              <p v-if="backEndErrors.has('action')">Laukas privalomas</p>
             </span>
 
             <span>
@@ -68,54 +90,63 @@
                 <div class="textOnInput">
                   <label for="inputText">Gavėjo-Vardas-Pavardė</label>
                   <ValidationProvider
+                    v-slot="{ errors }"
                     rules="required"
                     mode="eager"
-                    v-slot="{ errors }"
                   >
                     <input
+                      v-model="user"
                       :disabled="disabled"
-                      @change="backEndErrors.clear('user_id')"
-                      @input="filterStates"
-                      @onBlur="modal = false"
-                      @focus="modal = true"
                       :class="
                         filteredUsers.length !== 0 && modal
                           ? 'inputLoginNoBottom'
                           : 'inputLogin'
                       "
                       autocomplete="off"
-                      v-model="user"
-                    />
+                      @change="backEndErrors.clear('user_id')"
+                      @keydown="request.user_id = null"
+                      @input="filterStates"
+                      @onBlur="modal = false"
+                      @focus="modal = true"
+                    >
                     <p>{{ errors[0] }}</p>
-                    <p v-if="backEndErrors.has('user_id')" class="textSize">
+                    <p
+                      v-if="backEndErrors.has('user_id')"
+                      class="textSize"
+                    >
                       Vartotojas nerastas
                     </p>
                   </ValidationProvider>
                   <div v-if="filteredUsers.length !== 0 && modal">
                     <ul>
                       <li
-                        v-for="(user, index) in filteredUsers"
-                        :key="index"
-                        @click="setState(user)"
+                        v-for="(customers, ids) in filteredUsers"
+                        :key="ids"
+                        @click="setState(customers)"
                       >
-                        {{ user.name }} - {{ user.surname }}
+                        {{ customers.name }} - {{ customers.surname }}
                       </li>
                     </ul>
                   </div>
                 </div>
               </div>
             </span>
-            <button type="submit" class="buttonLogin">Tęsti</button>
+            <button
+              type="submit"
+              class="buttonLogin"
+            >
+              Tęsti
+            </button>
           </div>
         </form>
       </ValidationObserver>
       <AccessoryHandlingModal
         v-if="display"
-        v-bind:device="device"
+        :device="device"
         @closeModal="closeModal"
         @updateValue="updateTable"
         @sendRequest="sendRequest"
-      ></AccessoryHandlingModal>
+      />
     </div>
   </transition>
 </template>
@@ -129,7 +160,7 @@ export default {
   components: {
     AccessoryHandlingModal,
   },
-  props: ["device", "updateValue", "index", "type", "decoded"],
+  props: ["device", "index", "type", "decoded"],
   data() {
     return {
       request: {
@@ -156,14 +187,15 @@ export default {
         if (!success) {
           return;
         }
-        if (action == 2) {
+
+        if (action == 2 && this.device.state != 2) {
           this.display = true;
         } else {
-          this.show = false;
-          this.request.accessories = accessories;
           if (action == 3) {
             this.request.owner_id = this.decoded.id;
           }
+          this.request.accessories = accessories;
+
           axios
             .post("devices/transfer", this.request, {
               headers: {
@@ -171,27 +203,24 @@ export default {
               },
             })
             .then((res) => {
-              console.log(res);
-              this.request.user_id = null;
-              this.request.longTerm_id = null;
-              this.request.shortTerm_id = null;
-              this.request.action = 0;
-              this.$emit("updateValue", this.index);
-              this.closeModal();
-              this.$vToastify.success("Užklausa sėkmingai buvo įvygdyta");
+                console.log(res.re)
+                this.$emit("updateValue", this.index, this.request.action)
+                this.request.user_id = null
+                this.request.longTerm_id = null
+                this.request.shortTerm_id = null
+                this.request.action = 0
+                this.closeModal(),
+                this.$vToastify.success(res.data.message);
             })
             .catch((err) => {
-              console.log(err.response)
+              this.display = false;
+              this.show = true;
               this.backEndErrors.record(err.response.data);
-              if (this.backEndErrors.has("longTerm_id")) {
-                this.$vToastify.error(this.backEndErrors.get("longTerm_id"));
-              } else if (this.backEndErrors.has("shortTerm_id")) {
-                this.$vToastify.error(this.backEndErrors.get("shortTerm_id"));
-              }
             });
         }
       });
     },
+
     updateTable() {
       this.$emit("updateValue", this.index);
     },

@@ -146,8 +146,8 @@ class User extends Authenticatable implements
             return $merged;
         }
 
-        $longTerm =  DevicesLongTerm::where('state', $state)->where('name', 'like', "%" . $search . "%")->with('user')->get();
-        $shortTerm =  DevicesShortTerm::where('state', $state)->where('name', 'like', "%" . $search . "%")->with('user')->get();
+        $longTerm =  DevicesLongTerm::where('state', $state)->where('name', 'like', "%" . $search . "%")->where('user_id', '!=', auth()->user()->id)->with('user')->get();
+        $shortTerm =  DevicesShortTerm::where('state', $state)->where('name', 'like', "%" . $search . "%")->where('user_id', '!=', auth()->user()->id)->with('user')->get();
         $merged = $longTerm->concat($shortTerm);
         return $merged;
     }

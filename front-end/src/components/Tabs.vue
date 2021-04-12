@@ -11,14 +11,13 @@
             :class="tab.isActive ? 'tabs_a_active' : 'tabs_a'"
             :href="tab.href"
             @click="selectTab(tab)"
-            >{{ tab.name }}</a
-          >
+          >{{ tab.name }}</a>
         </li>
       </ul>
     </div>
 
     <div class="tabs-details">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>

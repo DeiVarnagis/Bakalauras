@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div v-if="ifLogged()">
-      <NavBar class="navigation-component"></NavBar>
+      <NavBar class="navigation-component" />
     </div>
     <router-view class="router-view" />
   </div>

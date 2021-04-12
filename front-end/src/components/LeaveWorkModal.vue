@@ -1,13 +1,29 @@
 <template>
   <transition name="fade">
-    <div class="modal" v-if="show">
-      <div class="modal__backdrop" @click="closeModal()" />
+    <div
+      v-if="show"
+      class="modal"
+    >
+      <div
+        class="modal__backdrop"
+        @click="closeModal()"
+      />
       <ValidationObserver ref="form">
-        <form @submit.prevent="sendRequest" class="formLogin">
-          <div class="autoSelect_backdrop_leaveWork" @click="modal = false" />
+        <form
+          class="formLogin"
+          @submit.prevent="sendRequest"
+        >
+          <div
+            class="autoSelect_backdrop_leaveWork"
+            @click="modal = false"
+          />
           <div class="con">
             <div class="buttonDiv">
-              <button type="button" class="modal__close" @click="closeModal()">
+              <button
+                type="button"
+                class="modal__close"
+                @click="closeModal()"
+              >
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -20,36 +36,39 @@
                 <div class="textOnInput">
                   <label for="inputText">Gavėjo-Vardas-Pavardė</label>
                   <ValidationProvider
+                    v-slot="{ errors }"
                     rules="required"
                     mode="eager"
-                    v-slot="{ errors }"
                   >
                     <input
-                      @change="backEndErrors.clear('user_id')"
-                      @input="filterStates"
-                      @onBlur="modal = false"
-                      @focus="modal = true"
+                      v-model="user"
                       :class="
                         filteredUsers.length !== 0 && modal
                           ? 'inputLoginNoBottom'
                           : 'inputLogin'
                       "
                       autocomplete="off"
-                      v-model="user"
-                    />
+                      @change="backEndErrors.clear('user_id')"
+                      @input="filterStates"
+                      @onBlur="modal = false"
+                      @focus="modal = true"
+                    >
                     <p>{{ errors[0] }}</p>
-                    <p v-if="backEndErrors.has('user_id')" class="textSize">
+                    <p
+                      v-if="backEndErrors.has('user_id')"
+                      class="textSize"
+                    >
                       Vartotojas nerastas
                     </p>
                   </ValidationProvider>
                   <div v-if="filteredUsers.length !== 0 && modal">
                     <ul>
                       <li
-                        v-for="(user, index) in filteredUsers"
+                        v-for="(customer, index) in filteredUsers"
                         :key="index"
-                        @click="setState(user)"
+                        @click="setState(customer)"
                       >
-                        {{ user.name }} - {{ user.surname }}
+                        {{ customer.name }} - {{ customer.surname }}
                       </li>
                     </ul>
                   </div>
@@ -57,7 +76,12 @@
               </div>
             </span>
 
-            <button type="submit" class="buttonLogin">Patvirtinti</button>
+            <button
+              type="submit"
+              class="buttonLogin"
+            >
+              Patvirtinti
+            </button>
           </div>
         </form>
       </ValidationObserver>

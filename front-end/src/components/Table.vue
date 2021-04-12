@@ -1,143 +1,217 @@
 <template>
   <div>
-    <table class="home_table" cellspacing="0" cellpadding="0">
+    <table
+      class="home_table"
+      cellspacing="0"
+      cellpadding="0"
+    >
       <thead>
         <tr>
-          <th></th>
-          <th>Kodas</th>
-          <th>Pavadinimas</th>
-          <th>Serijos Numeris</th>
-          <th>Kiekis</th>
-          <th>Tipas</th>
-          <th>Statusas</th>
-          <th v-if="decoded.admin && type == 'All'">Vardas</th>
-          <th v-if="decoded.admin && type == 'All'">Pavardė</th>
+          <th />
+          <th v-column-sortable:code>
+            Kodas
+          </th>
+          <th v-column-sortable:name>
+            Pavadinimas
+          </th>
+          <th v-column-sortable:serialNumber>
+            Serijos Numeris
+          </th>
+          <th v-column-sortable:amount>
+            Kiekis
+          </th>
+          <th v-column-sortable:type>
+            Tipas
+          </th>
+          <th v-column-sortable:state>
+            Statusas
+          </th>
+          <th
+            v-if="decoded.admin && type == 'All'"
+            v-column-sortable:user.name
+          >
+            Vardas
+          </th>
+          <th
+            v-if="decoded.admin && type == 'All'"
+            v-column-sortable:user.surname
+          >
+            Pavardė
+          </th>
           <th>Įrankiai</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(device, index) in devices" :key="index">
+        <tr
+          v-for="(device, ids) in devices"
+          :key="ids"
+        >
           <td style="--minWidth: 50px">
             <img
               v-if="device.src != null"
+              class="home_table-img"
               alt=""
               :src="'http://127.0.0.1:8000/storage/' + device.src"
-            />
-            <img v-else alt="" src="../images/devices.png" />
+            >
+            <img
+              v-else
+              class="home_table-img"
+              alt=""
+              src="../images/devices.png"
+            >
           </td>
-          <td data-label="Kodas" style="--minWidth: 100px">
+          <td
+            data-label="Kodas"
+            style="--minWidth: 100px"
+          >
             {{ device.code }}
           </td>
-          <td data-label="Pavadinimas" style="--minWidth: 200px">
+          <td
+            data-label="Pavadinimas"
+            style="--minWidth: 200px"
+          >
             {{ device.name }}
           </td>
-          <td data-label="Serijos Numeris" style="--minWidth: 200px">
+          <td
+            data-label="Serijos Numeris"
+            style="--minWidth: 200px"
+          >
             {{ device.serialNumber }}
           </td>
-          <td data-label="Kiekis" style="--minWidth: 75px">
+          <td
+            data-label="Kiekis"
+            style="--minWidth: 75px"
+          >
             {{ device.amount }}
           </td>
           <td
+            v-if="device.type == 'LongTerm'"
             data-label="Tipas"
             style="--minWidth: 75px"
-            v-if="device.type == 'LongTerm'"
           >
             Ilgalaikis
           </td>
-          <td data-label="Tipas" v-if="device.type == 'ShortTerm'">
+          <td
+            v-if="device.type == 'ShortTerm'"
+            data-label="Tipas"
+          >
             Trumpalaikis
           </td>
-          <td v-if="device.state == 0">Laisvas</td>
-          <td v-if="device.state == 1">Laukia užklausoje</td>
-          <td v-if="device.state == 2">Paskolintas</td>
-          <td v-if="decoded.admin && type == 'All'">{{ device.user.name }}</td>
-          <td v-if="decoded.admin && type == 'All'">
+          <td v-if="device.state == 0">
+            Laisvas
+          </td>
+          <td v-if="device.state == 1">
+            Laukia užklausoje
+          </td>
+          <td v-if="device.state == 2">
+            Paskolintas
+          </td>
+          <td v-if="decoded.admin && type == 'All' && device.user != null">
+            {{ device.user.name }}
+          </td>
+          <td v-if="decoded.admin && type == 'All' && device.user != null">
             {{ device.user.surname }}
           </td>
           <td>
             <button
               :disabled="disabledDolly(device)"
-              class="iconButton"
-              @click="clicked(device, index), $refs.handleDevice.openModal()"
+              :class="disabledDolly(device) ? 'disabledButton' : 'iconButton'"
+              @click="clicked(device, ids), $refs.handleDevice.openModal()"
             >
-              <font-awesome-icon
-                :class="
-                  disabledDolly(device) ? 'disabledButton' : 'confirmButton'
-                "
-                icon="dolly"
-              />
+              <img
+                height="30px"
+                src="../assets/move.svg"
+              >
             </button>
 
             <router-link :to="'/device/' + device.type + '/' + device.id">
-              <button class="iconButton" @click="clicked(device, index)">
-                <font-awesome-icon class="confirmButton" icon="eye" /></button
-            ></router-link>
+              <button
+                class="iconButton"
+                @click="clicked(device, ids)"
+              >
+                <img
+                  height="30px"
+                  src="../assets/eye.svg"
+                >
+              </button>
+            </router-link>
 
             <button
               :disabled="disabledButton(device)"
-              class="iconButton"
+              :class="disabledButton(device) ? 'disabledButton' : 'iconButton'"
               @click="
-                clicked(device, index, device.type),
-                  $refs.updateDevice.openModal(clickedDevice)
+                clicked(device, ids, device.type),
+                $refs.updateDevice.openModal(clickedDevice)
               "
             >
-              <font-awesome-icon
-                :class="
-                  disabledButton(device) ? 'disabledButton' : 'confirmButton'
-                "
-                icon="edit"
-              />
+              <img
+                height="30px"
+                src="../assets/edit.svg"
+              >
             </button>
+
             <button
               :disabled="disabledButton(device)"
-              class="iconButton"
+              :class="disabledButton(device) ? 'disabledButton' : 'iconButton'"
               @click="
-                clicked(device, index, device.type),
-                  $refs.deleteModal.openModal()
+                clicked(device, ids, device.type), $refs.deleteModal.openModal()
               "
             >
-              <font-awesome-icon
-                :class="
-                  disabledButton(device) ? 'disabledButton' : 'confirmButton'
-                "
-                icon="trash-alt"
-              />
+              <img
+                height="30px"
+                src="../assets/delete.png"
+              >
             </button>
           </td>
         </tr>
       </tbody>
     </table>
     <DeviceUpdateModal
-      v-bind:id="clickedDevice.id"
-      v-bind:index="index"
-      @updateDevice="updateDevice"
+      :id="clickedDevice.id"
       ref="updateDevice"
-    >
-    </DeviceUpdateModal>
+      :index="index"
+      @updateDevice="updateDevice"
+    />
 
     <DeviceHandlingModal
-      v-bind:device="clickedDevice"
-      @updateValue="updateValue"
-      v-bind:index="index"
-      v-bind:type="type"
-      v-bind:decoded="decoded"
       ref="handleDevice"
-    ></DeviceHandlingModal>
+      :device="clickedDevice"
+      :index="index"
+      :type="type"
+      :decoded="decoded"
+      @updateValue="updateValue"
+    />
 
     <DeleteModal
-      v-bind:device="clickedDevice"
-      @deleteValue="deleteValue"
-      v-bind:index="index"
       ref="deleteModal"
-    ></DeleteModal>
+      :device="clickedDevice"
+      :index="index"
+      @deleteValue="deleteValue"
+    />
   </div>
 </template>
 
 <script>
+import columnSortable from "vue-column-sortable";
 import DeviceHandlingModal from "../components/DeviceHandlingModal";
 import DeleteModal from "../components/DeleteModal";
 import DeviceUpdateModal from "../components/DeviceUpdateModal";
+import Vue from "vue";
+
+new Vue({
+  directives: { columnSortable },
+});
+
 export default {
+  components: {
+    DeviceHandlingModal,
+    DeleteModal,
+    DeviceUpdateModal,
+  },
+  directives: {
+    columnSortable,
+  },
+  props: ["devices", "type", "decoded"],
   data() {
     return {
       disabled: false,
@@ -151,12 +225,6 @@ export default {
       loading: false,
     };
   },
-  props: ["devices", "type", "decoded"],
-  components: {
-    DeviceHandlingModal,
-    DeleteModal,
-    DeviceUpdateModal,
-  },
   methods: {
     clicked(device, index, typ) {
       this.clickedDevice = device;
@@ -167,8 +235,9 @@ export default {
       }
       this.clickedType = this.deviceType;
     },
-    updateValue(id) {
+    updateValue(id, action) {
       this.devices[id].state = 1;
+      this.devices[id].action = action;
     },
     deleteValue(id) {
       this.devices.splice(id, 1);
@@ -182,17 +251,23 @@ export default {
       this.devices[id].src = data.src;
     },
     disabledDolly(device) {
-      if (device.state == 0 || (this.type == "Borrowed" && device.state == 2)) {
+      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)  || (this.type == "Borrowed" && device.action == 0)
+      ) {
         return false;
       }
       return true;
     },
 
     disabledButton(device) {
-      if (device.user_id == this.decoded.id && device.state == 0 || this.decoded.admin && device.state == 0) {
+      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)
+      ) {
         return false;
       }
       return true;
+    },
+    orderBy(sortFn) {
+      // sort your array data like this.userArray
+      this.devices.sort(sortFn);
     },
   },
 };

@@ -140,6 +140,9 @@ button:focus{
 
 .inputDiv{
     display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     flex-direction: column;
     text-align: left;
     width: 325px;
