@@ -6,6 +6,8 @@
         style="overflow: auto"
       >
         <AreaChart />
+        <LineChart />
+        <PieChart />
       </div>
     </div>
   </div>
@@ -13,15 +15,15 @@
 
 <script>
 import AreaChart from "../components/AreaChart.vue";
-/*import LineChart from "../components/LineChart.vue";
-import PieChart from "../components/PieChart.vue";  */
+import LineChart from "../components/LineChart.vue";
+import PieChart from "../components/PieChart.vue";
 
 export default {
   name: "App",
   components: {
     AreaChart,
-   /* LineChart,
-    PieChart*/ 
+    LineChart,
+    PieChart
   },
   data() {
     return {
