@@ -69,7 +69,7 @@
         </div>
         <Table :decoded="decoded" :type="type" :devices="devices" />
         <div v-if="loading" class="tableNoData">
-            <ClipLoader :color="'#0054A6'"></ClipLoader>
+          <ClipLoader :color="'#0054A6'"></ClipLoader>
         </div>
         <div v-if="!loading && devices.length == 0" class="tableNoData">
           <h1>Duomenų nėra</h1>
@@ -172,9 +172,10 @@ export default {
           this.last_page = res.data.data.last_page;
           this.devices = res.data.data.data;
         })
-        .catch(
-          this.devices = []
-        );
+        .catch((err) => {
+          console.log(err)
+          this.devices = [];
+        });
     },
     fetchCounts: async function () {
       await axios
@@ -185,7 +186,7 @@ export default {
         })
         .then((res) => {
           this.generalData = res.data;
-        })
+        });
     },
 
     fetchInventorization: async function () {
@@ -197,9 +198,11 @@ export default {
         })
         .then((res) => {
           const now = new Date();
+         
           const endDate = new Date(res.data);
+          endDate.setHours(8,0,0)
           this.time = this.getDifferenceInSeconds(now, endDate);
-        })
+        });
     },
     getDifferenceInSeconds(date1, date2) {
       var diff = date2.getTime() - date1.getTime();

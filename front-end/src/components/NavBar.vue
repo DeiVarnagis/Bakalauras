@@ -15,16 +15,6 @@
           >
         </a>
       </div>
-      <a
-        class="unselectable"
-        @click="push('Home')"
-      >
-        <img
-          class="navi_img"
-          src="../assets/logo.svg"
-          alt="Teltonika"
-        >
-      </a>
       <div class="navi_links">
         <a
           class="unselectable navi_link"

@@ -14,12 +14,12 @@ class InventorizationController extends Controller
 
     public function index()
     {
-        return response()->json(Inventorization::all(), 200);
+        return response()->json(Inventorization::where('inventorization_time', '>=', date('Y-m-d'))->get(), 200);
     }
 
     public function closest()
     {
-        $time = Inventorization::min('inventorization_time');
+        $time = Inventorization::where('inventorization_time', '>=', date('Y-m-d'))->min('inventorization_time');
         if($time == null)
         {
             return response()->json(['error' => "Inventorizacijos laikas nerastas"], 404);
@@ -52,7 +52,7 @@ class InventorizationController extends Controller
     protected function validateData()
     {
         return request()->validate([
-            'inventorization_time' => 'required|date|date_format:Y-m-d|after:'. date('Y-m-d')
+            'inventorization_time' => 'required|date|date_format:Y-m-d|after:yesterday'
         ]);
     }
 }

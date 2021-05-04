@@ -1,10 +1,7 @@
 <template>
   <div class="container">
     <div class="wrapperInventorization">
-      <div
-        v-if="!loading"
-        class="layout_div"
-      >
+      <div v-if="!loading" class="layout_div">
         <FunctionalCalendar
           ref="Calendar"
           v-model="calendarData"
@@ -12,11 +9,7 @@
           @choseDay="checkIfContains"
         />
         <div class="button_div">
-          <button
-            :disabled="!isMarkedAdd"
-            class="buttonLogin"
-            @click="addDate"
-          >
+          <button :disabled="!isMarkedAdd" class="buttonLogin" @click="addDate">
             Pridėti
           </button>
           <button
@@ -83,22 +76,22 @@ export default {
   methods: {
     convertToJavaScriptDate() {
       this.dates.forEach((element) => {
-        this.pushToMarkedDates(element.inventorization_time, element.id)
+        this.pushToMarkedDates(element.inventorization_time, element.id);
       });
     },
 
-    pushToMarkedDates(date, id){
+    pushToMarkedDates(date, id) {
       var dateJava = new Date(Date.parse(date));
       this.calendarConfigs.markedDates.push({
-          date:
-            dateJava.getFullYear() +
-            "/" +
-            (dateJava.getMonth() + 1) +
-            "/" +
-            dateJava.getDate(),
-          class: "markedDates",
-          id: id,
-        });
+        date:
+          dateJava.getFullYear() +
+          "/" +
+          (dateJava.getMonth() + 1) +
+          "/" +
+          dateJava.getDate(),
+        class: "markedDates",
+        id: id,
+      });
     },
 
     convertToStandarDate() {
@@ -143,24 +136,30 @@ export default {
           this.dates = res.data;
           this.convertToJavaScriptDate();
           this.loading = false;
-        })
+        });
     },
 
     deleteDate: async function () {
-      var pos = this.calendarConfigs.markedDates.findIndex(el => el.id == this.selectedDateID );
+      var pos = this.calendarConfigs.markedDates.findIndex(
+        (el) => el.id == this.selectedDateID
+      );
       await axios
         .delete("inventorization/" + this.selectedDateID, {
           headers: {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then(
+        .then((res) => {
+          console.log(res)
           this.$vToastify.success(
             "Inventorizacijos laikas sėkmingai ištrintas"
-          ),
-          this.calendarConfigs.markedDates.splice(pos,1),
-          this.loading = false
-        )
+          );
+          this.calendarConfigs.markedDates.splice(pos, 1);
+          this.loading = false;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
 
     addDate: async function () {
@@ -176,8 +175,8 @@ export default {
         )
         .then((res) => {
           this.$vToastify.success("Inventorizacijos laikas sėkmingai pridėtas");
-          this.pushToMarkedDates(res.data.inventorization_time, res.data.id)
-        })
+          this.pushToMarkedDates(res.data.inventorization_time, res.data.id);
+        });
     },
   },
 };
