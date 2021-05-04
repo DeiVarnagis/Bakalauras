@@ -116,7 +116,6 @@ export default {
           return;
         }
 
-        console.log(this.accessory);
         var formData = this.gatherFormData();
 
         axios
@@ -127,7 +126,6 @@ export default {
             },
           })
           .then((res) => {
-            console.log(res.data.data, "data");
             this.$emit("updateAccessory", this.index, res.data),
               this.closeModal(),
               this.$vtNotify(
@@ -137,7 +135,6 @@ export default {
               );
           })
           .catch((err) => {
-            console.log(err.response);
              this.backEndErrors.record(err.response.data);
           });
       });

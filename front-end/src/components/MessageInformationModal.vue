@@ -118,13 +118,9 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res.data);
           this.device = res.data;
           this.loading = false;
         })
-        .catch((err) => {
-          console.log(err);
-        });
     },
   },
 };

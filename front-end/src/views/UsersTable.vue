@@ -107,7 +107,7 @@
                 </button>
                 <button
                   class="iconButton"
-                  @click="(clickedUser = user), $refs.deleteModal.openModal()"
+                  @click="clickedUser = user, clickedIndex = index, $refs.deleteModal.openModal()"
                 >
                   <img height="30px" src="../assets/delete.png" />
                 </button>
@@ -150,11 +150,12 @@
           </button>
         </div>
       </div>
-      <AddUserModal ref="addUser" :add-user="true" />
+      <AddUserModal ref="addUser" :addUser="true" @addUserToList="addUserToList" />
       <ProfileEdit ref="editProfile" @updateProfile="updateProfile" />
       <DeleteModal
         ref="deleteModal"
         :device="clickedUser"
+        :index="clickedIndex"
         @deleteValue="deleteValue"
         :who="'user'"
       />
@@ -216,14 +217,10 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res.data);
           this.last_page = res.data.data.last_page;
           this.users = res.data.data.data;
           this.loading = false;
         })
-        .catch((err) => {
-          console.log(err.response);
-        });
     },
     getUsersCount() {
       axios
@@ -235,9 +232,6 @@ export default {
         .then((res) => {
           this.usersCount = res.data;
         })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     updateProfile(data) {
       this.users[this.clickedIndex].name = data.name;
@@ -248,8 +242,11 @@ export default {
       this.users[this.clickedIndex].birth = data.birth;
       this.users[this.clickedIndex].src = data.src;
     },
-    deleteValue() {
-      this.users.splice(this.clickedIndex + 1, 1);
+    deleteValue(index) {
+      this.users.splice(index, 1);
+    },
+    addUserToList(data) {
+      this.users.push(data);
     },
   },
 };

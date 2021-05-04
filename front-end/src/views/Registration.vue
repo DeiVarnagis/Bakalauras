@@ -153,7 +153,6 @@ export default {
         axios
           .post("auth/register", this.user)
           .then((res) => {
-            console.log(res);
               this.user.name = null;
               this.user.surname = null;
               this.user.email = null;
@@ -161,6 +160,7 @@ export default {
               this.user.password_confirmation = null;
             if (this.addUser) {
               this.$emit("closeModal");
+              this.$emit("emitUserAdd", res.data)
               this.$vToastify.success("Naujas vartotojas sėkmingai buvo sukurtas");
             } else {
               this.$router.push("/login");
@@ -169,7 +169,6 @@ export default {
             }
           })
           .catch((err) => {
-            console.log(err.response)
             this.backEndErrors.record(err.response.data);
           });
       });

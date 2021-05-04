@@ -224,7 +224,6 @@ export default {
             );
           })
           .catch((err) => {
-            console.log(err.response)
             this.backEndErrors.record(err.response.data);
           });
       });

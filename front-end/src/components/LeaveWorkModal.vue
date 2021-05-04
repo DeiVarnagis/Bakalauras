@@ -110,7 +110,6 @@ export default {
         if (!success) {
           return;
         }
-        console.log(this.user_id);
         axios
           .post(
             "leaveWork",
@@ -121,16 +120,13 @@ export default {
               },
             }
           )
-          .then((res) => {
-            console.log(res);
-            this.user_id = null;
-            this.user = "";
-            this.closeModal();
-            this.$vToastify.success("Užklausa sėkmingai buvo išsiųsta");
-          })
+          .then(
+            this.user_id = null,
+            this.user = "",
+            this.closeModal(),
+            this.$vToastify.success("Užklausa sėkmingai buvo išsiųsta")
+          )
           .catch((err) => {
-            console.log(err.response);
-
             if (err.response.data.errors) {
               this.backEndErrors.record(err.response.data);
             } else {
@@ -156,9 +152,6 @@ export default {
         .then((res) => {
           this.users = res.data;
         })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
     },
     filterStates() {
       this.filteredUsers = this.users.filter((user) => {

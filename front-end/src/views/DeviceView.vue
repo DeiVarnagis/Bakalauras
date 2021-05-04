@@ -43,7 +43,7 @@
           <div>
             <div class="search">
               <button
-                :disabled="!disabledButton(device)"
+                v-if="disabledButton(device)"
                 class="addDevice"
                 @click="$refs.addAccessoryModal.openModal()"
               >
@@ -97,9 +97,8 @@
                     <td data-label="Data">
                       {{ accessory.created_at }}
                     </td>
-                    <td>
-                      <button
-                        v-if="disabledButton(device)"
+                    <td v-if="disabledButton(device)">
+                      <button              
                         class="iconButton"
                         @click="
                           clicked(accessory, ids),
@@ -109,7 +108,6 @@
                         <img height="30px" src="../assets/edit.svg" />
                       </button>
                       <button
-                        v-if="disabledButton(device)"
                         class="iconButton"
                         @click="
                           clicked(accessory, ids), $refs.deleteModal.openModal()
@@ -121,10 +119,7 @@
                   </tr>
                 </tbody>
               </table>
-              <div
-                v-if="resultQuery.length == 0"
-                class="tableNoData"
-              >
+              <div v-if="resultQuery.length == 0" class="tableNoData">
                 <h1>Prietaisas neturi aksesuarų</h1>
               </div>
             </div>
@@ -229,12 +224,10 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res.data);
           this.device = res.data.data;
           this.loading = false;
         })
         .catch((err) => {
-          console.log(err.response);
           if (err.response.status == 404) {
             this.$router.push("/notFound");
           }
@@ -257,7 +250,10 @@ export default {
     },
     disabledButton(device) {
       if (device.user_id == this.decoded.id || this.decoded.admin) {
-        return true;
+        
+        if (device.state == 0) {
+          return true;
+        }
       }
       return false;
     },

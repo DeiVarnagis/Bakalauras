@@ -84,7 +84,6 @@ export default {
           responseType: "arraybuffer",
         })
         .then((res) => {
-          console.log(res);
           const url = window.URL.createObjectURL(new Blob([res.data]));
           const link = document.createElement("a");
           link.href = url;
@@ -92,9 +91,6 @@ export default {
           document.body.appendChild(link);
           link.click();
         })
-        .catch((err) => {
-          console.log(err.response);
-        });
     },
   },
 };

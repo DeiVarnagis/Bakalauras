@@ -1,45 +1,28 @@
 <template>
   <ValidationObserver ref="form">
-    <form
-      class="formLogin"
-      @submit.prevent="submitAccessories"
-    >
+    <form class="formLogin" @submit.prevent="submitAccessories">
       <div class="con">
         <div class="buttonDiv">
-          <button
-            type="button"
-            class="modal__close"
-            @click="close()"
-          >
+          <button type="button" class="modal__close" @click="close()">
             <font-awesome-icon icon="times" />
           </button>
         </div>
         <header class="headerLogin">
           <h2>Pasirinkite aksesuarus</h2>
         </header>
-        <div
-          id="scroller"
-          class="tableAccessories"
-        >
+        <div id="scroller" class="tableAccessories">
           <table class="accessoriesTable">
             <thead>
               <tr>
                 <th>
-                  <input
-                    v-model="selectAll"
-                    type="checkbox"
-                    @click="select"
-                  >
+                  <input v-model="selectAll" type="checkbox" @click="select" />
                 </th>
                 <th>Pavadinimas</th>
                 <th>Kiekis</th>
               </tr>
             </thead>
             <tbody>
-              <tr
-                v-for="(i, index) in accessories"
-                :key="index"
-              >
+              <tr v-for="(i, index) in accessories" :key="index">
                 <td>
                   <input
                     v-model="selected"
@@ -50,7 +33,7 @@
                       amount: getAmount(i.id),
                       src: i.src,
                     }"
-                  >
+                  />
                 </td>
                 <td>{{ i.name }}</td>
 
@@ -72,7 +55,7 @@
                           ? selected[checkIfExist(i.id)].amount
                           : 1
                       "
-                    >
+                    />
                     <button
                       class="quantity_plus"
                       @click.prevent="increment(i.id, index)"
@@ -84,19 +67,14 @@
               </tr>
             </tbody>
           </table>
-         <div v-if="loading" class="tableNoData">
+          <div v-if="loading" class="tableNoData">
             <ClipLoader :color="'#0054A6'"></ClipLoader>
+          </div>
+          <div v-if="!loading && accessories.length == 0" class="tableNoData">
+            <h1>Duomenų nėra</h1>
+          </div>
         </div>
-        <div v-if="!loading && accessories.length == 0" class="tableNoData">
-          <h1>Duomenų nėra</h1>
-        </div>
-        </div>
-        <button
-          type="submit"
-          class="buttonLogin"
-        >
-          Patvirtinti
-        </button>
+        <button type="submit" class="buttonLogin">Patvirtinti</button>
       </div>
     </form>
   </ValidationObserver>
@@ -116,8 +94,8 @@ export default {
       loading: true,
     };
   },
-  components:{
-    ClipLoader
+  components: {
+    ClipLoader,
   },
   mounted: function () {
     this.getAccessories();
@@ -139,11 +117,7 @@ export default {
 
     increment(index, accessoryIndex) {
       var id = this.checkIfExist(index);
-      console.log(id);
       if (id != null) {
-        console.log(
-          this.accessories[accessoryIndex].amount > this.selected[id].amount
-        );
         if (
           this.accessories[accessoryIndex].amount > this.selected[id].amount
         ) {
@@ -188,13 +162,9 @@ export default {
           },
         })
         .then((res) => {
-          console.log(res);
           this.accessories = res.data.data;
           this.loading = false;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        }) 
     },
 
     submitAccessories() {

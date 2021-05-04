@@ -144,14 +144,10 @@ export default {
           this.convertToJavaScriptDate();
           this.loading = false;
         })
-        .catch((err) => {
-          console.log(err);
-        });
     },
 
     deleteDate: async function () {
       var pos = this.calendarConfigs.markedDates.findIndex(el => el.id == this.selectedDateID );
-      console.log(pos);
       await axios
         .delete("inventorization/" + this.selectedDateID, {
           headers: {
@@ -163,12 +159,8 @@ export default {
             "Inventorizacijos laikas sėkmingai ištrintas"
           ),
           this.calendarConfigs.markedDates.splice(pos,1),
-          //this.convertToJavaScriptDate(),
           this.loading = false
         )
-        .catch((err) => {
-          console.log(err.response);
-        });
     },
 
     addDate: async function () {
@@ -186,9 +178,6 @@ export default {
           this.$vToastify.success("Inventorizacijos laikas sėkmingai pridėtas");
           this.pushToMarkedDates(res.data.inventorization_time, res.data.id)
         })
-        .catch((err) => {
-          console.log(err.response);
-        });
     },
   },
 };

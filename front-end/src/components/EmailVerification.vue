@@ -12,13 +12,10 @@ export default {
     };
   },
   mounted: function () {
-
-      /*console.log(this.$route.params.id)
-      console.log("email/verify".$route.params.id)
     axios
       .get("email/verify".$route.params.id, this.user)
       .then((this.message = "email verified"))
-      .catch((this.message = "email failed to verify"));*/
+      .catch((this.message = "email failed to verify"));
   },
 };
 </script>

@@ -80,27 +80,6 @@ export default {
           );
         });
     },
-    deleteAccessory(id) {
-      axios
-        .delete("accessories/" + id, {
-          headers: {
-            Authorization: "Bearer".concat(localStorage["token"]),
-          },
-        })
-        .then((res) => {
-          console.log(res);
-          this.$emit("deleteValue", this.index);
-          this.closeModal();
-          this.$vToastify.success(
-            "Aksesuaras " + this.device.name + " sėkmingai buvo ištrintas"
-          );
-        })
-        .catch((err) => {
-          this.$vToastify.error(
-            this.device.name + " " + err.response.data.error
-          );
-        });
-    },
   },
 };
 </script>

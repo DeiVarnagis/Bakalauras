@@ -220,7 +220,6 @@ export default {
             this.closeModal();
           })
           .catch((err) => {
-            console.log(err.response.data);
             this.backEndErrors.record(err.response.data);
           });
       });

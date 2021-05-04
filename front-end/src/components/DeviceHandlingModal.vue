@@ -173,7 +173,6 @@ export default {
               },
             })
             .then((res) => {
-                console.log(res.re)
                 this.$emit("updateValue", this.index, this.request.action)
                 this.request.user_id = null
                 this.request.longTerm_id = null
@@ -215,9 +214,6 @@ export default {
         .then((res) => {
           this.users = res.data;
         })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
     },
     setState(state) {
       this.user = state.name + " " + state.surname;

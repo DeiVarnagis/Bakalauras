@@ -12,7 +12,7 @@
           <header class="headerLogin" v-if="device.name != null">
             <h2>Ar tikrai norite ištrinti {{ device.name }}</h2>
           </header>
-           <header v-else class="headerLogin">
+          <header v-else class="headerLogin">
             <h2>Ar tikrai norite ištrinti</h2>
           </header>
           <br />
@@ -22,8 +22,14 @@
               @click.prevent="
                 who == 'device'
                   ? deleteDevice(device.type, device.id)
-                  : who == 'accessory' ? deleteAccessory(device.id)
-                    : who == 'user' ? deleteUser(device.id) : who  == 'inventorization' ? deleteInventorization(device.id) : ''"
+                  : who == 'accessory'
+                  ? deleteAccessory(device.id)
+                  : who == 'user'
+                  ? deleteUser(device.id)
+                  : who == 'inventorization'
+                  ? deleteInventorization(device.id)
+                  : ''
+              "
             >
               Taip
             </button>
@@ -66,10 +72,10 @@ export default {
         })
         .then(
           this.$emit("deleteValue", this.index),
-          this.closeModal(),
-          this.$vToastify.success(
-            "Prietaisas " + this.device.name + " sėkmingai buvo ištrintas"
-          )
+            this.closeModal(),
+            this.$vToastify.success(
+              "Prietaisas " + this.device.name + " sėkmingai buvo ištrintas"
+            )
         )
         .catch((err) => {
           this.$vToastify.error(
@@ -84,14 +90,13 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res);
-          this.$emit("deleteValue", this.index);
-          this.closeModal();
+        .then(
+          this.$emit("deleteValue", this.index),
+          this.closeModal(),
           this.$vToastify.success(
             "Aksesuaras " + this.device.name + " sėkmingai buvo ištrintas"
-          );
-        })
+          )
+        )
         .catch((err) => {
           this.$vToastify.error(
             this.device.name + " " + err.response.data.error
@@ -105,17 +110,13 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res);
-          this.$emit("deleteValue", this.index);
-          this.closeModal();
+        .then(
+          this.$emit("deleteValue", this.index),
+          this.closeModal(),
           this.$vToastify.success(
             "Vartotojas " + this.device.name + " sėkmingai buvo ištrintas"
-          );
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+          )
+        )
     },
     deleteInventorization(id) {
       axios
@@ -124,17 +125,13 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res)
-          this.$emit("deleteValue", this.index);
-          this.closeModal();
+        .then(
+          this.$emit("deleteValue", this.index),
+          this.closeModal(),
           this.$vToastify.success(
             "Inventorizacijos data sėkmingai buvo ištrinta"
-          );
-        })
-        .catch((err) => {
-          console.log(err.response);
-        });
+          )
+        )
     },
   },
 };

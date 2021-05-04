@@ -184,6 +184,7 @@
 
     <DeleteModal
       ref="deleteModal"
+      :who="'device'"
       :device="clickedDevice"
       :index="index"
       @deleteValue="deleteValue"

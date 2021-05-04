@@ -172,10 +172,9 @@ export default {
           this.last_page = res.data.data.last_page;
           this.devices = res.data.data.data;
         })
-        .catch((err) => {
-          console.log(err.response.data);
-          this.devices = [];
-        });
+        .catch(
+          this.devices = []
+        );
     },
     fetchCounts: async function () {
       await axios
@@ -187,9 +186,6 @@ export default {
         .then((res) => {
           this.generalData = res.data;
         })
-        .catch((err) => {
-          console.log(err);
-        });
     },
 
     fetchInventorization: async function () {
@@ -204,9 +200,6 @@ export default {
           const endDate = new Date(res.data);
           this.time = this.getDifferenceInSeconds(now, endDate);
         })
-        .catch((err) => {
-          console.log(err);
-        });
     },
     getDifferenceInSeconds(date1, date2) {
       var diff = date2.getTime() - date1.getTime();

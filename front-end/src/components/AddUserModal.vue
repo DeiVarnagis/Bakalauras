@@ -12,6 +12,7 @@
         :button-name="'Patvirtinti'"
         :header="'Pridekite nauja vartotoja'"
         :add-user="addUser"
+        @emitUserAdd="emitUserAdd"
         @closeModal="closeModal"
       />
     </div>
@@ -31,6 +32,10 @@ export default {
     };
   },
   methods: {
+    emitUserAdd(data)
+    {
+       this.$emit("addUserToList", data)
+    },
     closeModal() {
       this.show = false;
     },
