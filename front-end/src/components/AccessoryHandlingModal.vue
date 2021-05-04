@@ -84,9 +84,12 @@
               </tr>
             </tbody>
           </table>
-          <h2 v-if="accessories.length == 0 && !loading">
-            Prietaisas neturi aksesuarų
-          </h2>
+         <div v-if="loading" class="tableNoData">
+            <ClipLoader :color="'#0054A6'"></ClipLoader>
+        </div>
+        <div v-if="!loading && accessories.length == 0" class="tableNoData">
+          <h1>Duomenų nėra</h1>
+        </div>
         </div>
         <button
           type="submit"
@@ -101,6 +104,7 @@
 
 <script>
 import axios from "axios";
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 export default {
   props: ["closeModal", "device", "updateValue", "sendRequest"],
   data() {
@@ -111,6 +115,9 @@ export default {
       selectAll: false,
       loading: true,
     };
+  },
+  components:{
+    ClipLoader
   },
   mounted: function () {
     this.getAccessories();

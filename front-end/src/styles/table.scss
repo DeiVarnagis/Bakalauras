@@ -112,6 +112,13 @@
   }
 }
 
+.tableNoData{
+  display: flex;
+  height: 350px;
+  justify-content: center;
+  align-items: center;
+}
+
 .generaldata_container {
   font-family: "Oswald";
   display: flex;

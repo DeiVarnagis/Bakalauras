@@ -2,14 +2,8 @@
   <div class="container">
     <div class="inner-div">
       <Tabs class="inner-div_tabs">
-        <Tab
-          name="Prietaisas"
-          :selected="true"
-        >
-          <div
-            v-if="!loading"
-            class="inner-div_column_layout_left"
-          >
+        <Tab name="Prietaisas" :selected="true">
+          <div v-if="!loading" class="inner-div_column_layout_left">
             <div class="inner-div_column_layout_left_row">
               <div class="inner-div_column_layout_left_baseColumn">
                 <div class="inner-div_img-div">
@@ -17,20 +11,14 @@
                     v-if="device.src != null"
                     alt=""
                     :src="'http://127.0.0.1:8000/storage/' + device.src"
-                  >
-                  <img
-                    v-else
-                    alt=""
-                    src="../images/devices.png"
-                  >
+                  />
+                  <img v-else alt="" src="../images/devices.png" />
                 </div>
               </div>
 
               <div class="inner-div_column_layout_left_column">
                 <div class="inner-div_column_layout_left_baseColumn">
-                  <h4 class="">
-                    Pavadinimas
-                  </h4>
+                  <h4 class="">Pavadinimas</h4>
                   <div class="inner-div_attributes">
                     {{ device.name }}
                   </div>
@@ -51,10 +39,7 @@
             </div>
           </div>
         </Tab>
-        <Tab
-          name="Aksesuarai"
-          :selected="false"
-        >
+        <Tab name="Aksesuarai" :selected="false">
           <div>
             <div class="search">
               <button
@@ -65,10 +50,7 @@
                 <font-awesome-icon icon="plus" />
               </button>
               <div class="textOnInput">
-                <label
-                  style="top: -10px"
-                  for="inputText"
-                >Paieška</label>
+                <label style="top: -10px" for="inputText">Paieška</label>
                 <input
                   v-model="search"
                   class="searchInput"
@@ -76,48 +58,35 @@
                   type="text"
                   name="search"
                   @change="filterAccessories"
-                >
+                />
               </div>
             </div>
-            <div
-              v-if="!loading"
-              id="scroller"
-              class="tableDiv"
-            >
-              <table
-                class="home_table"
-                cellspacing="0"
-                cellpadding="0"
-              >
+            <div v-if="!loading" id="scroller" class="tableDiv">
+              <table class="home_table" cellspacing="0" cellpadding="0">
                 <thead>
                   <tr>
                     <th />
                     <th>Pavadinimas</th>
                     <th>Kiekis</th>
                     <th>Data</th>
-                    <th v-if="disabledButton(device)">
-                      Įrankiai
-                    </th>
+                    <th v-if="disabledButton(device)">Įrankiai</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    v-for="(accessory, ids) in resultQuery"
-                    :key="ids"
-                  >
+                  <tr v-for="(accessory, ids) in resultQuery" :key="ids">
                     <td>
                       <img
-                        v-if="accessory.src == null"
                         class="home_table-img"
+                        v-if="accessory.src == null"
                         alt="device"
                         src="../images/devices.png"
-                      >
+                      />
                       <img
-                        v-else
                         class="home_table-img"
+                        v-else
                         alt=""
                         :src="'http://127.0.0.1:8000/storage/' + accessory.src"
-                      >
+                      />
                     </td>
                     <td data-label="Pavadinimas">
                       {{ accessory.name }}
@@ -134,13 +103,10 @@
                         class="iconButton"
                         @click="
                           clicked(accessory, ids),
-                          $refs.editAccessory.openModal(clickedAccessory)
+                            $refs.editAccessory.openModal(clickedAccessory)
                         "
                       >
-                        <img
-                          height="30px"
-                          src="../assets/edit.svg"
-                        >
+                        <img height="30px" src="../assets/edit.svg" />
                       </button>
                       <button
                         v-if="disabledButton(device)"
@@ -149,21 +115,18 @@
                           clicked(accessory, ids), $refs.deleteModal.openModal()
                         "
                       >
-                        <img
-                          height="30px"
-                          src="../assets/delete.png"
-                        >
+                        <img height="30px" src="../assets/delete.png" />
                       </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <h1
-                v-if="device.accessories.length == 0"
-                class="centered"
+              <div
+                v-if="resultQuery.length == 0"
+                class="tableNoData"
               >
-                Prietaisas neturi aksesuarų
-              </h1>
+                <h1>Prietaisas neturi aksesuarų</h1>
+              </div>
             </div>
           </div>
         </Tab>
@@ -181,6 +144,7 @@
       :device="clickedAccessory"
       :index="index"
       @deleteValue="deleteValue"
+      :who="'accessory'"
     />
 
     <AccessoryEdit
@@ -226,7 +190,7 @@ export default {
       index: null,
       activeItem: "prietaisas",
       loading: true,
-      decoded: jwt_decode(localStorage["token"])
+      decoded: jwt_decode(localStorage["token"]),
     };
   },
   computed: {
@@ -298,7 +262,6 @@ export default {
       return false;
     },
     filterAccessories() {
-      console.log("working");
       this.filteredAccessories = this.users.accessories.filter((accessory) => {
         return accessory.name.toLowerCase().includes(this.search.toLowerCase());
       });

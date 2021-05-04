@@ -1,30 +1,17 @@
 <template>
   <transition name="fade">
-    <div
-      v-if="show"
-      class="modal"
-    >
-      <div
-        class="modal__backdrop"
-        @click="closeModal()"
-      />
+    <div v-if="show" class="modal">
+      <div class="modal__backdrop" @click="closeModal()" />
       <ValidationObserver ref="form">
         <form
           v-if="!display"
           class="formLogin"
           @submit.prevent="sendRequest(request.action, [])"
         >
-          <div
-            class="autoSelect_backdrop"
-            @click="modal = false"
-          />
+          <div class="autoSelect_backdrop" @click="modal = false" />
           <div class="con">
             <div class="buttonDiv">
-              <button
-                type="button"
-                class="modal__close"
-                @click="closeModal()"
-              >
+              <button type="button" class="modal__close" @click="closeModal()">
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -61,25 +48,16 @@
 
             <span>
               <div class="textOnInput">
-                <label
-                  class="top"
-                  for="inputText"
-                >Veiksmas</label>
+                <label class="top" for="inputText">Veiksmas</label>
                 <select
                   v-model="request.action"
                   class="select-css"
                   @change="backEndErrors.clear('action'), getOwner()"
                 >
                   <option value="0">Pasirinkite veiksmą</option>
-                  <option
-                    v-if="type != 'Borrowed'"
-                    value="1"
-                  >Perduoti</option>
+                  <option v-if="type != 'Borrowed'" value="1">Perduoti</option>
                   <option value="2">Paskolinti</option>
-                  <option
-                    v-if="type == 'Borrowed'"
-                    value="3"
-                  >Grąžinti</option>
+                  <option v-if="type == 'Borrowed'" value="3">Grąžinti</option>
                 </select>
               </div>
               <p v-if="backEndErrors.has('action')">Laukas privalomas</p>
@@ -108,12 +86,9 @@
                       @input="filterStates"
                       @onBlur="modal = false"
                       @focus="modal = true"
-                    >
+                    />
                     <p>{{ errors[0] }}</p>
-                    <p
-                      v-if="backEndErrors.has('user_id')"
-                      class="textSize"
-                    >
+                    <p v-if="backEndErrors.has('user_id')" class="textSize">
                       Vartotojas nerastas
                     </p>
                   </ValidationProvider>
@@ -131,12 +106,7 @@
                 </div>
               </div>
             </span>
-            <button
-              type="submit"
-              class="buttonLogin"
-            >
-              Tęsti
-            </button>
+            <button type="submit" class="buttonLogin">Tęsti</button>
           </div>
         </form>
       </ValidationObserver>

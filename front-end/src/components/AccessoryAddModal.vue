@@ -13,7 +13,7 @@
           id="form"
           class="formLogin"
           @submit.prevent="add()"
-          @keydown="backEndErrors.clear($event.target.name)"
+           @keydown="backEndErrors.clear($event.target.name)"
         >
           <div class="con">
             <div class="buttonDiv">
@@ -43,7 +43,7 @@
                   name="name"
                 >
                 <p>{{ errors[0] }}</p>
-                <p
+                 <p
                   v-if="backEndErrors.has('name')"
                   class="textSize"
                 >
@@ -54,7 +54,7 @@
 
             <ValidationProvider
               v-slot="{ errors }"
-              rules="required|numeric|minNumber:1|maxNumber:30"
+             rules="required|numeric|minNumber:1|maxNumber:30"
               mode="eager"
             >
               <div class="textOnInput">

@@ -1,26 +1,14 @@
 <template>
   <div>
     <div class="generaldata_container">
-      <DataBlock
-        class="data_text"
-        :data="generalData.allDevices"
-      >
+      <DataBlock class="data_text" :data="generalData.allDevices">
         PRIETAISŲ SKAIČIUS:
       </DataBlock>
-      <DataBlock
-        class="data_text"
-        :data="generalData.borrowed"
-      >
+      <DataBlock class="data_text" :data="generalData.borrowed">
         PASISKOLINTI PRIETAISAI:
       </DataBlock>
-      <DataBlock
-        class="data_text"
-        :data="null"
-      >
-        <vue-countdown
-          v-slot="{ days, hours, minutes }"
-          :time="time"
-        >
+      <DataBlock class="data_text" :data="null">
+        <vue-countdown v-slot="{ days, hours, minutes }" :time="time">
           INVENTORIZACIJA: {{ days }} Dienos, {{ hours }} valandos,
           {{ minutes }} minutės.
         </vue-countdown>
@@ -30,10 +18,7 @@
       <div class="innerDiv">
         <div class="search">
           <div>
-            <button
-              class="addDevice"
-              @click="$refs.addModal.openModal()"
-            >
+            <button class="addDevice" @click="$refs.addModal.openModal()">
               <font-awesome-icon icon="plus" />
             </button>
           </div>
@@ -46,7 +31,7 @@
               type="text"
               name="search"
               @input="(current_page = 1), fetchData()"
-            >
+            />
           </div>
 
           <div class="textOnInput">
@@ -56,24 +41,11 @@
               class="filter"
               @change="(current_page = 1), fetchData()"
             >
-              <option value="Yours">
-                Visas turtas
-              </option>
-              <option value="ShortTerm">
-                Trumpalaikis turtas
-              </option>
-              <option value="LongTerm">
-                Ilgalaikis turtas
-              </option>
-              <option value="Borrowed">
-                Pasiskolintas turtas
-              </option>
-              <option
-                v-if="decoded.admin"
-                value="All"
-              >
-                Kitų turtas
-              </option>
+              <option value="Yours">Visas turtas</option>
+              <option value="ShortTerm">Trumpalaikis turtas</option>
+              <option value="LongTerm">Ilgalaikis turtas</option>
+              <option value="Borrowed">Pasiskolintas turtas</option>
+              <option v-if="decoded.admin" value="All">Kitų turtas</option>
             </select>
           </div>
 
@@ -84,54 +56,32 @@
               class="filter"
               @change="(current_page = 1), fetchData()"
             >
-              <option value="all">
-                Visi
-              </option>
-              <option value="0">
-                Laisvi
-              </option>
-              <option value="1">
-                Laukiantis užklausoje
-              </option>
-              <option value="2">
-                Paskolintas turtas
-              </option>
+              <option value="all">Visi</option>
+              <option value="0">Laisvi</option>
+              <option value="1">Laukiantis užklausoje</option>
+              <option value="2">Paskolintas turtas</option>
             </select>
           </div>
 
-          <button
-            class="pdfButton"
-            @click="$refs.pdfModal.openModal()"
-          >
+          <button class="pdfButton" @click="$refs.pdfModal.openModal()">
             PDF
           </button>
         </div>
-        <Table
-          :decoded="decoded"
-          :type="type"
-          :devices="devices"
-        />
-        <div v-if="loading && devices.length == 0">
-          <h1
-            v-if="devices.length == 0"
-            class="centered"
-          >
-            Duomenų nėra
-          </h1>
+        <Table :decoded="decoded" :type="type" :devices="devices" />
+        <div v-if="loading" class="tableNoData">
+            <ClipLoader :color="'#0054A6'"></ClipLoader>
         </div>
-        <div
-          v-if="devices.length !== 0"
-          class="pagination"
-        >
+        <div v-if="!loading && devices.length == 0" class="tableNoData">
+          <h1>Duomenų nėra</h1>
+        </div>
+
+        <div v-if="devices.length !== 0" class="pagination">
           <button
             @click="
               current_page > 1 ? current_page-- : current_page, fetchData()
             "
           >
-            <font-awesome-icon
-              class="arrow"
-              icon="chevron-left"
-            />
+            <font-awesome-icon class="arrow" icon="chevron-left" />
           </button>
           <button
             v-for="(times, ids) in last_page"
@@ -144,26 +94,21 @@
           <button
             @click="
               current_page < last_page ? current_page++ : current_page,
-              fetchData()
+                fetchData()
             "
           >
-            <font-awesome-icon
-              class="arrow"
-              icon="chevron-right"
-            />
+            <font-awesome-icon class="arrow" icon="chevron-right" />
           </button>
         </div>
         <DeviceAddModal ref="addModal" />
-        <PdfGeneratorModal
-          ref="pdfModal"
-          :decoded="decoded"
-        />
+        <PdfGeneratorModal ref="pdfModal" :decoded="decoded" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 import Table from "../components/Table";
 import axios from "axios";
 import DeviceAddModal from "../components/DeviceAddModal";
@@ -174,6 +119,7 @@ import VueCountdown from "@chenfengyuan/vue-countdown";
 
 export default {
   components: {
+    ClipLoader,
     PdfGeneratorModal,
     DeviceAddModal,
     DataBlock,
@@ -194,7 +140,7 @@ export default {
       searchQuery: "",
       clickedDevice: {},
       index: null,
-      loading: false,
+      loading: true,
       decoded: jwt_decode(localStorage["token"]),
     };
   },
@@ -222,8 +168,8 @@ export default {
           }
         )
         .then((res) => {
+          this.loading = false;
           this.last_page = res.data.data.last_page;
-
           this.devices = res.data.data.data;
         })
         .catch((err) => {
@@ -257,7 +203,6 @@ export default {
           const now = new Date();
           const endDate = new Date(res.data);
           this.time = this.getDifferenceInSeconds(now, endDate);
-          this.loading = true;
         })
         .catch((err) => {
           console.log(err);

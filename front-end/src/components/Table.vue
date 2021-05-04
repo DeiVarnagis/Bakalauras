@@ -251,22 +251,21 @@ export default {
       this.devices[id].src = data.src;
     },
     disabledDolly(device) {
-      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)  || (this.type == "Borrowed" && device.action == 0)
-      ) {
+      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)  || (this.type == "Borrowed" && device.action == 0)) 
+      {
         return false;
       }
       return true;
     },
 
     disabledButton(device) {
-      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)
-      ) {
+      if ((device.user_id == this.decoded.id && device.state == 0) ||(this.decoded.admin && device.state == 0)) 
+      {
         return false;
       }
       return true;
     },
     orderBy(sortFn) {
-      // sort your array data like this.userArray
       this.devices.sort(sortFn);
     },
   },

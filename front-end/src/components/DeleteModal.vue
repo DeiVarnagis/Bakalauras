@@ -1,36 +1,29 @@
 <template>
   <transition name="fade">
-    <div
-      v-if="show"
-      class="modal"
-    >
-      <div
-        class="modal__backdrop"
-        @click="closeModal()"
-      />
+    <div v-if="show" class="modal">
+      <div class="modal__backdrop" @click="closeModal()" />
       <form class="formLogin">
         <div class="con">
           <div class="buttonDiv">
-            <button
-              type="button"
-              class="modal__close"
-              @click="closeModal()"
-            >
+            <button type="button" class="modal__close" @click="closeModal()">
               <font-awesome-icon icon="times" />
             </button>
           </div>
-          <header class="headerLogin">
+          <header class="headerLogin" v-if="device.name != null">
             <h2>Ar tikrai norite ištrinti {{ device.name }}</h2>
           </header>
-          <br>
+           <header v-else class="headerLogin">
+            <h2>Ar tikrai norite ištrinti</h2>
+          </header>
+          <br />
           <div>
             <button
               class="buttonLogin"
               @click.prevent="
-                device.type != null
+                who == 'device'
                   ? deleteDevice(device.type, device.id)
-                  : device.shortTerm_id != null || device.longTerm_id != null ? deleteAccessory(device.id)
-                    : deleteUser(device.id)"
+                  : who == 'accessory' ? deleteAccessory(device.id)
+                    : who == 'user' ? deleteUser(device.id) : who  == 'inventorization' ? deleteInventorization(device.id) : ''"
             >
               Taip
             </button>
@@ -51,7 +44,7 @@
 import axios from "axios";
 export default {
   name: "DeleteModal",
-  props: ["device", "type", "index"],
+  props: ["device", "type", "index", "who"],
   data() {
     return {
       show: false,
@@ -118,6 +111,25 @@ export default {
           this.closeModal();
           this.$vToastify.success(
             "Vartotojas " + this.device.name + " sėkmingai buvo ištrintas"
+          );
+        })
+        .catch((err) => {
+          console.log(err.response);
+        });
+    },
+    deleteInventorization(id) {
+      axios
+        .delete("inventorization/" + id, {
+          headers: {
+            Authorization: "Bearer".concat(localStorage["token"]),
+          },
+        })
+        .then((res) => {
+          console.log(res)
+          this.$emit("deleteValue", this.index);
+          this.closeModal();
+          this.$vToastify.success(
+            "Inventorizacijos data sėkmingai buvo ištrinta"
           );
         })
         .catch((err) => {

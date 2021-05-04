@@ -44,7 +44,7 @@
                   name="code"
                 >
                 <p>{{ errors[0] }}</p>
-                <p
+                  <p
                   v-if="backEndErrors.has('name')"
                   class="text-danger textSize"
                 >
@@ -66,8 +66,8 @@
                   type="text"
                   name="surname"
                 >
-                <p>{{ errors[0] }}</p>
-                <p
+                 <p>{{ errors[0] }}</p>
+                  <p
                   v-if="backEndErrors.has('surname')"
                   class="text-danger textSize"
                 >
@@ -114,7 +114,7 @@
                   name="phoneNumber"
                 >
                 <p>{{ errors[0] }}</p>
-                <p
+                  <p
                   v-if="backEndErrors.has('phoneNumber')"
                   class="text-danger textSize"
                 >
@@ -154,7 +154,7 @@
                   name="birth"
                 >
                 <p>{{ errors[0] }}</p>
-                <p
+                  <p
                   v-if="backEndErrors.has('birth')"
                   class="text-danger textSize"
                 >
@@ -179,7 +179,7 @@
                 <p class="marginLeft">
                   {{ errors[0] }}
                 </p>
-                <p
+                  <p
                   v-if="backEndErrors.has('address')"
                   class="text-danger textSize"
                 >

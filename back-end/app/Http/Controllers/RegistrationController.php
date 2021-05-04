@@ -13,7 +13,7 @@ class RegistrationController extends Controller
         
         $user = User::create(array_merge($this->validateRegistration(),[ 'password' => Hash::make($request['password'])]));
 
-        //$user->sendApiEmailVerificationNotification(); //siusti laiška
+        $user->sendApiEmailVerificationNotification();
 
         return response()->json($user, 201);
     }

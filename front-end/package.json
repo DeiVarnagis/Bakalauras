@@ -27,6 +27,7 @@
     "vue-functional-calendar": "^2.9.4",
     "vue-notification-bell": "^0.8.14",
     "vue-router": "^3.5.1",
+    "vue-spinner": "^1.0.4",
     "vue-toastify": "^1.8.0"
   },
   "devDependencies": {

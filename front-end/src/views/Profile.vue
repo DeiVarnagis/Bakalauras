@@ -27,14 +27,6 @@
               {{ user.name }} {{ user.surname }}
             </p>
           </div>
-          <div class="aboutDiv">
-            <p class="about">
-              So perhaps, you've generated some fancy text, and you're content
-              that you can now copy and paste your fancy text in the comments
-              section of funny cat videos, but perhaps you're wondering how it's
-              even
-            </p>
-          </div>
           <div class="generalInfo">
             <p class="genaralStyle">
               Bendra Informacija

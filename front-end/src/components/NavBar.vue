@@ -143,7 +143,6 @@ export default {
       decoded: jwt_decode(localStorage["token"]),
     };
   },
-
   async mounted() {
     this.loading = false;
     await this.messagesCount();
@@ -183,7 +182,6 @@ export default {
       var pusher = new Pusher("911c4c72971affe5f999", {
         cluster: "eu",
       });
-
       var channel = pusher.subscribe("notiflication-channel");
       channel.bind(
         "NotificationSend",
@@ -192,7 +190,6 @@ export default {
             this.messages = data.count;
           }
         },
-        this
       );
     },
   },

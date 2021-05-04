@@ -1,67 +1,69 @@
 <template>
-  <div
-    v-if="!loading"
-    class="inner-div_column"
-  >
-    <div
-      v-if="history.length > 0"
-      id="scroller"
-      class="inner-div_column_layout_right"
-    >
-      <div
-        v-for="(action, index) in history"
-        :key="index"
-        class="inner-div_column_layout_right_row"
-      >
-        <p
-          :class="
-            action.action == 2
-              ? 'inner-div_column_layout_right_bubbleLabelRight'
-              : 'inner-div_column_layout_right_bubbleLabelLeft'
-          "
-        >
-          {{ action.receiver_name }} {{ action.receiver_surname }}
-          {{ action.updated_at }}
-        </p>
-
-        <p
-          :class="
-            action.action == 2
-              ? 'inner-div_column_layout_right_bubble_yellow'
-              : 'inner-div_column_layout_right_bubble_blue'
-          "
-        />
-
-        <p :class="getClass(index)" />
-      </div>
-      <div class="inner-div_column_layout_right_row">
-        <p class="inner-div_column_layout_right_bubbleLabelLeft">
-          {{ history[history.length - 1].owner_name }}
-          {{ history[history.length - 1].owner_surname }}
-          {{ history[history.length - 1].created_at }}
-        </p>
-        <p class="inner-div_column_layout_right_bubble_blue" />
-        <p :class="firstConnector()" />
-      </div>
+  <div>
+    <div v-if="loading" class="tableNoData">
+      <ClipLoader :color="'#0054A6'"></ClipLoader>
     </div>
-    <div
-      v-else
-      class="inner-div_column_layout_right"
-    >
-      <h3>Prietaisas vis dar neturi istorijos</h3>
+    <div v-if="!loading" class="inner-div_column">
+      <div
+        v-if="history.length > 0"
+        id="scroller"
+        class="inner-div_column_layout_right"
+      >
+        <div
+          v-for="(action, index) in history"
+          :key="index"
+          class="inner-div_column_layout_right_row"
+        >
+          <p
+            :class="
+              action.action == 2
+                ? 'inner-div_column_layout_right_bubbleLabelRight'
+                : 'inner-div_column_layout_right_bubbleLabelLeft'
+            "
+          >
+            {{ action.receiver_name }} {{ action.receiver_surname }}
+            {{ action.updated_at }}
+          </p>
+
+          <p
+            :class="
+              action.action == 2
+                ? 'inner-div_column_layout_right_bubble_yellow'
+                : 'inner-div_column_layout_right_bubble_blue'
+            "
+          />
+
+          <p :class="getClass(index)" />
+        </div>
+        <div class="inner-div_column_layout_right_row">
+          <p class="inner-div_column_layout_right_bubbleLabelLeft">
+            {{ history[history.length - 1].owner_name }}
+            {{ history[history.length - 1].owner_surname }}
+            {{ history[history.length - 1].created_at }}
+          </p>
+          <p class="inner-div_column_layout_right_bubble_blue" />
+          <p :class="firstConnector()" />
+        </div>
+      </div>
+      <div v-else class="inner-div_column_layout_right">
+        <h3>Prietaisas vis dar neturi istorijos</h3>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 export default {
   data() {
     return {
       history: [],
       loading: true,
     };
+  },
+  components:{
+      ClipLoader
   },
   created: function () {
     this.getHistory();
@@ -88,7 +90,7 @@ export default {
       return "inner-div_column_layout_right_connector_L_R_UP";
     },
     firstConnector() {
-      if (this.history[this.history.length-1].action == 2) {
+      if (this.history[this.history.length - 1].action == 2) {
         return "inner-div_column_layout_right_connector_L_R_UP";
       }
       return "inner-div_column_layout_right_connector_L_UP";

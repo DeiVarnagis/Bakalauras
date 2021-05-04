@@ -1,16 +1,10 @@
 <template>
   <div>
     <div class="generaldata_container">
-      <DataBlock
-        class="data_text"
-        :data="generalData.accepted"
-      >
+      <DataBlock class="data_text" :data="generalData.accepted">
         PATVIRTINTOS UŽKLAUSOS:
       </DataBlock>
-      <DataBlock
-        class="data_text"
-        :data="generalData.decliend"
-      >
+      <DataBlock class="data_text" :data="generalData.decliend">
         ATŠAUKTOS UŽKLAUSOS:
       </DataBlock>
     </div>
@@ -26,7 +20,7 @@
               type="text"
               name="search"
               @input="(current_page = 1), fetchData"
-            >
+            />
           </div>
 
           <div class="textOnInput">
@@ -36,15 +30,9 @@
               class="filter"
               @change="(current_page = 1), fetchData()"
             >
-              <option value="0">
-                Naujos užklausos
-              </option>
-              <option value="1">
-                Patvirtintos užklausos
-              </option>
-              <option value="-1">
-                Atšauktos užklausos
-              </option>
+              <option value="0">Naujos užklausos</option>
+              <option value="1">Patvirtintos užklausos</option>
+              <option value="-1">Atšauktos užklausos</option>
             </select>
           </div>
         </div>
@@ -61,10 +49,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="(message, index) in messages"
-              :key="index"
-            >
+            <tr v-for="(message, index) in messages" :key="index">
               <td data-label="Savininkas">
                 {{ message.owner_name }} {{ message.owner_surname }}
               </td>
@@ -84,74 +69,47 @@
               <td
                 v-if="
                   message.device_name_short == null &&
-                    message.device_name_long == null
+                  message.device_name_long == null
                 "
                 data-label="Prietaiso pavadinimas"
               >
                 Visi
               </td>
-              <td
-                v-if="message.device_code_long"
-                data-label="Prietaiso Kodas"
-              >
+              <td v-if="message.device_code_long" data-label="Prietaiso Kodas">
                 {{ message.device_code_long }}
               </td>
-              <td
-                v-if="message.device_code_short"
-                data-label="Prietaiso Kodas"
-              >
+              <td v-if="message.device_code_short" data-label="Prietaiso Kodas">
                 {{ message.device_code_short }}
               </td>
               <td
                 v-if="
                   message.device_code_long == null &&
-                    message.device_code_short == null
+                  message.device_code_short == null
                 "
                 data-label="Prietaiso pavadinimas"
               >
                 --------------
               </td>
-              <td
-                v-if="message.action == 1"
-                data-label="Veiksmas"
-              >
+              <td v-if="message.action == 1" data-label="Veiksmas">
                 Perdavimas
               </td>
-              <td
-                v-if="message.action == 2"
-                data-label="Veiksmas"
-              >
+              <td v-if="message.action == 2" data-label="Veiksmas">
                 Skolinimas
               </td>
-              <td
-                v-if="message.action == 3"
-                data-label="Veiksmas"
-              >
+              <td v-if="message.action == 3" data-label="Veiksmas">
                 Grąžinimas
               </td>
-              <td
-                v-if="message.action == null"
-                data-label="Veiksmas"
-              >
+              <td v-if="message.action == null" data-label="Veiksmas">
                 Visų prietaisų grąžinimas
               </td>
-             
-              <td
-                v-if="message.device_state == 0"
-                data-label="Statusas"
-              >
+
+              <td v-if="message.device_state == 0" data-label="Statusas">
                 Laukia patvirtinimo
               </td>
-              <td
-                v-if="message.device_state == 1"
-                data-label="Statusas"
-              >
+              <td v-if="message.device_state == 1" data-label="Statusas">
                 Patvirtinta
               </td>
-              <td
-                v-if="message.device_state == -1"
-                data-label="Statusas"
-              >
+              <td v-if="message.device_state == -1" data-label="Statusas">
                 Atšaukta
               </td>
               <td v-if="message.device_code_long || message.device_code_short">
@@ -159,20 +117,15 @@
                   class="iconButton"
                   @click="$refs.deviceInfo.openModal(message.id)"
                 >
-                  <font-awesome-icon
-                    class="confirmButton"
-                    icon="eye"
-                  />
+                  <img height="30px" src="../assets/eye.svg" />
                 </button>
               </td>
-              <td v-else>
-                -
-              </td>
+              <td v-else>-</td>
               <td
                 v-if="
                   message.device_state == 0 &&
-                    message.device_name_short == null &&
-                    message.device_name_long == null
+                  message.device_name_short == null &&
+                  message.device_name_long == null
                 "
                 data-label="Prietaiso pavadinimas"
               >
@@ -180,70 +133,53 @@
                   class="iconButton"
                   @click="confirmRequestAll(message.id, index)"
                 >
-                  <font-awesome-icon
-                    class="confirmButton"
-                    icon="check"
-                  />
+                  <font-awesome-icon class="confirmButton" icon="check" />
                 </button>
                 <button
                   class="iconButton"
                   @click="declineRequestAll(message.id, index)"
                 >
-                  <font-awesome-icon
-                    class="deleteButton"
-                    icon="times"
-                  />
+                  <font-awesome-icon class="confirmButton" icon="times" />
                 </button>
               </td>
               <td
                 v-if="
                   message.device_state == 0 &&
-                    (message.device_name_short != null ||
-                      message.device_name_long != null)
+                  (message.device_name_short != null ||
+                    message.device_name_long != null)
                 "
               >
                 <button
                   class="iconButton"
                   @click="confirmRequest(message.id, index)"
                 >
-                  <font-awesome-icon
-                    class="confirmButton"
-                    icon="check"
-                  />
+                  <font-awesome-icon class="confirmButton" icon="check" />
                 </button>
                 <button
                   class="iconButton"
                   @click="declineRequest(message.id, index)"
                 >
-                  <font-awesome-icon
-                    class="confirmButton"
-                    icon="times"
-                  />
+                  <font-awesome-icon class="confirmButton" icon="times" />
                 </button>
               </td>
 
-              <td v-if="message.device_state != 0">
-                -
-              </td>
+              <td v-if="message.device_state != 0">-</td>
             </tr>
           </tbody>
         </table>
-        <h1 v-if="messages.length == 0 && !loading">
-          Duomenų nėra
-        </h1>
-        <div
-          v-if="messages.length !== 0 && !loading"
-          class="pagination"
-        >
+        <div v-if="loading" class="tableNoData">
+          <ClipLoader :color="'#0054A6'"></ClipLoader>
+        </div>
+        <div v-if="!loading && messages.length == 0" class="tableNoData">
+          <h1>Duomenų nėra</h1>
+        </div>
+        <div v-if="messages.length !== 0" class="pagination">
           <button
             @click="
               current_page > 1 ? current_page-- : current_page, fetchData()
             "
           >
-            <font-awesome-icon
-              class="arrow"
-              icon="chevron-left"
-            />
+            <font-awesome-icon class="arrow" icon="chevron-left" />
           </button>
           <button
             v-for="(times, index) in last_page"
@@ -256,13 +192,10 @@
           <button
             @click="
               current_page < last_page ? current_page++ : current_page,
-              fetchData()
+                fetchData()
             "
           >
-            <font-awesome-icon
-              class="arrow"
-              icon="chevron-right"
-            />
+            <font-awesome-icon class="arrow" icon="chevron-right" />
           </button>
         </div>
       </div>
@@ -272,13 +205,15 @@
 </template>
 
 <script>
+import ClipLoader from "vue-spinner/src/ClipLoader.vue";
 import axios from "axios";
 import DataBlock from "../components/DataBlock";
 import MessageInformationModal from "../components/MessageInformationModal";
 export default {
   components: {
+    ClipLoader,
     DataBlock,
-    MessageInformationModal
+    MessageInformationModal,
   },
   data() {
     return {
@@ -303,14 +238,8 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res.data);
-          this.messages[index].device_state = 1;
-        })
-        .catch((err) => {
-          console.log(err.response);
-          // this.messages = [];
-        });
+        .then((this.messages[index].device_state = 1))
+        .catch();
     },
     declineRequest(id, index) {
       axios
@@ -319,13 +248,8 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res.data);
-          this.messages[index].device_state = -1;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+        .then((this.messages[index].device_state = -1))
+        .catch();
     },
     confirmRequestAll(id, index) {
       axios
@@ -334,13 +258,8 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res.data);
-          this.messages[index].device_state = 1;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+        .then((this.messages[index].device_state = 1))
+        .catch();
     },
     declineRequestAll(id, index) {
       axios
@@ -349,13 +268,8 @@ export default {
             Authorization: "Bearer".concat(localStorage["token"]),
           },
         })
-        .then((res) => {
-          console.log(res.data);
-          this.messages[index].device_state = -1;
-        })
-        .catch((err) => {
-          console.log(err.response.data);
-        });
+        .then((this.messages[index].device_state = -1))
+        .catch();
     },
     fetchData() {
       axios
@@ -377,11 +291,6 @@ export default {
           this.last_page = res.data.data.last_page;
           this.loading = false;
         })
-        .catch((err) => {
-          console.log(err.response.data);
-          this.loading = false;
-          this.messages = [];
-        });
     },
     fetchCounts: async function () {
       await axios
@@ -391,11 +300,9 @@ export default {
           },
         })
         .then((res) => {
-          this.generalData = res.data;
+            this.generalData = res.data
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch();
     },
   },
 };

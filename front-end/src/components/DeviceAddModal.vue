@@ -81,7 +81,7 @@
                   name="name"
                 >
                 <p>{{ errors[0] }}</p>
-                <p
+                 <p
                   v-if="backEndErrors.has('name')"
                   class="textSize"
                 >

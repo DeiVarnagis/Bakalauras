@@ -1,27 +1,15 @@
 <template>
   <transition name="fade">
-    <div
-      v-if="show"
-      class="modal"
-    >
-      <div
-        class="modal__backdrop"
-        @click="closeModal()"
-      />
+    <div v-if="show" class="modal">
+      <div class="modal__backdrop" @click="closeModal()" />
       <ValidationObserver ref="form">
-        <form
-          id="form"
-          class="formLogin"
-          @submit.prevent="update()"
-          @keydown="backEndErrors.clear($event.target.name)"
-        >
+        <form id="form"
+         class="formLogin"
+        @submit.prevent="update()"
+          @keydown="backEndErrors.clear($event.target.name)">
           <div class="con">
             <div class="buttonDiv">
-              <button
-                type="button"
-                class="modal__close"
-                @click="closeModal()"
-              >
+              <button type="button" class="modal__close" @click="closeModal()">
                 <font-awesome-icon icon="times" />
               </button>
             </div>
@@ -41,9 +29,9 @@
                   class="inputLogin"
                   type="text"
                   name="name"
-                >
+                />
                 <p>{{ errors[0] }}</p>
-                <p
+                 <p
                   v-if="backEndErrors.has('name')"
                   class="textSize"
                 >
@@ -64,15 +52,12 @@
                   class="inputLogin"
                   type="number"
                   name="name"
-                >
+                />
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
-            <ValidationProvider
-              v-slot="{ errors }"
-              mode="eager"
-            >
+            <ValidationProvider v-slot="{ errors }" mode="eager">
               <div class="textOnInput">
                 <label for="inputText">Nauja nuotrauką</label>
                 <input
@@ -80,14 +65,12 @@
                   type="file"
                   name="file"
                   @change="upload_src"
-                >
+                />
                 <p>{{ errors[0] }}</p>
               </div>
             </ValidationProvider>
 
-            <button class="buttonLogin">
-              Atnaujinti
-            </button>
+            <button class="buttonLogin">Atnaujinti</button>
           </div>
         </form>
       </ValidationObserver>
