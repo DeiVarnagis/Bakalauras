@@ -16,7 +16,7 @@ Then, simply run the following command:
 git clone https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system.git
 ```
 
-Alternatively, you may download the [(https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system/archive/main.zip)](https://github.com/DeiVarnagis/Company-assets-transfer-and-lending-system/archive/main.zip) and run `composer install` from your project's root directory.
+Alternatively, you may download the [(https://github.com/DeiVarnagis/Bakalauras/archive/refs/heads/main.zip)](https://github.com/DeiVarnagis/Bakalauras/archive/refs/heads/main.zip) and run `composer install` from your project's root directory.
 
 Configuration
 -------------
